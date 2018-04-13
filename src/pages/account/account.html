@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-title>My Account</ion-title>
+</ion-header>
+<ion-content>
+  <div class="userAccountDiv">
+    <ion-grid>      
+      <ion-row style="height:40vh;">
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4 >
+          <p>Username</p>
+          <p style="border: 2px solid grey; height:70%;"> User Profile Image Here</p>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <p> ERP-Coin Balance:<br>122ERP</p>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-9>
+          <button>View List of Conservation Areas</button>        
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4>
+          <button>Send ERP</button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <button>Receive ERP</button>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4>
+          <button>Manage Account</button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <button>View Leaderboard</button>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4>
+          <button>Help and Support</button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <button (click)="logout()">Logout</button>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
