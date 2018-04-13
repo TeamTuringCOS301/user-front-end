@@ -16,29 +16,34 @@ export class LogPage {
   }
 
   loginUser(value: any) {
-    let addr: any = "V:'";
-    addr+= value.username ;
+    let addr: any = "localhost:8080/user/login";
+    let param:any ='{"username":"';
+    param+= value.username ;
+    param+= '","password":"';
+    param+= value.password;
+    param+= '"}';
     //addr+="','";
    // addr+=value.password;
-    addr+="'";
-    addr = "http://137.215.251.159:8080";//"+addr;
-    //window.alert(addr);
-    this.navCtrl.push(AccountPage);
-    /*
-    this.http.get(addr, {}, {}).then(data =>
+    //addr+="'";
+   // window.alert(addr);
+    //window.alert(param);
+    //this.navCtrl.push(AccountPage);
+    
+    this.http.post(addr, param, {}).then(data =>
     {
       console.log(data.status);
       console.log(data.data); // data received by server
       console.log(data.headers);
       //window.alert(data.data);
-      window.alert("Login Success!");
+      //window.alert("Login Success!");
+      this.navCtrl.push(AccountPage);
     }).catch(error => {
       console.log(error.status);
       console.log(error.error); // error message as string
       console.log(error.headers);
-      window.alert(error.data);
+      //window.alert(error.data);
        window.alert("Login Failure!");
-    });     */ 
+    });     
 }
 
 }

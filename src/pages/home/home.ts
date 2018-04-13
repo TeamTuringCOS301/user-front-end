@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RegPage } from '../register/register';
 import { LogPage } from '../login/login';
-import { HomePage } from '../home/home';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
