@@ -52,7 +52,12 @@ export class RegPage {
       window.alert("Registration Failure!");
     });
     //window.alert("Success!");    
-  }
+  }    
 }
+
+navPop()
+  {
+    this.navCtrl.pop();
+  }
 
 }

@@ -22,10 +22,7 @@ export class LogPage {
     param+= '","password":"';
     param+= value.password;
     param+= '"}';
-    //addr+="','";
-   // addr+=value.password;
-    //addr+="'";
-   // window.alert(addr);
+    //window.alert(addr);
     //window.alert(param);
     //this.navCtrl.push(AccountPage);
     
@@ -45,5 +42,9 @@ export class LogPage {
        window.alert("Login Failure!");
     });     
 }
+  navPop()
+  {
+    this.navCtrl.pop();
+  }
 
 }

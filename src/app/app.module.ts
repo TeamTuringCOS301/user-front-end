@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LogPage } from '../pages/login/login';
 import { HTTP } from '@ionic-native/http';
 import { AccountPage } from '../pages/account/account';
+import { ConservationPage } from '../pages/conservation/conservation';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AccountPage } from '../pages/account/account';
     Splash,
     RegPage,
     LogPage,
-    AccountPage
+    AccountPage,
+    ConservationPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { AccountPage } from '../pages/account/account';
     Splash,
     RegPage,
     LogPage,
-    AccountPage
+    AccountPage,
+    ConservationPage
   ],
   providers: [
     StatusBar,
