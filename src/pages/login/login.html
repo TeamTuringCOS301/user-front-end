@@ -1,0 +1,43 @@
+<ion-header>
+   <button><ion-icon id="backBtn" name="arrow-dropleft" (click)="navPop()"></ion-icon></button>
+	<ion-title>Login</ion-title>
+</ion-header>
+<ion-content>
+<div class="divForm">
+<form (submit)="loginUser(logUser.value)" [formGroup]="logUser">
+<ion-list>
+<ion-grid>
+	<ion-row>
+	  <ion-col col-1></ion-col>
+	  <ion-col col-10>
+		  <ion-item>
+			  <ion-label floating>Username</ion-label>
+			  <ion-input formControlName="username" type="text"></ion-input>
+		  </ion-item>
+    </ion-col>
+		<ion-col col-1></ion-col>
+	</ion-row>
+	<ion-row>
+	  <ion-col col-1></ion-col>
+		<ion-col col-10>
+	    <ion-item>
+		    <ion-label floating>Password</ion-label>
+		    <ion-input formControlName="password" type="password"></ion-input>
+	    </ion-item>
+	  </ion-col>
+    <ion-col col-1></ion-col>
+  </ion-row>
+</ion-grid>
+</ion-list>
+<ion-grid>
+<ion-row>
+<ion-col col-1></ion-col>
+<ion-col col-10>
+<button ion-button type="submit" class="submitBtn" block>Log In</button>
+</ion-col>
+<ion-col col-1></ion-col>
+</ion-row>
+</ion-grid>
+</form>
+</div>
+</ion-content>
