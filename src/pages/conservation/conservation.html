@@ -1,13 +1,13 @@
 <ion-header>
-    <button><ion-icon id="backBtn" name="arrow-dropleft" (click)="navPop()"></ion-icon></button>
-    <ion-title>Conservation Areas</ion-title>
+  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>
+  <ion-title>Conservation Areas</ion-title>
 </ion-header>
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col col-1></ion-col>
       <ion-col col-10>
-        <ion-card>
+        <ion-card (click)="picked()">
           <ion-card-header>
             Rietvlei Nature Reserve
           </ion-card-header>

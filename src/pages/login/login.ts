@@ -24,8 +24,8 @@ export class LogPage {
     param+= '"}';
     //window.alert(addr);
     //window.alert(param);
-    //this.navCtrl.push(AccountPage);
-    
+    this.navCtrl.push(AccountPage);
+
     this.http.post(addr, param, {}).then(data =>
     {
       console.log(data.status);
@@ -40,7 +40,7 @@ export class LogPage {
       console.log(error.headers);
       //window.alert(error.data);
        window.alert("Login Failure!");
-    });     
+    });
 }
   navPop()
   {

@@ -1,0 +1,23 @@
+page-receiveErp{
+  @media(max-width: 900px) {
+    .divForm{
+      display:block;
+      width:100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+
+  @media(min-width: 900px) {
+    .divForm{
+      display:block;
+      width:100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+
+  p{
+    color:black;
+  }
+}

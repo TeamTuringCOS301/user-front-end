@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\assets\\imgs",
+    "\\src\\pages",
+    "\\src\\pages\\conservation",
+    "\\src\\pages\\home",
+    "\\src\\pages\\map",
+    "\\src\\pages\\register",
+    "\\src\\pages\\rewards"
+  ],
+  "SelectedNode": "\\src\\pages\\map\\map.html",
+  "PreviewInSolutionExplorer": false
+}

@@ -36,9 +36,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      let splash = this.modalCtrl.create(Splash);
-      splash.present();
-      //this.splashScreen.hide();
+      //let splash = this.modalCtrl.create(Splash);
+      //splash.present();
+      this.splashScreen.hide();
     });
   }
 

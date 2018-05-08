@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicPageModule } from 'ionic-angular';
 import { Splash } from '../pages/splash/splash';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -12,7 +13,10 @@ import { LogPage } from '../pages/login/login';
 import { HTTP } from '@ionic-native/http';
 import { AccountPage } from '../pages/account/account';
 import { ConservationPage } from '../pages/conservation/conservation';
-
+import { RewardsPage } from '../pages/rewards/rewards';
+import { MapPage } from '../pages/map/map';
+import { SendPage } from '../pages/sendErp/sendErp';
+import { ReceivePage } from '../pages/receiveErp/receiveErp';
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +26,11 @@ import { ConservationPage } from '../pages/conservation/conservation';
     RegPage,
     LogPage,
     AccountPage,
-    ConservationPage
+    ConservationPage,
+    RewardsPage,
+    MapPage,
+    SendPage,
+    ReceivePage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,11 @@ import { ConservationPage } from '../pages/conservation/conservation';
     RegPage,
     LogPage,
     AccountPage,
-    ConservationPage
+    ConservationPage,
+    RewardsPage,
+    MapPage,
+    SendPage,
+    ReceivePage
   ],
   providers: [
     StatusBar,
