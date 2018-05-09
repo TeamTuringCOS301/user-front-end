@@ -33,6 +33,7 @@ export class LogPage {
       function(data) //Success
       {
         //alert("Success: " +data.text());
+        //Test
         var jsonResp = JSON.parse(datra.text());
         if(jsonResp.success)
         {
