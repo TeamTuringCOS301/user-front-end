@@ -23,6 +23,7 @@ export class LogPage {
     var param = JSON.stringify(jsonArr);
     //window.alert(addr);
     //window.alert(param);
+    //Test
     //this.navCtrl.push(AccountPage);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
