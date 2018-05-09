@@ -10,7 +10,7 @@ import { RegPage } from '../pages/register/register';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LogPage } from '../pages/login/login';
-import { HTTP } from '@ionic-native/http';
+import { HttpModule } from '@angular/http';
 import { AccountPage } from '../pages/account/account';
 import { ConservationPage } from '../pages/conservation/conservation';
 import { RewardsPage } from '../pages/rewards/rewards';
@@ -34,6 +34,7 @@ import { ReceivePage } from '../pages/receiveErp/receiveErp';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -54,7 +55,6 @@ import { ReceivePage } from '../pages/receiveErp/receiveErp';
   providers: [
     StatusBar,
     SplashScreen,
-    HTTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
