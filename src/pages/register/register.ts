@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {FormGroup, FormControl} from '@angular/forms';
-import { HTTP } from '@ionic-native/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
 import { AccountPage } from '../account/account';
 
 @Component({
@@ -10,8 +11,8 @@ import { AccountPage } from '../account/account';
 })
 export class RegPage {
   regUser: any;
-  constructor(private http: HTTP, public navCtrl: NavController) {
-  this.regUser = new FormGroup({username: new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
+  constructor(private http: Http, public navCtrl: NavController) {
+  this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
 
   }
 
@@ -22,37 +23,51 @@ export class RegPage {
   }
   else
   {
-    let addr: any = "localhost:8080/user/register";
-    let param: any= '{"name":"'; 
-    param+=value.fName;
-    param+='", "surname":"';
-    param+=value.sName;
-    param+='","username":"';
-    param+= value.username ;
-    param+='","password":"';
-    param+=value.password;
-    param+='","cellphoneNumber":"';
-    param+=value.cellNumber;
-    param+='","vehicleModel":"';
-    param+=value.vehicleModel;
-    param+='","vehicleRegistration":"';
-    param+=value.vehicleReg;
-    param+='"}';
-    this.http.get(addr, param, {}).then(data =>
-    {
-      console.log(data.status);
-      console.log(data.data); // data received by server
-      console.log(data.headers);
-      window.alert("Registration Success!");
-      this.navCtrl.push(AccountPage);
-    }).catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error.headers);
-      window.alert("Registration Failure!");
-    });
-    //window.alert("Success!");    
-  }    
+    let addr: any = "http://192.168.43.72:8080/user/register";
+    var jsonArr: any = {};
+    jsonArr.username = value.username;
+    jsonArr.password = value.password;
+    jsonArr.email = value.email;
+    jsonArr.name = value.fName;
+    jsonArr.surname = value.sName;
+    jsonArr.cellNumber = value.cellNumber;
+    //jsonArr.vehicleModel = value.vehicleModel;
+    //jsonArr.vehicleRegistration = value.vehicleReg;
+    var param = jsonArr;
+    alert(addr);
+    console.log("Param:");
+    console.log(param);
+    alert(param);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({headers: headers});
+    alert("Post options set");
+    this.http.post(addr, param, options).subscribe
+    (
+      function(response) //Success
+      {
+        //Handle successful register
+        alert("Success" +response);
+        console.log(response);
+        return false;
+      },
+      function(error) //Failure
+      {
+        //Handle error
+        alert("Error" +error);
+        console.log("Error");
+        return false;
+      },
+      function()
+      {
+        //Completion code
+        alert("Compl");
+        console.log("Success");
+        return false;
+      }
+    );
+    //window.alert("Success!");
+  }
 }
 
 navPop()
