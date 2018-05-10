@@ -17,6 +17,8 @@ import { RewardsPage } from '../pages/rewards/rewards';
 import { MapPage } from '../pages/map/map';
 import { SendPage } from '../pages/sendErp/sendErp';
 import { ReceivePage } from '../pages/receiveErp/receiveErp';
+import { SendAlert } from '../pages/sendAlert/sendAlert';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [
     MyApp,
@@ -30,12 +32,14 @@ import { ReceivePage } from '../pages/receiveErp/receiveErp';
     RewardsPage,
     MapPage,
     SendPage,
-    ReceivePage
+    ReceivePage,
+    SendAlert
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +54,8 @@ import { ReceivePage } from '../pages/receiveErp/receiveErp';
     RewardsPage,
     MapPage,
     SendPage,
-    ReceivePage
+    ReceivePage,
+    SendAlert
   ],
   providers: [
     StatusBar,

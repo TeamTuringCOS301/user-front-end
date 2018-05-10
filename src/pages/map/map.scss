@@ -44,14 +44,46 @@ page-map{
       height:60%;
       margin-top: 5%;
     }
+
+    #alertBtn{
+      width:100%;
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:40px;
+      display:block;
+      margin:auto;
+    }
   }
 
   @media(min-width: 900px) {
     #map {
-      margin-left:30%;
+      margin-left:5%;
       height: 80%;
-      width:40%;
+      width:60%;
       margin-top:3%;
+      position:relative;
+      float:left;
+    }
+
+   #alertBtn{
+      width:40%;
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:40px;
+      display:block;
+    }
+
+    #details{
+      float:right;
+      position:relative;
+      width: 30%;
+      height:80%;
+      margin-right:4%;
+      margin-top:2%;
     }
   }
       .scroll {

@@ -25896,6 +25896,16 @@ page-login ion-title {
     margin-left: auto;
     margin-right: auto;
   }
+  page-login .submitBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
 }
 
 @media (min-width: 900px) {
@@ -25904,6 +25914,15 @@ page-login ion-title {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
+  }
+  page-login .submitBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
   }
 }
 
@@ -25985,14 +26004,43 @@ page-map #backButton {
     height: 60%;
     margin-top: 5%;
   }
+  page-map #alertBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
 }
 
 @media (min-width: 900px) {
   page-map #map {
-    margin-left: 30%;
+    margin-left: 5%;
     height: 80%;
-    width: 40%;
+    width: 60%;
     margin-top: 3%;
+    position: relative;
+    float: left;
+  }
+  page-map #alertBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+  }
+  page-map #details {
+    float: right;
+    position: relative;
+    width: 30%;
+    height: 80%;
+    margin-right: 4%;
+    margin-top: 2%;
   }
 }
 
@@ -26037,6 +26085,16 @@ page-register ion-title {
     margin-left: auto;
     margin-right: auto;
   }
+  page-register .submitBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
 }
 
 @media (min-width: 900px) {
@@ -26045,6 +26103,15 @@ page-register ion-title {
     width: 40%;
     margin-left: auto;
     margin-right: auto;
+  }
+  page-register .submitBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
   }
 }
 

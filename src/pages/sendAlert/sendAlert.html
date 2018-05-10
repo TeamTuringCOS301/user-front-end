@@ -1,0 +1,58 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>Send Alert</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="divForm">
+    <form [formGroup]="sendAlert" (submit)="sendFunc(sendAlert.value)">
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Alert Title</ion-label>
+                <ion-input formControlName="title" type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Description</ion-label>
+                <ion-input formControlName="description" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Image</ion-label>
+                <ion-input formControlName="image" type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col col-10>
+            <button ion-button type="submit" class="submitBtn" block>Send</button>
+          </ion-col>
+          <ion-col col-1></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

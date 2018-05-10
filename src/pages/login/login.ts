@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {FormGroup, FormControl} from '@angular/forms';
+import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { AccountPage } from '../account/account';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-login',
@@ -10,33 +11,48 @@ import { AccountPage } from '../account/account';
 })
 export class LogPage {
   logUser: any;
-  constructor(private http: Http, public navCtrl: NavController) {
-  this.logUser = new FormGroup({username: new FormControl(), password: new FormControl()});
+  constructor(public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
+  this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
 
   }
 
+  public presentToast(text)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: text,
+      duration: 1500,
+      position: 'bottom',
+      dismissOnPageChange: false
+    });
+    toast.present();
+  }
+
   loginUser(value: any) {
-    let addr: any = "http://192.168.43.72:8080/user/login";
+    if(!this.logUser.valid)
+    {
+      this.presentToast("Please fill out all of the fields");
+      return;
+    }
+    let addr: any = "http://127.0.0.1:8080/user/login";
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
     var param = JSON.stringify(jsonArr);
-    //window.alert(addr);
-    //window.alert(param);
-    //Test
-    //this.navCtrl.push(AccountPage);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: headers});
-    alert("Post options set");
+    //this.navCtrl.push(AccountPage);
     this.http.post(addr, param, options).subscribe
     (
-      function(data) //Success
+      (data) => //Success
       {
         //alert("Success: " +data.text());
-        var jsonResp = JSON.parse(datra.text());
+        var jsonResp = JSON.parse(data.text());
+        //alert(jsonResp);
         if(jsonResp.success)
         {
+          this.presentToast("Welcome!");
           this.navCtrl.push(AccountPage);
         }
         else
@@ -44,11 +60,11 @@ export class LogPage {
           alert("Invalid username/password combination");
         }
       },
-      function(error) //Failure
+      (error) =>//Failure
       {
-        alert("Error: " +error);
+        alert("Error: "+error);
       },
-      function()
+      (complete) =>
       {
         //Completion code
       }
