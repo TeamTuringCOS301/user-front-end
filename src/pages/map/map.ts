@@ -15,8 +15,10 @@ declare var google;
 export class MapPage {
   Gmap: any;
   patrol:any;
+  address:any;
   constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.patrol = {};
+    this.storage.get('address').then(val=>{this.address = val;});
   }
 
   @ViewChild('map') mapElement: ElementRef;
@@ -168,7 +170,7 @@ LoadMap(areaName) {
   let headers = new Headers();
   headers.append('Content-Type', 'application/json');
   let options = new RequestOptions({headers: headers});
-  var addr = "http://192.168.43.19:8080/area/info/"+areaName;
+  var addr = this.address+"/area/info/"+areaName;
   this.http.get(addr).subscribe
   (
     (data) => //Success
@@ -197,7 +199,7 @@ LoadMap(areaName) {
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#0000ff',
-      fillOpacity: 0.0
+      fillOpacity: 0.2
     });
     mapObj.setMap(this.Gmap);
 

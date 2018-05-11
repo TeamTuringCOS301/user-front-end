@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { LogPage } from '../login/login';
 import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-register',
@@ -11,9 +12,10 @@ import { ToastController } from 'ionic-angular';
 })
 export class RegPage {
   regUser: any;
-  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
+  address: any;
+  constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
     this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
-
+    this.storage.get('address').then(val=>{this.address = val});
   }
 
   public presentToast(message)
@@ -40,7 +42,7 @@ export class RegPage {
       }
       else
       {
-        let addr: any = "http://192.168.43.19:8080/user/add";
+        var addr= this.address+"/user/add";
         var jsonArr: any = {};
         jsonArr.username = value.username;
         jsonArr.password = value.password;

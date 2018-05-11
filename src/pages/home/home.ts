@@ -14,6 +14,7 @@ export class HomePage {
   constructor(public storage: Storage, public navCtrl: NavController) {
     this.pushPage = RegPage;
     this.storage.set('area', 99);
+    this.storage.set('address', "http://192.168.43.19:8080");
   }
 
   registerPage()

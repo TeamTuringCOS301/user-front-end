@@ -8,6 +8,7 @@ import { SendPage } from '../sendErp/sendErp';
 import { ReceivePage } from '../receiveErp/receiveErp';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-account',
@@ -15,11 +16,13 @@ import { ToastController } from 'ionic-angular';
 })
 export class AccountPage {
   user:any;
+  address:any ;
   rootPage: any = AccountPage;
-  constructor(public toastCtrl: ToastController, public http: Http, public navCtrl: NavController, public modalCtrl : ModalController) {
+  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController, public modalCtrl : ModalController) {
     this.user = {};
     this.user.name = "Dave";
     this.user.balance = 10;
+    this.storage.get('address').then(val=>{this.address = val;});
   }
 
   public presentToast()
@@ -47,7 +50,7 @@ export class AccountPage {
   {
     var jsonArr:any = {};
     var param = JSON.stringify(jsonArr);
-    var addr = "http://127.0.0.1:8080/user/logout"
+    var addr = this.address+"/user/logout";
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: headers});
