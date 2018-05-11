@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RegPage } from '../register/register';
 import { LogPage } from '../login/login';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -9,8 +11,9 @@ import { LogPage } from '../login/login';
 export class HomePage {
   pushPage: any;
   rootPage: any = HomePage;
-  constructor(public navCtrl: NavController) {   
+  constructor(public storage: Storage, public navCtrl: NavController) {
     this.pushPage = RegPage;
+    this.storage.set('area', 99);
   }
 
   registerPage()
@@ -24,4 +27,3 @@ export class HomePage {
   }
 
 }
-

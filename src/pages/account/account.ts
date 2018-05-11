@@ -14,9 +14,12 @@ import { ToastController } from 'ionic-angular';
   templateUrl: 'account.html'
 })
 export class AccountPage {
-
+  user:any;
   rootPage: any = AccountPage;
   constructor(public toastCtrl: ToastController, public http: Http, public navCtrl: NavController, public modalCtrl : ModalController) {
+    this.user = {};
+    this.user.name = "Dave";
+    this.user.balance = 10;
   }
 
   public presentToast()
@@ -49,19 +52,16 @@ export class AccountPage {
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: headers});
     //this.navCtrl.push(AccountPage);
-    this.http.post(addr, param, options).subscribe
+    this.http.get(addr).subscribe
     (
       (data) => //Success
       {
-        presentToast();
+        this.presentToast();
         this.navCtrl.push(HomePage);
       },
       (error) =>//Failure
       {
-        alert("Error: "+error);
-      },
-      (complete) =>
-      {
+        alert("Error: " +error);
       }
     );
 

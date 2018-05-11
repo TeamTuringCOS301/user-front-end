@@ -9,6 +9,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22,11 +23,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl) {
+    function HomePage(storage, navCtrl) {
+        this.storage = storage;
         this.navCtrl = navCtrl;
         this.rootPage = HomePage_1;
         this.pushPage = __WEBPACK_IMPORTED_MODULE_2__register_register__["a" /* RegPage */];
+        this.storage.set('area', 99);
     }
     HomePage_1 = HomePage;
     HomePage.prototype.registerPage = function () {
@@ -39,10 +43,10 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\home\home.html"*/'<ion-header>\n\n<!--<ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>-->\n\n  \n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <div class="loadingDiv">\n\n    <img src="assets/imgs/background.png" alt="Loading Image">\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4.5>\n\n          <button id="leftButton" (click)="loginPage()">Log In</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4.5>\n\n          <button id="rightButton" (click)="registerPage()">Register</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n      <ion-col col-1></ion-col>\n\n        <ion-col col-10>\n\n          <button id="middleButton">Learn about ERP-Coin</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n    </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
-    var HomePage_1;
+    var HomePage_1, _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -100,7 +104,7 @@ var RegPage = /** @class */ (function () {
             this.presentToast("Please ensure that your passwords match");
         }
         else {
-            var addr = "http://127.0.0.1:8080/user/register";
+            var addr = "http://192.168.43.19:8080/user/add";
             var jsonArr = {};
             jsonArr.username = value.username;
             jsonArr.password = value.password;
@@ -108,7 +112,7 @@ var RegPage = /** @class */ (function () {
             jsonArr.name = value.fName;
             jsonArr.surname = value.sName;
             jsonArr.cellNumber = value.cellNumber;
-            //jsonArr.vehicleModel = value.vehicleModel;
+            jsonArr.walletAddress = value.vehicleModel;
             //jsonArr.vehicleRegistration = value.vehicleReg;
             var param = jsonArr;
             //alert(addr);
@@ -129,10 +133,6 @@ var RegPage = /** @class */ (function () {
                 //Handle error
                 alert("Error" + error);
                 console.log("Error");
-            }, function (complete) {
-                //Completion code
-                //alert("Compl");
-                console.log("Success");
             });
             //window.alert("Success!");
         }
@@ -144,9 +144,10 @@ var RegPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-register',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\register\register.html"*/'<ion-header>\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n\n  <ion-title>Registration</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div class="divForm">\n\n    <form (submit)="registerUser(regUser.value)" [formGroup]="regUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Username</ion-label>\n\n                <ion-input formControlName="username" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Email Address</ion-label>\n\n                <ion-input formControlName="email" type="email"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-4.5>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Name</ion-label>\n\n                <ion-input formControlName="fName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-4.5>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Surname</ion-label>\n\n                <ion-input formControlName="sName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-4.5>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Password</ion-label>\n\n                <ion-input formControlName="password" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-4.5>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Confim password</ion-label>\n\n                <ion-input formControlName="confirmPassword" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Cellphone Number</ion-label>\n\n                <ion-input formControlName="cellNumber" type="number"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Vehicle Model</ion-label>\n\n                <ion-input formControlName="vehicleModel" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Vehicle Registration</ion-label>\n\n                <ion-input formControlName="vehicleReg" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button type="submit" class="submitBtn" block>Register</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\register\register.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ToastController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _c || Object])
     ], RegPage);
     return RegPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=register.js.map
@@ -226,6 +227,9 @@ var AccountPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
         this.rootPage = AccountPage_1;
+        this.user = {};
+        this.user.name = "Dave";
+        this.user.balance = 10;
     }
     AccountPage_1 = AccountPage;
     AccountPage.prototype.presentToast = function () {
@@ -253,12 +257,11 @@ var AccountPage = /** @class */ (function () {
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_7__angular_http__["d" /* RequestOptions */]({ headers: headers });
         //this.navCtrl.push(AccountPage);
-        this.http.post(addr, param, options).subscribe(function (data) {
-            presentToast();
+        this.http.get(addr).subscribe(function (data) {
+            _this.presentToast();
             _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_0__home_home__["a" /* HomePage */]);
         }, function (error) {
             alert("Error: " + error);
-        }, function (complete) {
         });
     };
     AccountPage.prototype.rewardsPage = function () {
@@ -269,7 +272,7 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage = AccountPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/'<ion-header>\n\n  <ion-title>My Account</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div class="userAccountDiv">\n\n    <ion-grid>\n\n      <ion-row style="height:40vh;">\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4 >\n\n          <div id="leftDiv">\n\n            <p>Username</p>\n\n            <div id="profileImage"> User Profile Image Here</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <div id="rightDiv">\n\n            <p> ERP-Coin Balance:<br>122ERP</p>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="conservationAreas()">View List of Conservation Areas</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="rewardsPage()">View Rewards</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="sendErp()">Send ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="receiveErp()">Receive ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Manage Account</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton">View Leaderboard</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Help and Support</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="logout()">Logout</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/
+            selector: 'page-account',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/'<ion-header>\n\n  <ion-title>My Account</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div class="userAccountDiv">\n\n    <ion-grid>\n\n      <ion-row style="height:40vh;">\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4 >\n\n          <div id="leftDiv">\n\n            <p><b>Welcome {{user.name}}</b></p>\n\n            <div id="erpLogo"><img src="assets/imgs/background.png" alt="ERP Image"></div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <div id="rightDiv">\n\n            <p><b>ERP-Coin Balance:<br>{{user.balance}} ERP Coins</b></p>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="conservationAreas()">View List of Conservation Areas</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="rewardsPage()">View Rewards</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="sendErp()">Send ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="receiveErp()">Receive ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Manage Account</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton">View Leaderboard</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Help and Support</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="logout()">Logout</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* ToastController */], __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* ModalController */]])
     ], AccountPage);
@@ -307,12 +310,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ConservationPage = /** @class */ (function () {
     function ConservationPage(http, navCtrl, storage) {
+        var _this = this;
         this.http = http;
         this.navCtrl = navCtrl;
         this.storage = storage;
+        this.areas = [];
+        this.area = {};
+        var jsonArr = {};
+        jsonArr.location = "";
+        var param = JSON.stringify(jsonArr);
+        var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        var options = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        var addr = "http://192.168.43.19:8080/area/list";
+        this.http.get(addr).subscribe(function (data) {
+            var jsonResp = JSON.parse(data.text());
+            //alert(data.text());
+            _this.areas = jsonResp.areas;
+        });
     }
     ConservationPage.prototype.picked = function (area) {
         this.storage.set('area', area);
+        //alert(area);
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__map_map__["a" /* MapPage */]);
     };
     ConservationPage.prototype.ionViewDidLoad = function () {
@@ -323,74 +342,13 @@ var ConservationPage = /** @class */ (function () {
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["d" /* RequestOptions */]({ headers: headers });
         var addr = "";
-        /*this.http.post(addr, param, options).subscribe
-        (
-          (data) => //Success
-          {
-            //alert("Success: " +data.text());
-            var jsonResp = JSON.parse(data.text());
-            //alert(jsonResp);
-            if(jsonResp.success)
-            {
-              var array = jsonResp;*/
-        /* Expecting:
-          item.name
-          item.title
-          item.province
-          item.city*/
-        var array = [];
-        var jsonObj = {};
-        jsonObj.name = "reitvlei";
-        jsonObj.title = "Rietvlei Nature Reserve";
-        jsonObj.province = "Gauteng";
-        jsonObj.city = "Pretoria";
-        array.push(jsonObj);
-        jsonObj = {};
-        jsonObj.name = "dinokeng";
-        jsonObj.title = "Dinokeng Game Reserve";
-        jsonObj.province = "Gauteng";
-        jsonObj.city = "Pretoria";
-        array.push(jsonObj);
-        var content = "";
-        array.forEach(function (item) {
-            content += '<ion-row>' +
-                '<ion-col col-1></ion-col>' +
-                '<ion-col col-10>' +
-                '<ion-card (click)="picked(' + item.name + ')">' +
-                '<ion-card-header>' +
-                item.title +
-                '</ion-card-header>' +
-                '<ion-card-content>' +
-                '<p>Province:' + item.province + ', City: ' + item.city + '</p>' +
-                '</ion-card-content>' +
-                '</ion-card>' +
-                '</ion-col>' +
-                '<ion-col col-1></ion-col>' +
-                '</ion-row>';
-        });
-        document.getElementById("conservationList").innerHTML = content;
-        /*}
-        else
-        {
-          alert("Invalid username/password combination");
-        }
-      },
-      (error) =>//Failure
-      {
-        alert("Error: Could not connect to the server. Please ensure that this device has internet access.");
-      },
-      (complete) =>
-      {
-        //Completion code
-      }
-    );*/
     };
     ConservationPage.prototype.navPop = function () {
         this.navCtrl.pop();
     };
     ConservationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-conservation',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/'<ion-header>\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n  <ion-title>Conservation Areas</ion-title>\n</ion-header>\n<ion-content>\n  <ion-grid id="conservationList">\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/
+            selector: 'page-conservation',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/'<ion-header>\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n  <ion-title>Conservation Areas</ion-title>\n</ion-header>\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-1></ion-col>\n      <ion-col col-10>\n        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">\n          <ion-card-header>\n\n            {{area.name}}\n\n          </ion-card-header>\n          <ion-card-content>\n\n            <p>Province: {{area.province}}, City: {{area.city}}</p>\n\n          </ion-card-content>\n        </ion-card>\n      </ion-col>\n      <ion-col col-1></ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
     ], ConservationPage);
@@ -433,23 +391,31 @@ var MapPage = /** @class */ (function () {
         this.storage = storage;
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
+        this.patrol = {};
     }
     MapPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.storage.get('area').then(function (val) {
             var area = val;
-            //alert("Received area is: " +area);
+            alert("Received area is: " + area);
+            while (area == "null") {
+                _this.storage.get('area').then(function (val) { _this.area = val; });
+                alert("Area is: " + _this.area);
+            }
+            alert("New area is: " + area);
             //var polygonPoints:any = [];
             //polygonPoints = this.getPolygonPoints(area);
             //this.loadMap(polygonPoints);
+            _this.patrol = {};
+            _this.patrol.coins = 0;
             var polygonPoints = [
                 { lat: 25.774, lng: -80.190 },
                 { lat: 18.466, lng: -66.118 },
                 { lat: 32.321, lng: -64.757 },
                 { lat: 25.774, lng: -80.190 }
             ];
-            _this.LoadMap(polygonPoints);
-            _this.alerts();
+            _this.LoadMap(area);
+            //this.alerts();
         });
     };
     MapPage.prototype.alerts = function () {
@@ -460,33 +426,50 @@ var MapPage = /** @class */ (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        var addr = "";
-        /*this.http.post(addr, param, options).subscribe
-        (
-          (data) => //Success
-          {
+        var addr = "http://192.168.43.19/area/info/"; // ID is area ID from database
+        this.http.post(addr, param, options).subscribe(function (data) {
             //alert("Success: " +data.text());
             var jsonResp = JSON.parse(data.text());
             //alert(jsonResp);
-            if(jsonResp.success)
-            {
-              this.presentToast();
-              this.navCtrl.push(AccountPage);
+            if (jsonResp.success) {
+                var iconPost = "Alert.png";
+                var iconPre = "assets/imgs/";
+                alertArr = [];
+                alertArr = jsonResp.alerts;
+                alertArr.forEach(function (alert) {
+                    console.log("Alert: " + alert.secerity);
+                    var iconSelection = iconPre + alert.severity + iconPost;
+                    var contentString = '<div id="content">' +
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h1 id="firstHeading" class="firstHeading">' + alert.title + '</h1>' +
+                        '<div id="bodyContent">' +
+                        '<p>' + alert.description + '</p>' +
+                        '</div>' +
+                        '</div>';
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+                    var marker = new google.maps.Marker({
+                        position: alert.location,
+                        map: _this.Gmap,
+                        title: alert.title,
+                        icon: {
+                            url: iconSelection,
+                            scaledSize: new google.maps.Size(16, 16) // pixels
+                        }
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.open(this.Gmap, marker);
+                    });
+                });
             }
-            else
-            {
-              alert("Invalid username/password combination");
+            else {
+                alert("Invalid username/password combination");
             }
-          },
-          (error) =>//Failure
-          {
-            alert("Error: Could not connect to the server. Please ensure that this device has internet access.");
-          },
-          (complete) =>
-          {
-            //Completion code
-          }
-        );*/
+        }, function (error) {
+            alert("Error: " + error);
+        });
         var alertArr = [];
         var testalert = {};
         var iconPost = "Alert.png";
@@ -509,7 +492,7 @@ var MapPage = /** @class */ (function () {
         testalert.location = { lat: 25.886, lng: -70.268 };
         alertArr.push(testalert);
         alertArr.forEach(function (alert) {
-            console.log("Alert: " + alert.secerity);
+            console.log("Alert: " + alert.severity);
             var iconSelection = iconPre + alert.severity + iconPost;
             var contentString = '<div id="content">' +
                 '<div id="siteNotice">' +
@@ -536,70 +519,79 @@ var MapPage = /** @class */ (function () {
             });
         });
     };
-    MapPage.prototype.getPolygonPoints = function (areaName) {
+    MapPage.prototype.LoadMap = function (areaName) {
+        var _this = this;
         var jsonArr = {};
-        jsonArr.location = areaName;
+        jsonArr.id = areaName;
         var param = JSON.stringify(jsonArr);
         var headers = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_4__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        var addr = "";
-        /*this.http.post(addr, param, options).subscribe
-        (
-          (data) => //Success
-          {
-            //alert("Success: " +data.text());
+        var addr = "http://192.168.43.19:8080/area/info/" + areaName;
+        this.http.get(addr).subscribe(function (data) {
+            alert("Success: " + data.text());
             var jsonResp = JSON.parse(data.text());
             //alert(jsonResp);
-            if(jsonResp.success)
-            {
-              this.presentToast();
-              this.navCtrl.push(AccountPage);
+            if (jsonResp) {
+                var mapDetails;
+                mapDetails = JSON.parse(data.text());
+                var test = [];
+                test = [{ lat: -25.75565, lng: 28.23938 },
+                    { lat: -25.75392, lng: 28.23217 }];
+                alert("Middle: " + mapDetails.middle);
+                alert("Middle: " + JSON.parse(mapDetails.middle));
+                _this.Gmap = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 5,
+                    center: JSON.parse(mapDetails.middle),
+                    mapTypeId: 'terrain'
+                });
+                // Construct the polygon.
+                var mapObj = new google.maps.Polygon({
+                    paths: JSON.parse(mapDetails.border),
+                    strokeColor: '#0000FF',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#0000ff',
+                    fillOpacity: 0.0
+                });
+                mapObj.setMap(_this.Gmap);
+                /*google.maps.Polygon.prototype.getBounds = function() {
+                  var bounds = new google.maps.LatLngBounds();
+                  var paths = this.getPaths();
+                  var path;
+                  for (var i = 0; i < paths.getLength(); i++) {
+                    path = paths.getAt(i);
+                    for (var ii = 0; ii < path.getLength(); ii++) {
+                      bounds.extend(path.getAt(ii));
+                    }
+                  }
+                  return bounds;
+                }
+                map.fitBounds(area.getBounds());
+            
+                var listener = google.maps.event.addListener(this.Gmap, "idle", function() {
+                  this.Gmap.setZoom(map.getZoom() * 1.03);			//if the polygon does not fit in the screen, adjust this value.
+                  google.maps.event.removeListener(listener);
+                });
+            
+                infoWindow = new google.maps.InfoWindow;
+            
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                    };
+                  });
+                }
+                  else
+                  {
+                    alert("Browser does not support geolocation");
+                  }*/
             }
-            else
-            {
-              alert("Invalid username/password combination");
-            }
-          },
-          (error) =>//Failure
-          {
-            alert("Error: Could not connect to the server. Please ensure that this device has internet access.");
-          },
-          (complete) =>
-          {
-            //Completion code
-          }
-        );*/
-    };
-    /*loadMap(polygonPoints){
-  
-      let latLng = new google.maps.LatLng(-34.9290, 138.6010);
-  
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-  
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-  
-    }*/
-    MapPage.prototype.LoadMap = function (polygonPoints) {
-        this.Gmap = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
-            center: { lat: 24.886, lng: -70.268 },
-            mapTypeId: 'terrain'
+        }, function (error) {
+            alert("Error: " + error);
         });
-        // Construct the polygon.
-        var bermudaTriangle = new google.maps.Polygon({
-            paths: polygonPoints,
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35
-        });
-        bermudaTriangle.setMap(this.Gmap);
     };
     MapPage.prototype.navPop = function () {
         this.navCtrl.pop();
@@ -614,7 +606,7 @@ var MapPage = /** @class */ (function () {
     ], MapPage.prototype, "mapElement", void 0);
     MapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n\n  <ion-title>Map</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div #map id="map"></div>\n\n  <div id="details">\n\n    <p>You have found: </p><p id="coinAmount"></p><p> ERP-Coins this patrol.</p>\n\n    <button id="alertBtn" (click)="sendAlert()">Send Out Alert</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
+            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n\n  <ion-title>Map</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div #map id="map"></div>\n\n  <div id="details">\n\n    <p>You have found: {{patrol.coins}} ERP-Coins this patrol.</p>\n\n    <button id="alertBtn" (click)="sendAlert()">Send Out Alert</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* ModalController */]) === "function" && _e || Object])
     ], MapPage);
@@ -687,7 +679,7 @@ var SendAlert = /** @class */ (function () {
     };
     SendAlert = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form [formGroup]="sendAlert" (submit)="sendFunc(sendAlert.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Alert Title</ion-label>\n\n                <ion-input formControlName="title" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Description</ion-label>\n\n                <ion-input formControlName="description" type="number"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Image</ion-label>\n\n                <ion-input formControlName="image" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button ion-button type="submit" class="submitBtn" block>Send</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
+            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form [formGroup]="sendAlert" (submit)="sendFunc(sendAlert.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Alert Title</ion-label>\n\n                <ion-input formControlName="title" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Description</ion-label>\n\n                <ion-input formControlName="description" type="number"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label stacked>Image</ion-label>\n\n                <ion-input formControlName="image" accept="image/*" type="file"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button ion-button type="submit" class="submitBtn" block>Send</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]])
     ], SendAlert);
@@ -1190,7 +1182,7 @@ var LogPage = /** @class */ (function () {
             this.presentToast("Please fill out all of the fields");
             return;
         }
-        var addr = "http://127.0.0.1:8080/user/login";
+        var addr = "http://192.168.43.19:8080/user/login";
         var jsonArr = {};
         jsonArr.username = value.username;
         jsonArr.password = value.password;
@@ -1212,8 +1204,6 @@ var LogPage = /** @class */ (function () {
             }
         }, function (error) {
             alert("Error: " + error);
-        }, function (complete) {
-            //Completion code
         });
     };
     LogPage.prototype.navPop = function () {

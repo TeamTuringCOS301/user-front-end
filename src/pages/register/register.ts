@@ -40,7 +40,7 @@ export class RegPage {
       }
       else
       {
-        let addr: any = "http://127.0.0.1:8080/user/register";
+        let addr: any = "http://192.168.43.19:8080/user/add";
         var jsonArr: any = {};
         jsonArr.username = value.username;
         jsonArr.password = value.password;
@@ -48,7 +48,7 @@ export class RegPage {
         jsonArr.name = value.fName;
         jsonArr.surname = value.sName;
         jsonArr.cellNumber = value.cellNumber;
-        //jsonArr.vehicleModel = value.vehicleModel;
+        jsonArr.walletAddress = value.vehicleModel;
         //jsonArr.vehicleRegistration = value.vehicleReg;
         var param = jsonArr;
         //alert(addr);
@@ -74,12 +74,6 @@ export class RegPage {
         //Handle error
         alert("Error" +error);
         console.log("Error");
-      },
-      (complete) =>
-      {
-        //Completion code
-        //alert("Compl");
-        console.log("Success");
       }
     );
     //window.alert("Success!");

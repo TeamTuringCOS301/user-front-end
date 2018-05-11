@@ -34,7 +34,7 @@ export class LogPage {
       this.presentToast("Please fill out all of the fields");
       return;
     }
-    let addr: any = "http://127.0.0.1:8080/user/login";
+    let addr: any = "http://192.168.43.19:8080/user/login";
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
@@ -63,10 +63,6 @@ export class LogPage {
       (error) =>//Failure
       {
         alert("Error: "+error);
-      },
-      (complete) =>
-      {
-        //Completion code
       }
     );
 }
