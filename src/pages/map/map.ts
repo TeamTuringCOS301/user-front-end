@@ -27,13 +27,13 @@ export class MapPage {
   ionViewDidLoad(){
     this.storage.get('area').then(val=>{
       let area = val;
-      alert("Received area is: " +area);
+      //alert("Received area is: " +area);
       while(area == "null")
       {
         this.storage.get('area').then(val=>{this.area = val;});
-        alert("Area is: "+this.area);
+        //alert("Area is: "+this.area);
       }
-      alert("New area is: "+area);
+      //alert("New area is: "+area);
       //var polygonPoints:any = [];
       //polygonPoints = this.getPolygonPoints(area);
       //this.loadMap(polygonPoints);
@@ -175,7 +175,7 @@ LoadMap(areaName) {
   (
     (data) => //Success
     {
-    alert("Success: " +data.text());
+    //alert("Success: " +data.text());
     var jsonResp = JSON.parse(data.text());
     //alert(jsonResp);
     if(jsonResp)
@@ -185,8 +185,8 @@ LoadMap(areaName) {
       var test:any = [];
       test = [{lat: -25.75565, lng: 28.23938},	//to be replaced with server request
 			{lat: -25.75392, lng: 28.23217}];
-      alert("Middle: "+mapDetails.middle);
-      alert("Middle: "+JSON.parse(mapDetails.middle));
+    //alert("Middle: "+mapDetails.middle);
+      //alert("Middle: "+JSON.parse(mapDetails.middle));
       this.Gmap = new google.maps.Map(document.getElementById('map'), {
         zoom: 5,
         center: JSON.parse(mapDetails.middle),
@@ -199,10 +199,39 @@ LoadMap(areaName) {
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#0000ff',
-      fillOpacity: 0.2
+      fillOpacity: 0.2,
     });
+    this.Gmap.zoom = 12;
     mapObj.setMap(this.Gmap);
+    this.Gmap.zoomo = 12;
+    /*findMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showTrackingPosition(position);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+    showTrackingPosition(position) {
+    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
+    this.currentLat = position.coords.latitude;
+    this.currentLong = position.coords.longitude;
 
+    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map.panTo(location);
+
+    if (!this.marker) {
+      this.marker = new google.maps.Marker({
+        position: location,
+        map: this.map,
+        title: 'Got you!'
+      });
+    }
+    else {
+      this.marker.setPosition(location);
+    }
+  }*/
     /*google.maps.Polygon.prototype.getBounds = function() {
       var bounds = new google.maps.LatLngBounds();
       var paths = this.getPaths();

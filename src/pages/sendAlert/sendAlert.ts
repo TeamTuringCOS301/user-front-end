@@ -2,6 +2,8 @@ import { ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'page-sendAlert',
   templateUrl: 'sendAlert.html'
@@ -10,9 +12,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class SendAlert
 {
   sendAlert: any;
-  constructor(public viewCtrl: ViewController, public http: Http)
+  address:any;
+  constructor(public storage: Storage, public viewCtrl: ViewController, public http: Http)
   {
     this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
+    this.storage.get('address').then(val=>{this.address = val;});
   }
 
   public closeModal()
@@ -27,8 +31,8 @@ export class SendAlert
       jsonArr.description = value.amount;
       jsonArr.image = value.image;
       var param = JSON.stringify(jsonArr);
-      var addr = "";
-      /*this.http.get(addr, param).subscribe
+      var addr = this.address+"/user/alert";
+      this.http.get(addr, param).subscribe
       (
         function(response) //Success
         {
@@ -37,12 +41,8 @@ export class SendAlert
         function(error) //Failure
         {
           //Handle error
-        },
-        function()
-        {
-          //Completion code
         }
-      );*/
+      );
       this.viewCtrl.dismiss();
   }
 

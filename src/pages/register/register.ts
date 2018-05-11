@@ -43,6 +43,7 @@ export class RegPage {
       else
       {
         var addr= this.address+"/user/add";
+        alert(addr);
         var jsonArr: any = {};
         jsonArr.username = value.username;
         jsonArr.password = value.password;

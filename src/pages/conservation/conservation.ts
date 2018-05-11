@@ -12,7 +12,9 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 export class ConservationPage {
   area:any;
   areas:any;
+  address:any;
   constructor(public http: Http, public navCtrl: NavController, public storage: Storage) {
+    this.storage.get('address').then(val=>{this.address = val;});
     this.areas = [];
     this.area = {};
     var jsonArr: any = {};
@@ -21,7 +23,8 @@ export class ConservationPage {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: headers});
-    var addr = "http://192.168.43.19:8080/area/list";
+    var addr = "http://192.168.43.72:8080/area/list";
+    //alert(addr);
     this.http.get(addr).subscribe
     (
       (data) => //Success
@@ -40,13 +43,6 @@ export class ConservationPage {
 
   ionViewDidLoad()
   {
-    var jsonArr: any = {};
-    jsonArr.location = "";
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    var addr = "";
 
   }
 
