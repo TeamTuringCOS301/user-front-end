@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {FormGroup, FormControl} from '@angular/forms';
-import { HTTP } from '@ionic-native/http';
-import { AccountPage } from '../account/account';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { LogPage } from '../login/login';
+import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-register',
@@ -10,54 +12,80 @@ import { AccountPage } from '../account/account';
 })
 export class RegPage {
   regUser: any;
-  constructor(private http: HTTP, public navCtrl: NavController) {
-  this.regUser = new FormGroup({username: new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
-
+  address: any;
+  constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
+    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
+    this.storage.get('address').then(val=>{this.address = val});
   }
 
-  registerUser(value: any) {
-  if(value.password != value.confirmPassword)
+  public presentToast(message)
   {
-     window.alert("Passwords do not match");
+    let toast = this.toastCtrl.create(
+      {
+        message: message,
+        duration: 1500,
+        position: 'bottom',
+        dismissOnPageChange: false
+      });
+      toast.present();
+    }
+
+
+    registerUser(value: any) {
+      var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(!regexEmail.test(value.email)) {
+        this.presentToast("Please enter a valid email address");
+      }
+      else if(value.password != value.confirmPassword)
+      {
+        this.presentToast("Please ensure that your passwords match");
+      }
+      else
+      {
+        var addr= this.address+"/user/add";
+        alert(addr);
+        var jsonArr: any = {};
+        jsonArr.username = value.username;
+        jsonArr.password = value.password;
+        jsonArr.email = value.email;
+        jsonArr.name = value.fName;
+        jsonArr.surname = value.sName;
+        jsonArr.cellNumber = value.cellNumber;
+        jsonArr.walletAddress = value.vehicleModel;
+        //jsonArr.vehicleRegistration = value.vehicleReg;
+        var param = jsonArr;
+        //alert(addr);
+        console.log("Param:");
+        console.log(param);
+        //alert(param);
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({headers: headers});
+        //alert("Post options set");
+        this.http.post(addr, param, options).subscribe
+        (
+          (response) => //Success
+          {
+          //Handle successful register
+          //alert("Success" +response);
+          console.log(response);
+          this.presentToast("Registration successful! Please log in");
+          this.navCtrl.push(LogPage);
+        },
+        (error) => //Failure
+        {
+        //Handle error
+        alert("Error" +error);
+        console.log("Error");
+      }
+    );
+    //window.alert("Success!");
   }
-  else
-  {
-    let addr: any = "localhost:8080/user/register";
-    let param: any= '{"name":"'; 
-    param+=value.fName;
-    param+='", "surname":"';
-    param+=value.sName;
-    param+='","username":"';
-    param+= value.username ;
-    param+='","password":"';
-    param+=value.password;
-    param+='","cellphoneNumber":"';
-    param+=value.cellNumber;
-    param+='","vehicleModel":"';
-    param+=value.vehicleModel;
-    param+='","vehicleRegistration":"';
-    param+=value.vehicleReg;
-    param+='"}';
-    this.http.get(addr, param, {}).then(data =>
-    {
-      console.log(data.status);
-      console.log(data.data); // data received by server
-      console.log(data.headers);
-      window.alert("Registration Success!");
-      this.navCtrl.push(AccountPage);
-    }).catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error.headers);
-      window.alert("Registration Failure!");
-    });
-    //window.alert("Success!");    
-  }    
 }
 
 navPop()
-  {
-    this.navCtrl.pop();
-  }
+{
+  this.navCtrl.pop();
+}
 
 }

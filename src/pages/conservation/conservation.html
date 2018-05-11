@@ -1,32 +1,18 @@
 <ion-header>
-    <button><ion-icon id="backBtn" name="arrow-dropleft" (click)="navPop()"></ion-icon></button>
-    <ion-title>Conservation Areas</ion-title>
+  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>
+  <ion-title>Conservation Areas</ion-title>
 </ion-header>
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col col-1></ion-col>
       <ion-col col-10>
-        <ion-card>
+        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">
           <ion-card-header>
-            Rietvlei Nature Reserve
+            {{area.name}}
           </ion-card-header>
           <ion-card-content>
-            <p>Province: Gauteng, City: Johannesburg</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col col-1></ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-1></ion-col>
-      <ion-col col-10>
-        <ion-card>
-          <ion-card-header>
-            Dinokeng Game Reserve
-          </ion-card-header>
-          <ion-card-content>
-            <p>Province: Gauteng, City: Pretoria</p>
+            <p>Province: {{area.province}}, City: {{area.city}}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

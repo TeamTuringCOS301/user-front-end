@@ -5,27 +5,28 @@
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>-->
+  
 </ion-header>
 
 <ion-content padding>
   <div class="loadingDiv">
-    <img src="assets/imgs/ERP-Loading.png" alt="Loading Image">
+    <img src="assets/imgs/background.png" alt="Loading Image">
     <ion-grid>
       <ion-row>
-        <ion-col col-1></ion-col>        
+        <ion-col col-1></ion-col>
         <ion-col col-4.5>
-          <button (click)="loginPage()">Log In</button>
+          <button id="leftButton" (click)="loginPage()">Log In</button>
         </ion-col>
         <ion-col col-1></ion-col>
         <ion-col col-4.5>
-          <button (click)="registerPage()">Register</button>
+          <button id="rightButton" (click)="registerPage()">Register</button>
         </ion-col>
         <ion-col col-1></ion-col>
       </ion-row>
       <ion-row>
       <ion-col col-1></ion-col>
         <ion-col col-10>
-          <button>Learn about ERP-Coin</button>
+          <button id="middleButton">Learn about ERP-Coin</button>
         </ion-col>
         <ion-col col-1></ion-col>
       </ion-row>

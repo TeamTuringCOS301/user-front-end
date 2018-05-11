@@ -1,24 +1,98 @@
 page-account {
+
   ion-col{
-    
-  }
-  button{
-    width:100%;
-    background-color:white;
-    border:solid 1px #AD2EFE;
-    color: #AD2EFE;
-    border-radius: 4px;
-    height:10vh;
-    display:block;
-    margin:auto;
+
   }
 
-  img{
-  height:70vh;
-  width:100%;
-  display:block;
-  margin:auto;
-  align-items:center;
-  object-fit:contain;
+  ion-title{
+    text-align: center;
+    width:100%;
+    position:fixed;
+    margin-top:10px;
+
+  }
+
+  ion-header{
+    position:fixed;
+    height:40px;
+  }
+
+  @media (max-width: 900px){
+    #leftDiv{
+      width:75%;
+      height:75%;
+      float:left;
+    }
+
+    #rightDiv{
+      width:100%;
+      height:100%;
+      float:left;
+    }
+
+    button{
+      width:100%;
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:10vh;
+      display:block;
+      margin:auto;
+    }
+
+    ion-content{
+      width:100%;
+    }
+  }
+
+  @media (min-width: 900px){
+    #leftDiv{
+      width:60%;
+      height:100%;
+      float:right;
+    }
+
+    #rightDiv{
+      width:60%;
+      height:100%;
+      float:left;
+    }
+
+    button{
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:50px;
+      display:block;
+    }
+
+    #middleButton{
+      margin-left:26.6666666665%;
+      width:46.6666666666667%;
+    }
+
+    #leftButton{
+      float:right;
+      width:60%;
+    }
+
+    #rightButton{
+      float:left;
+      width:60%;
+    }
+
+    ion-content{
+      width:60%;
+      margin-left:20%;
+      margin-right:20%;
+    }
+
 }
+    #profileImage{
+      border: 2px solid grey;
+      height:70%;
+    }
+
 }

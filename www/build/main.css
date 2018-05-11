@@ -25678,46 +25678,194 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-.modal-wrapper {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+ion-backdrop {
+  visibility: visible !important;
+  z-index: auto;
 }
 
-page-account button {
+@media (max-width: 900px) {
+  .modal-wrapper {
+    width: 70%;
+    height: 65%;
+    margin-top: 20%;
+    margin-left: 15%;
+  }
+}
+
+@media (min-width: 900px) {
+  .modal-wrapper {
+    width: 40%;
+    height: 70%;
+    top: 15%;
+    left: 30%;
+    background-color: black;
+    opacity: 0.5;
+  }
+}
+
+.scroll-content {
+  overflow-y: auto !important;
+}
+
+page-account ion-title {
+  text-align: center;
   width: 100%;
-  background-color: white;
-  border: solid 1px #AD2EFE;
+  position: fixed;
+  margin-top: 10px;
+}
+
+page-account ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+@media (max-width: 900px) {
+  page-account #leftDiv {
+    width: 75%;
+    height: 75%;
+    float: left;
+  }
+  page-account #rightDiv {
+    width: 100%;
+    height: 100%;
+    float: left;
+  }
+  page-account button {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 10vh;
+    display: block;
+    margin: auto;
+  }
+  page-account ion-content {
+    width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  page-account #leftDiv {
+    width: 60%;
+    height: 100%;
+    float: right;
+  }
+  page-account #rightDiv {
+    width: 60%;
+    height: 100%;
+    float: left;
+  }
+  page-account button {
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 50px;
+    display: block;
+  }
+  page-account #middleButton {
+    margin-left: 26.6666666665%;
+    width: 46.6666666666667%;
+  }
+  page-account #leftButton {
+    float: right;
+    width: 60%;
+  }
+  page-account #rightButton {
+    float: left;
+    width: 60%;
+  }
+  page-account ion-content {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
+
+page-account #profileImage {
+  border: 2px solid grey;
+  height: 70%;
+}
+
+page-conservation ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+page-conservation ion-title {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  margin-top: 10px;
+}
+
+page-conservation #backIcon {
   color: #AD2EFE;
-  border-radius: 4px;
-  height: 10vh;
-  display: block;
   margin: auto;
+  font-size: 3em;
+  padding-left: 1%;
+  text-align: center;
+  width: 100%;
 }
 
-page-account img {
-  height: 70vh;
-  width: 100%;
-  display: block;
-  margin: auto;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -o-object-fit: contain;
-  object-fit: contain;
-}
-
-page-home button {
-  width: 100%;
+page-conservation #backButton {
   background-color: white;
-  border: solid 1px #AD2EFE;
-  color: #AD2EFE;
-  border-radius: 4px;
-  height: 10vh;
-  display: block;
-  margin: auto;
+  width: 5%;
+  float: left;
+  margin-left: 0%;
+  position: relative;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  page-conservation .divForm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-conservation ion-content {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  page-home button {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  page-home button {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+  }
+  page-home #leftButton {
+    margin-right: 0;
+    margin-left: 67.5%;
+  }
+  page-home #rightButton {
+    margin-left: -7.5%;
+  }
+  page-home #middleButton {
+    margin: auto;
+  }
 }
 
 page-home img {
@@ -25733,54 +25881,338 @@ page-home img {
   object-fit: contain;
 }
 
-ion-title {
+page-login ion-title {
   text-align: center;
-  height: 7vh;
+  float: right;
+  width: 100%;
+  position: fixed;
+  margin-top: 10px;
 }
 
-.divForm {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+@media (max-width: 900px) {
+  page-login .divForm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  page-login .submitBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
 }
 
-ion-input {
+@media (min-width: 900px) {
+  page-login .divForm {
+    display: block;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  page-login .submitBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+  }
+}
+
+page-login ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+page-login ion-input {
   width: 100%;
   padding: 2px;
 }
 
-ion-label {
+page-login ion-label {
   width: 100%;
   padding: 4px;
 }
 
-.submitBtn {
+page-login .submitBtn {
   width: 100%;
 }
 
-ion-title {
+page-login #backIcon {
+  color: #AD2EFE;
+  margin: auto;
+  font-size: 3em;
+  padding-left: 1%;
   text-align: center;
-  height: 7vh;
 }
 
-.divForm {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+page-login #backButton {
+  background-color: white;
+  position: relative;
+  width: 5%;
+  margin-left: 0%;
+  float: left;
+  z-index: 5;
 }
 
-ion-input {
+page-map ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+page-map ion-title {
+  text-align: center;
   width: 100%;
-  padding: 2px;
+  position: fixed;
+  margin-top: 10px;
 }
 
-ion-label {
+page-map #backIcon {
+  color: #AD2EFE;
+  margin: auto;
+  font-size: 3em;
+  padding-left: 1%;
+  text-align: center;
+  width: 100%;
+}
+
+page-map #backButton {
+  background-color: white;
+  width: 5%;
+  position: relative;
+  float: left;
+  margin-left: 0%;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  page-map .divForm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  page-map #map {
+    width: 100%;
+    height: 60%;
+    margin-top: 5%;
+  }
+  page-map #alertBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-map #map {
+    margin-left: 5%;
+    height: 80%;
+    width: 60%;
+    margin-top: 3%;
+    position: relative;
+    float: left;
+  }
+  page-map #alertBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+  }
+  page-map #details {
+    float: right;
+    position: relative;
+    width: 30%;
+    height: 80%;
+    margin-right: 4%;
+    margin-top: 2%;
+  }
+}
+
+page-map .scroll {
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  page-receiveErp .divForm {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-receiveErp .divForm {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+page-receiveErp p {
+  color: black;
+}
+
+page-register ion-title {
+  text-align: center;
+  float: right;
+  width: 100%;
+  position: fixed;
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  page-register .divForm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  page-register .submitBtn {
+    width: 100%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+    margin: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-register .divForm {
+    display: block;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  page-register .submitBtn {
+    width: 40%;
+    background-color: white;
+    border: solid 1px #AD2EFE;
+    color: #AD2EFE;
+    border-radius: 4px;
+    height: 40px;
+    display: block;
+  }
+}
+
+page-register ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+page-register ion-input {
   width: 100%;
   padding: 4px;
 }
 
-.submitBtn {
+page-register ion-label {
   width: 100%;
+  padding: 4px;
+  text-align: left;
+}
+
+page-register .submitBtn {
+  width: 100%;
+}
+
+page-register #backIcon {
+  color: #AD2EFE;
+  margin: auto;
+  font-size: 3em;
+  padding-left: 1%;
+  text-align: center;
+}
+
+page-register #backButton {
+  background-color: white;
+  width: 5%;
+  margin-left: 0%;
+  float: left;
+  position: relative;
+  z-index: 5;
+}
+
+page-rewards ion-header {
+  position: fixed;
+  height: 40px;
+}
+
+page-rewards ion-title {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  margin-top: 10px;
+}
+
+page-rewards #backIcon {
+  color: #AD2EFE;
+  margin: auto;
+  font-size: 3em;
+  padding-left: 1%;
+  text-align: center;
+  width: 100%;
+}
+
+page-rewards #backButton {
+  background-color: white;
+  width: 5%;
+  margin-left: 0%;
+  position: relative;
+  float: left;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  page-rewards .divForm {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-rewards ion-content {
+    width: 40%;
+  }
+}
+
+@media (max-width: 900px) {
+  page-sendErp .divForm {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  page-sendErp .divForm {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @-webkit-keyframes loadingAnimation {
@@ -25807,11 +26239,11 @@ ion-label {
   }
 }
 
-img {
+page-splash img {
   -webkit-animation-name: loadingAnimation;
   animation-name: loadingAnimation;
-  -webkit-animation-duration: 0s;
-  animation-duration: 0s;
+  -webkit-animation-duration: 6s;
+  animation-duration: 6s;
   height: 70vh;
   width: 100%;
   display: block;

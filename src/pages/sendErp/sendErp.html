@@ -1,0 +1,58 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>Send ERP-Coin</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="divForm">
+    <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Wallet Address</ion-label>
+                <ion-input formControlName="address" type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Amount of ERP-Coin</ion-label>
+                <ion-input formControlName="message" type="number"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item no-lines>
+                <ion-label floating>Message</ion-label>
+                <ion-input formControlName="message" type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col col-10>
+            <button ion-button type="submit" class="submitBtn" block>Send</button>
+          </ion-col>
+          <ion-col col-1></ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

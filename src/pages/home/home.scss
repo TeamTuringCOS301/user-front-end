@@ -1,24 +1,50 @@
 page-home {
   ion-col{
-    
+
   }
-  button{
-    width:100%;
-    background-color:white;
-    border:solid 1px #AD2EFE;
-    color: #AD2EFE;
-    border-radius: 4px;
-    height:10vh;
-    display:block;
-    margin:auto;
+  @media screen and (max-width: 900px) {
+    button{
+      width:100%;
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:40px;
+      display:block;
+      margin:auto;
+    }
   }
 
-  img{
-  height:70vh;
-  width:100%;
-  display:block;
-  margin:auto;
-  align-items:center;
-  object-fit:contain;
+  @media screen and (min-width: 900px) {
+    button{
+      width:40%;
+      background-color:white;
+      border:solid 1px #AD2EFE;
+      color: #AD2EFE;
+      border-radius: 4px;
+      height:40px;
+      display:block;
+    }
+
+    #leftButton{
+      margin-right: 0;
+      margin-left: 67.5%;
+    }
+
+    #rightButton{
+      margin-left: -7.5%;
+    }
+    #middleButton{
+      margin:auto;
+    }
 }
+
+  img{
+    height:70vh;
+    width:100%;
+    display:block;
+    margin:auto;
+    align-items:center;
+    object-fit:contain;
+  }
 }

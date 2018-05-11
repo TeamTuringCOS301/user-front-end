@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {FormGroup, FormControl} from '@angular/forms';
-import { HTTP } from '@ionic-native/http';
+import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { AccountPage } from '../account/account';
+import { ToastController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
@@ -10,37 +12,61 @@ import { AccountPage } from '../account/account';
 })
 export class LogPage {
   logUser: any;
-  constructor(private http: HTTP, public navCtrl: NavController) {
-  this.logUser = new FormGroup({username: new FormControl(), password: new FormControl()});
+  address: any;
+  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
+  this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
+  this.storage.get('address').then(val=>{this.address = val;});
+}
 
+  public presentToast(text)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: text,
+      duration: 1500,
+      position: 'bottom',
+      dismissOnPageChange: false
+    });
+    toast.present();
   }
 
   loginUser(value: any) {
-    let addr: any = "localhost:8080/user/login";
-    let param:any ='{"username":"';
-    param+= value.username ;
-    param+= '","password":"';
-    param+= value.password;
-    param+= '"}';
-    //window.alert(addr);
-    //window.alert(param);
-    //this.navCtrl.push(AccountPage);
-    
-    this.http.post(addr, param, {}).then(data =>
+    if(!this.logUser.valid)
     {
-      console.log(data.status);
-      console.log(data.data); // data received by server
-      console.log(data.headers);
-      //window.alert(data.data);
-      //window.alert("Login Success!");
-      this.navCtrl.push(AccountPage);
-    }).catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error.headers);
-      //window.alert(error.data);
-       window.alert("Login Failure!");
-    });     
+      this.presentToast("Please fill out all of the fields");
+      return;
+    }
+    var addr = "http://192.168.43.72:8080/user/login";
+    var jsonArr: any = {};
+    jsonArr.username = value.username;
+    jsonArr.password = value.password;
+    var param = JSON.stringify(jsonArr);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({headers: headers});
+    //this.navCtrl.push(AccountPage);
+    this.http.post(addr, param, options).subscribe
+    (
+      (data) => //Success
+      {
+        //alert("Success: " +data.text());
+        var jsonResp = JSON.parse(data.text());
+        //alert(jsonResp);
+        if(jsonResp.success)
+        {
+          this.presentToast("Welcome!");
+          this.navCtrl.push(AccountPage);
+        }
+        else
+        {
+          alert("Invalid username/password combination");
+        }
+      },
+      (error) =>//Failure
+      {
+        alert("Error: "+error);
+      }
+    );
 }
   navPop()
   {

@@ -1,58 +1,66 @@
 <ion-header>
-    <ion-title>My Account</ion-title>
+  <ion-title>My Account</ion-title>
 </ion-header>
 <ion-content>
   <div class="userAccountDiv">
-    <ion-grid>      
+    <ion-grid>
       <ion-row style="height:40vh;">
         <ion-col col-1.5></ion-col>
         <ion-col col-4 >
-          <p>Username</p>
-          <p style="border: 2px solid grey; height:70%;"> User Profile Image Here</p>
+          <div id="leftDiv">
+            <p><b>Welcome {{user.name}}</b></p>
+            <div id="erpLogo"><img src="assets/imgs/background.png" alt="ERP Image"></div>
+          </div>
         </ion-col>
         <ion-col col-1></ion-col>
         <ion-col col-4>
-          <p> ERP-Coin Balance:<br>122ERP</p>
-        </ion-col>
-        <ion-col col-1.5></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-1.5></ion-col>
-        <ion-col col-9>
-          <button (click)="conservationAreas()">View List of Conservation Areas</button>        
-        </ion-col>
-        <ion-col col-1.5></ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-1.5></ion-col>
-        <ion-col col-4>
-          <button>Send ERP</button>
-        </ion-col>
-        <ion-col col-1></ion-col>
-        <ion-col col-4>
-          <button>Receive ERP</button>
+          <div id="rightDiv">
+            <p><b>ERP-Coin Balance:<br>{{user.balance}} ERP Coins</b></p>
+          </div>
         </ion-col>
         <ion-col col-1.5></ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-1.5></ion-col>
         <ion-col col-4>
-          <button>Manage Account</button>
+          <button id="leftButton" (click)="conservationAreas()">View List of Conservation Areas</button>
         </ion-col>
         <ion-col col-1></ion-col>
         <ion-col col-4>
-          <button>View Leaderboard</button>
+          <button id="rightButton" (click)="rewardsPage()">View Rewards</button>
         </ion-col>
         <ion-col col-1.5></ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-1.5></ion-col>
         <ion-col col-4>
-          <button>Help and Support</button>
+          <button id="leftButton" (click)="sendErp()">Send ERP</button>
         </ion-col>
         <ion-col col-1></ion-col>
         <ion-col col-4>
-          <button (click)="logout()">Logout</button>
+          <button id="rightButton" (click)="receiveErp()">Receive ERP</button>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4>
+          <button id="leftButton">Manage Account</button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <button id="rightButton">View Leaderboard</button>
+        </ion-col>
+        <ion-col col-1.5></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1.5></ion-col>
+        <ion-col col-4>
+          <button id="leftButton">Help and Support</button>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-4>
+          <button id="rightButton" (click)="logout()">Logout</button>
         </ion-col>
         <ion-col col-1.5></ion-col>
       </ion-row>
