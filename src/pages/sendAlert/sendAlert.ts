@@ -1,4 +1,4 @@
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -13,8 +13,10 @@ export class SendAlert
 {
   sendAlert: any;
   address:any;
-  constructor(public storage: Storage, public viewCtrl: ViewController, public http: Http)
+  currentLocation: any;
+  constructor(public storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
   {
+    //this.currentLocation = JSON.parse(params.get('location'));
     this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
     this.storage.get('address').then(val=>{this.address = val;});
   }
@@ -30,6 +32,7 @@ export class SendAlert
       jsonArr.title = value.title;
       jsonArr.description = value.amount;
       jsonArr.image = value.image;
+      jsonArr.location = this.currentLocation;
       var param = JSON.stringify(jsonArr);
       var addr = this.address+"/user/alert";
       this.http.get(addr, param).subscribe
@@ -48,6 +51,7 @@ export class SendAlert
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
+
     //console.log(this.navParams.get('message'));
 }
 }

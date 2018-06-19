@@ -5,6 +5,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { AccountPage } from '../account/account';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CONFIG } from '../../app-config';
 
 @Component({
   selector: 'page-login',
@@ -12,10 +13,10 @@ import { Storage } from '@ionic/storage';
 })
 export class LogPage {
   logUser: any;
-  address: any;
+  url:any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
   this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
-  this.storage.get('address').then(val=>{this.address = val;});
+  this.url = CONFIG.url;
 }
 
   public presentToast(text)
@@ -36,7 +37,7 @@ export class LogPage {
       this.presentToast("Please fill out all of the fields");
       return;
     }
-    var addr = "http://192.168.43.72:8080/user/login";
+    var addr = this.url+"/user/login";
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
