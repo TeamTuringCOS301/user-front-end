@@ -9,6 +9,7 @@ import { ReceivePage } from '../receiveErp/receiveErp';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CONFIG } from '../../app-config';
 
 @Component({
   selector: 'page-account',
@@ -22,7 +23,7 @@ export class AccountPage {
     this.user = {};
     this.user.name = "Dave";
     this.user.balance = 10;
-    this.storage.get('address').then(val=>{this.address = val;});
+    this.address = CONFIG.url;
   }
 
   public presentToast()

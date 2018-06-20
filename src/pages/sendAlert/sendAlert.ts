@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { CONFIG } from '../../app-config';
 
 @Component({
   selector: 'page-sendAlert',
@@ -18,7 +19,7 @@ export class SendAlert
   {
     //this.currentLocation = JSON.parse(params.get('location'));
     this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
-    this.storage.get('address').then(val=>{this.address = val;});
+    this.address = CONFIG.url;
   }
 
   public closeModal()
