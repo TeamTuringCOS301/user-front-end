@@ -19,6 +19,10 @@ import { SendPage } from '../pages/sendErp/sendErp';
 import { ReceivePage } from '../pages/receiveErp/receiveErp';
 import { SendAlert } from '../pages/sendAlert/sendAlert';
 import { IonicStorageModule } from '@ionic/storage';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -60,7 +64,10 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BackgroundGeolocation,
+    Geolocation,
+    LocationTrackerProvider
   ]
 })
 export class AppModule {}

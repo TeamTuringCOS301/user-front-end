@@ -45,7 +45,7 @@ export class LogPage {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({headers: headers});
-    //this.navCtrl.push(AccountPage);
+    alert(addr);
     this.http.post(addr, param, options).subscribe
     (
       (data) => //Success

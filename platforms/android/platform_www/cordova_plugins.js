@@ -239,6 +239,46 @@ module.exports = [
     "clobbers": [
       "navigator.splashscreen"
     ]
+  },
+  {
+    "id": "org.apache.cordova.geolocation.Coordinates",
+    "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
+    "pluginId": "org.apache.cordova.geolocation",
+    "clobbers": [
+      "Coordinates"
+    ]
+  },
+  {
+    "id": "org.apache.cordova.geolocation.PositionError",
+    "file": "plugins/org.apache.cordova.geolocation/www/PositionError.js",
+    "pluginId": "org.apache.cordova.geolocation",
+    "clobbers": [
+      "PositionError"
+    ]
+  },
+  {
+    "id": "org.apache.cordova.geolocation.Position",
+    "file": "plugins/org.apache.cordova.geolocation/www/Position.js",
+    "pluginId": "org.apache.cordova.geolocation",
+    "clobbers": [
+      "Position"
+    ]
+  },
+  {
+    "id": "org.apache.cordova.geolocation.geolocation",
+    "file": "plugins/org.apache.cordova.geolocation/www/geolocation.js",
+    "pluginId": "org.apache.cordova.geolocation",
+    "clobbers": [
+      "navigator.geolocation"
+    ]
+  },
+  {
+    "id": "cordova-plugin-mauron85-background-geolocation.backgroundGeolocation",
+    "file": "plugins/cordova-plugin-mauron85-background-geolocation/www/backgroundGeolocation.js",
+    "pluginId": "cordova-plugin-mauron85-background-geolocation",
+    "clobbers": [
+      "backgroundGeolocation"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -250,7 +290,9 @@ module.exports.metadata =
   "cordova-plugin-ionic-keyboard": "2.0.5",
   "cordova-plugin-ionic-webview": "1.2.0",
   "cordova-plugin-splashscreen": "5.0.2",
-  "cordova-plugin-whitelist": "1.3.3"
+  "cordova-plugin-whitelist": "1.3.3",
+  "org.apache.cordova.geolocation": "0.3.6",
+  "cordova-plugin-mauron85-background-geolocation": "2.3.5"
 };
 // BOTTOM OF METADATA
 });
