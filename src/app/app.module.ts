@@ -22,6 +22,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
+import { Http } from '../http-api';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { LocationTrackerProvider } from '../providers/location-tracker/location-
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackgroundGeolocation,
-    LocationTrackerProvider
+    LocationTrackerProvider,
+    Http
   ]
 })
 export class AppModule {}

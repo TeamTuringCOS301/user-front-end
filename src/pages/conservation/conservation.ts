@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { CONFIG } from '../../app-config';
-
+import { Http } from '../../http-api';
 
 @Component({
   selector: 'page-conservation',
@@ -16,18 +14,9 @@ export class ConservationPage {
   areas:any;
   url:any;
   constructor(public http: Http, public navCtrl: NavController, public storage: Storage) {
-    this.url = CONFIG.url;
     this.areas = [];
     this.area = {};
-    var jsonArr: any = {};
-    jsonArr.location = "";
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    var addr = this.url+"/area/list";
-    //alert(addr);
-    this.http.get(addr).subscribe
+    this.http.get("/area/list").subscribe
     (
       (data) => //Success
       {
