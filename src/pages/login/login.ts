@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { Http, RequestOptions, Headers } from '@angular/http';
 import { AccountPage } from '../account/account';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { CONFIG } from '../../app-config';
+import { Http } from '../../http-api';
 
 @Component({
   selector: 'page-login',
@@ -16,7 +15,6 @@ export class LogPage {
   url:any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
   this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
-  this.url = CONFIG.url;
 }
 
   public presentToast(text)
@@ -37,16 +35,11 @@ export class LogPage {
       this.presentToast("Please fill out all of the fields");
       return;
     }
-    var addr = this.url+"/user/login";
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
     //this.navCtrl.push(AccountPage);
-    this.http.post(addr, param, options).subscribe
+    this.http.post("/user/login", jsonArr).subscribe
     (
       (data) => //Success
       {

@@ -19,6 +19,7 @@ import { SendPage } from '../pages/sendErp/sendErp';
 import { ReceivePage } from '../pages/receiveErp/receiveErp';
 import { SendAlert } from '../pages/sendAlert/sendAlert';
 import { IonicStorageModule } from '@ionic/storage';
+import { Http } from '../http-api';
 @NgModule({
   declarations: [
     MyApp,
@@ -60,7 +61,8 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Http
   ]
 })
 export class AppModule {}

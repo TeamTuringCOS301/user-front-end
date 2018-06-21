@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Http, RequestOptions, Headers } from '@angular/http';
 import { CONFIG } from '../../app-config';
+import { Http } from '../../http-api';
 
 declare var google;
 @Component({
@@ -25,7 +25,6 @@ export class MapPage {
   url: any;
   constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
-    this.url = CONFIG.url;
     this.isTracking = false;
     this.patrol = {};
   }
@@ -92,13 +91,7 @@ export class MapPage {
   {
     var jsonArr: any = {};
     jsonArr.location = location;
-    var param = jsonArr;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    var addr = this.url+"/point/add/"+this.area+"/"; // ID is area ID from database
-    alert("AddR: "+addr);
-    this.http.post(addr, param, options).subscribe
+    this.http.post("/point/add/"+this.area, jsonArr).subscribe
     (
       (data) =>
       {
@@ -126,12 +119,7 @@ export class MapPage {
   {
     var jsonArr: any = {};
     jsonArr.location = "";
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    var addr = this.url+"/area/info/"; // ID is area ID from database
-    this.http.post(addr, param, options).subscribe
+    this.http.post("/area/info", jsonArr).subscribe
     (
       (data) => //Success
       {
@@ -236,14 +224,7 @@ alertArr.forEach((alert) =>{
 
 
 LoadMap(areaName) {
-  var jsonArr: any = {};
-  jsonArr.id = areaName;
-  var param = JSON.stringify(jsonArr);
-  let headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  let options = new RequestOptions({headers: headers});
-  var addr = this.url+"/area/info/"+areaName;
-  this.http.get(addr).subscribe
+  this.http.get("/area/info/"+areaName).subscribe
   (
     (data) => //Success
     {
