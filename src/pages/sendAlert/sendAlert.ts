@@ -1,8 +1,8 @@
 import { ViewController, NavParams } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { Http } from '../../http-api';
 
 @Component({
   selector: 'page-sendAlert',
@@ -18,7 +18,6 @@ export class SendAlert
   {
     //this.currentLocation = JSON.parse(params.get('location'));
     this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
-    this.storage.get('address').then(val=>{this.address = val;});
   }
 
   public closeModal()
@@ -33,9 +32,7 @@ export class SendAlert
       jsonArr.description = value.amount;
       jsonArr.image = value.image;
       jsonArr.location = this.currentLocation;
-      var param = JSON.stringify(jsonArr);
-      var addr = this.address+"/user/alert";
-      this.http.get(addr, param).subscribe
+      this.http.post("/user/alert", jsonArr).subscribe
       (
         function(response) //Success
         {

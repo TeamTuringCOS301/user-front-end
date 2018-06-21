@@ -1,7 +1,8 @@
 import { ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
 import {FormGroup, FormControl} from '@angular/forms';
+import { Http } from '../../http-api';
+
 @Component({
   selector: 'page-sendErp',
   templateUrl: 'sendErp.html'
@@ -26,9 +27,7 @@ export class SendPage
       jsonArr.address = value.address;
       jsonArr.amount = value.amount;
       jsonArr.message = value.message;
-      var param = JSON.stringify(jsonArr);
-      var addr = "";
-      this.http.get(addr, param).subscribe
+      this.http.post("", jsonArr).subscribe
       (
         function(response) //Success
         {
