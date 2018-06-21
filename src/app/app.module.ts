@@ -62,11 +62,11 @@ import { LocationTrackerProvider } from '../providers/location-tracker/location-
     SendAlert
   ],
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackgroundGeolocation,
-    Geolocation,
     LocationTrackerProvider
   ]
 })
