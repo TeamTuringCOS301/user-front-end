@@ -24,8 +24,10 @@ export class MapPage {
   myVar: any;
   marker:any;
   url: any;
+  naviID: any;
   constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
+    this.naviID;
     this.isTracking = false;
     this.patrol = {};
   }
@@ -63,10 +65,13 @@ export class MapPage {
   public trackMe() {
     if (navigator.geolocation) {
       this.isTracking = true;
-      navigator.geolocation.watchPosition((position) => {
-        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);;
+      this.naviID = setInterval(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
       });
+    }, CONFIG.interval);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
@@ -76,6 +81,10 @@ export class MapPage {
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
     this.map.setZoom(80);
+    if(this.marker)
+    {
+      this.marker.setMap(null);
+    }
     this.marker = new google.maps.Marker({
       position: location,
       map: this.map,
@@ -91,7 +100,7 @@ export class MapPage {
   public sendLocation(location)
   {
     var jsonArr: any = {};
-    jsonArr.location = location;
+    jsonArr = location;
     this.http.post("/point/add/"+this.area, jsonArr).subscribe
     (
       (data) =>
@@ -103,11 +112,8 @@ export class MapPage {
         }
         else
         {
-          alert("Awww, you did not get a coin!");
+          //alert("Awww, you did not get a coin!");
         }
-        if(!this.myVar)
-          clearInterval(this.myVar);
-        this.myVar = setInterval(this.sendLocation(location), CONFIG.interval);
       },
       (error) =>
       {
@@ -270,6 +276,7 @@ alert("Error: " +error);
 
 navPop()
 {
+  clearInterval(this.naviID);
   this.navCtrl.pop();
 }
 

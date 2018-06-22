@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
+import { CONFIG } from '../../app-config';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-sendAlert',
@@ -11,14 +15,48 @@ import { Http } from '../../http-api';
 
 export class SendAlert
 {
+  imageURI:any;
+  imageFileName:any;
   sendAlert: any;
   address:any;
   currentLocation: any;
-  constructor(public storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
+  constructor(private transfer: FileTransfer, private camera: Camera, public loadingCtrl: LoadingController, public toastCtrl: ToastControllerpublic storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
   {
     //this.currentLocation = JSON.parse(params.get('location'));
-    this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
+    this.currentLocation = CONFIG.currentLocation;
+    this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl(), severity: new FormControl()});
   }
+
+  uploadFile() {
+  let loader = this.loadingCtrl.create({
+    content: "Uploading..."
+  });
+  loader.present();
+  const fileTransfer: FileTransferObject = this.transfer.create();
+
+  let options: FileUploadOptions = {
+    fileKey: 'ionicfile',
+    fileName: 'ionicfile',
+    chunkedMode: false,
+    mimeType: "image/jpeg",
+    headers: {}
+  }
+}
+
+  getImage() {
+  const options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+  }
+
+  this.camera.getPicture(options).then((imageData) => {
+    this.imageURI = imageData;
+  }, (err) => {
+    console.log(err);
+    this.presentToast(err);
+  });
+}
 
   public closeModal()
   {
@@ -29,18 +67,19 @@ export class SendAlert
   {
       var jsonArr: any = {};
       jsonArr.title = value.title;
-      jsonArr.description = value.amount;
+      jsonArr.description = value.description;
       jsonArr.image = value.image;
+      jsonArr.severity = value.severity;
       jsonArr.location = this.currentLocation;
-      this.http.post("/user/alert", jsonArr).subscribe
+      this.http.post("/add/"+CONFIG.area, jsonArr).subscribe
       (
         function(response) //Success
         {
-          //Handle successful register
+          alert(response);//Handle successful register
         },
         function(error) //Failure
         {
-          //Handle error
+          alert(error);//Handle error
         }
       );
       this.viewCtrl.dismiss();

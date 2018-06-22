@@ -24,6 +24,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { Http } from '../http-api';
 import { LocationService, GoogleMap, GoogleMapOptions, MyLocation } from '@ionic-native/google-maps';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,12 @@ import { LocationService, GoogleMap, GoogleMapOptions, MyLocation } from '@ionic
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackgroundGeolocation,
     LocationTrackerProvider,
-    Http
+    Http,
+    FileTransfer,
+    FileUploadOptions,
+    FileTransferObject,
+    File,
+    Camera
   ]
 })
 export class AppModule {}

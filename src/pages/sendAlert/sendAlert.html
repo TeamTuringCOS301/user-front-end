@@ -27,10 +27,24 @@
             <ion-col col-10>
               <ion-item no-lines>
                 <ion-label floating>Description</ion-label>
-                <ion-input formControlName="description" type="number"></ion-input>
+                <ion-input formControlName="description" type="text"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <ion-item>
+                <ion-label>Severity</ion-label>
+                <ion-select formControlName="severity">
+                  <ion-option value="0">Animal Sighting</ion-option>
+                  <ion-option value="1">Warning/Caution</ion-option>
+                  <ion-option value="2">Critical unicorn</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col  col-1></ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-1></ion-col>
