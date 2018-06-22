@@ -137,6 +137,10 @@
             {
               "xml": "<receiver android:enabled=\"true\" android:exported=\"true\" android:name=\"com.marianhello.bgloc.BootCompletedReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
               "count": 1
+            },
+            {
+              "xml": "<meta-data android:name=\"com.google.android.geo.API_KEY\" android:value=\"...\" />",
+              "count": 1
             }
           ]
         }

@@ -38,17 +38,8 @@ export class LogPage {
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-<<<<<<< HEAD
     var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    alert(addr);
-    this.http.post(addr, param, options).subscribe
-=======
-    //this.navCtrl.push(AccountPage);
     this.http.post("/user/login", jsonArr).subscribe
->>>>>>> 58f65bad38382216ba57edb39313a77af18cb5c6
     (
       (data) => //Success
       {

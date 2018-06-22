@@ -7,6 +7,7 @@ import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 
 declare var google;
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
@@ -256,68 +257,7 @@ LoadMap(areaName) {
     });
     this.map.zoom = 12;
     mapObj.setMap(this.map);
-    this.map.zoomo = 12;
-    /*findMe() {
-    if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-    this.showTrackingPosition(position);
-  });
-} else {
-alert("Geolocation is not supported by this browser.");
-}
-}
-showTrackingPosition(position) {
-console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
-this.currentLat = position.coords.latitude;
-this.currentLong = position.coords.longitude;
-
-let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-this.map.panTo(location);
-
-if (!this.marker) {
-this.marker = new google.maps.Marker({
-position: location,
-map: this.map,
-title: 'Got you!'
-});
-}
-else {
-this.marker.setPosition(location);
-}
-}*/
-/*google.maps.Polygon.prototype.getBounds = function() {
-var bounds = new google.maps.LatLngBounds();
-var paths = this.getPaths();
-var path;
-for (var i = 0; i < paths.getLength(); i++) {
-path = paths.getAt(i);
-for (var ii = 0; ii < path.getLength(); ii++) {
-bounds.extend(path.getAt(ii));
-}
-}
-return bounds;
-}
-map.fitBounds(area.getBounds());
-
-var listener = google.maps.event.addListener(this.Gmap, "idle", function() {
-this.Gmap.setZoom(map.getZoom() * 1.03);			//if the polygon does not fit in the screen, adjust this value.
-google.maps.event.removeListener(listener);
-});
-
-infoWindow = new google.maps.InfoWindow;
-
-if (navigator.geolocation) {
-navigator.geolocation.getCurrentPosition(function(position) {
-var pos = {
-lat: position.coords.latitude,
-lng: position.coords.longitude
-};
-});
-}
-else
-{
-alert("Browser does not support geolocation");
-}*/
+    this.map.zoom = 12;
 }
 },
 (error) =>//Failure

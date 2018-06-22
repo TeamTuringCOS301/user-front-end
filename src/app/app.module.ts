@@ -23,6 +23,7 @@ import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { Http } from '../http-api';
+import { LocationService, GoogleMap, GoogleMapOptions, MyLocation } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { Http } from '../http-api';
     SendAlert
   ],
   providers: [
+    LocationService,
     Geolocation,
     StatusBar,
     SplashScreen,

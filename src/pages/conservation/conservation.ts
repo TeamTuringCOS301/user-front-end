@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
+import { CONFIG } from '../../app-config';
 
 @Component({
   selector: 'page-conservation',
