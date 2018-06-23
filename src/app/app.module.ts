@@ -76,7 +76,7 @@ import { Camera } from '@ionic-native/camera';
     LocationTrackerProvider,
     Http,
     FileTransfer,
-    FileUploadOptions,
+    //FileUploadOptions,
     FileTransferObject,
     File,
     Camera

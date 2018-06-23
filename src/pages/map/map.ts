@@ -15,61 +15,97 @@ declare var google;
 
 
 export class MapPage {
-  //map: any;
+  map: any;
   patrol:any;
   isTracking:any;
   address:any;
   area: any;
   currentLocation: any;
+  pointsArr: any;
   myVar: any;
+  alertsArr: any;
   marker:any;
   url: any;
   naviID: any;
   constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
+    this.alertsArr = [];
     this.naviID;
+    this.pointsArr = [];
     this.isTracking = false;
     this.patrol = {};
   }
 
-  @ViewChild('map') mapElement: ElementRef;
-  map: any;
-
   ionViewDidLoad(){
-    //this.storage.get('area').then(val=>{
-      this.area = 1;
-      //alert("Received area is: " +area);
-      //while(this.area == "null")
-      //{
-        //this.storage.get('area').then(val=>{this.area = val;});
-        //alert("Area is: "+this.area);
-      //}
-      //alert("New area is: "+area);
-      //var polygonPoints:any = [];
-      //polygonPoints = this.getPolygonPoints(area);
-      //this.loadMap(polygonPoints);
+      this.area = CONFIG.area;
       this.patrol = {};
       this.patrol.coins = 0;
-      var polygonPoints = [
-        {lat: 25.774, lng: -80.190},
-        {lat: 18.466, lng: -66.118},
-        {lat: 32.321, lng: -64.757},
-        {lat: 25.774, lng: -80.190}
-      ];
       this.LoadMap(this.area);
       this.trackMe();
-      //this.alerts();
-  //  });
+  }
+
+  public getOtherUserPoints(since)
+  {
+    this.http.get("/point/list/"+this.area+"/"+since).subscribe(
+        (data) => //success
+        {
+          var jsonResp = JSON.parse(data.text());
+          console.log("Returned: "+data.text());
+          var points = jsonResp.points;
+          this.pointsArr.forEach(
+          (point) =>
+          {
+            point.setMap(null);
+          });
+          this.pointsArr = [];
+          points.forEach(
+            (point) =>
+            {
+              var pointLocation = new google.maps.LatLng(point.lat, point.lng);
+              var marker = new google.maps.Marker({
+                position: pointLocation,
+                map: this.map,
+                title: 'Other User',
+                zIndex:0,
+                icon: {
+                  url: "assets/imgs/userPoint.png",
+                  scaledSize: new google.maps.Size(16, 16) // pixels
+                }
+              });
+              this.pointsArr.push(marker);
+            }
+          );
+        },
+        (error) =>
+        {
+          alert(error);
+        }
+    );
   }
 
   public trackMe() {
     if (navigator.geolocation) {
       this.isTracking = true;
+      /*if(!this.map)
+      {
+        this.LoadMap(this.area)
+      }*/
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        CONFIG.currentLocation = this.currentLocation;
+        this.showPosition(position);
+        this.map.panTo(this.currentLocation);
+        this.map.setZoom(16);
+        this.alerts();
+        this.getOtherUserPoints(0);
+      });
       this.naviID = setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
+        this.alerts();
+        this.getOtherUserPoints(0);
       });
     }, CONFIG.interval);
     } else {
@@ -79,19 +115,18 @@ export class MapPage {
 
   public showPosition(position) {
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
-    this.map.setZoom(80);
-    if(this.marker)
+        if(this.marker)
     {
       this.marker.setMap(null);
     }
     this.marker = new google.maps.Marker({
       position: location,
       map: this.map,
+      zIndex: 5,
       title: 'Got you!',
       icon: {
         url: "assets/imgs/people.png",
-        scaledSize: new google.maps.Size(32, 32) // pixels
+        scaledSize: new google.maps.Size(48, 48) // pixels
       }
     });
     this.sendLocation(location);
@@ -109,6 +144,7 @@ export class MapPage {
         if(jsonResp.coin)
         {
           alert("Yay, you got a coin!");
+          this.patrol.coins ++;
         }
         else
         {
@@ -126,21 +162,20 @@ export class MapPage {
   {
     var jsonArr: any = {};
     jsonArr.location = "";
-    this.http.post("/area/info", jsonArr).subscribe
+    var since = 0; //CHANGE THIS
+    this.http.get("/alert/broadcasts/"+this.area+"/"+since, jsonArr).subscribe
     (
       (data) => //Success
       {
-      //alert("Success: " +data.text());
       var jsonResp = JSON.parse(data.text());
-      //alert(jsonResp);
-      if(jsonResp.success)
-      {
-        var iconPost = "Alert.png";
-        var iconPre = "assets/imgs/";
-        alertArr = [];
-        alertArr = jsonResp.alerts;
-        alertArr.forEach((alert) =>{
-          console.log("Alert: "+alert.secerity);
+        this.alertArr = [];
+        this.alertArr = jsonResp.alerts;
+        this.alertsArr.forEach((alert) => {alert.setMap(null);});
+        this.alertArr.forEach((alert) =>{
+          console.log("Alert: ");
+          var testLoc = new google.maps.LatLng(alert.location.lat, alert.location.lng);
+          var iconPost = "Alert.png";
+          var iconPre = "assets/imgs/"
           var iconSelection = iconPre + alert.severity+ iconPost;
           var contentString = '<div id="content">'+
           '<div id="siteNotice">'+
@@ -150,83 +185,33 @@ export class MapPage {
           '<p>'+alert.description+'</p>'+
           '</div>'+
           '</div>';
-
+          console.log("Image: "+iconSelection);
+          this.alertsArr = [];
           var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
           var marker = new google.maps.Marker({
-            position: alert.location,
+            position: testLoc,
             map: this.map,
             title: alert.title,
+            zIndex: 3,
             icon: {
               url: iconSelection,
-              scaledSize: new google.maps.Size(16, 16) // pixels
+              scaledSize: new google.maps.Size(32, 32), // pixels
             }
           });
+          console.log("Marker: "+marker)
           marker.addListener('click', function() {
             infowindow.open(this.map, marker);
           });
+          this.alertsArr.push(marker);
         });
-      }
-      else
-      {
-        alert("Invalid username/password combination");
-      }
     },
     (error) =>//Failure
     {
-    alert("Error: "+error);
+    alert("Error"+error);
     }
 );
-var alertArr: any = [];
-var testalert: any = {};
-var iconPost = "Alert.png";
-var iconPre = "assets/imgs/";
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "red";
-testalert.location = {lat: 24.886, lng: -70.268};
-alertArr.push(testalert);
-testalert = {};
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "orange";
-testalert.location = {lat: 23.886, lng: -70.268};
-alertArr.push(testalert);
-testalert = {};
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "blue";
-testalert.location = {lat: 25.886, lng: -70.268};
-alertArr.push(testalert);
-alertArr.forEach((alert) =>{
-  console.log("Alert: "+alert.severity);
-  var iconSelection = iconPre + alert.severity+ iconPost;
-  var contentString = '<div id="content">'+
-  '<div id="siteNotice">'+
-  '</div>'+
-  '<h1 id="firstHeading" class="firstHeading">'+alert.title+'</h1>'+
-  '<div id="bodyContent">'+
-  '<p>'+alert.description+'</p>'+
-  '</div>'+
-  '</div>';
-
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
-  var marker = new google.maps.Marker({
-    position: alert.location,
-    map: this.map,
-    title: 'Test Alert',
-    icon: {
-      url: iconSelection,
-      scaledSize: new google.maps.Size(16, 16) // pixels
-    }
-  });
-  marker.addListener('click', function() {
-    infowindow.open(this.map, marker);
-  });
-});
 }
 
 
@@ -235,43 +220,34 @@ LoadMap(areaName) {
   (
     (data) => //Success
     {
-    //alert("Success: " +data.text());
+    console.log(data.text());
     var jsonResp = JSON.parse(data.text());
-    //alert(jsonResp);
+    console.log(jsonResp.middle);
     if(jsonResp)
     {
       var mapDetails:any;
-      mapDetails = JSON.parse(data.text());
-      var test:any = [];
-      test = [{lat: -25.75565, lng: 28.23938},	//to be replaced with server request
-        {lat: -25.75392, lng: 28.23217}];
-        //alert("Middle: "+mapDetails.middle);
-        //alert("Middle: "+JSON.parse(mapDetails.middle));
-        this.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 5,
-        center: JSON.parse(mapDetails.middle),
-        mapTypeId: 'terrain'
-      });
-      // Construct the polygon.
-      var mapObj = new google.maps.Polygon({
-      paths: JSON.parse(mapDetails.border),
+      this.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 5,
+      center: jsonResp.middle,
+      mapTypeId: 'terrain'
+    });
+    // Construct the polygon.
+    var mapObj = new google.maps.Polygon
+    ({
+      paths: jsonResp.border,
       strokeColor: '#0000FF',
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#0000ff',
       fillOpacity: 0.2,
     });
-    this.map.zoom = 12;
     mapObj.setMap(this.map);
-    this.map.zoom = 12;
-}
-},
-(error) =>//Failure
-{
-alert("Error: " +error);
-}
-);
-
+    }
+  },
+  (error) =>//Failure
+  {
+    alert("Error: " +error);
+  });
 }
 
 navPop()

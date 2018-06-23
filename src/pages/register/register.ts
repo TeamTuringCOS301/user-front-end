@@ -5,6 +5,7 @@ import { LogPage } from '../login/login';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
+import { AccountPage } from '../account/account';
 
 @Component({
   selector: 'page-register',
@@ -14,7 +15,7 @@ export class RegPage {
   regUser: any;
   url: any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
-    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
+    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), walletAddress: new FormControl()});
   }
 
   public presentToast(message)
@@ -47,7 +48,7 @@ export class RegPage {
         jsonArr.email = value.email;
         jsonArr.name = value.fName;
         jsonArr.surname = value.sName;
-        jsonArr.walletAddress = value.vehicleModel;
+        jsonArr.walletAddress = value.walletAddress;
         //jsonArr.vehicleRegistration = value.vehicleReg;
         this.http.post("/user/add", jsonArr).subscribe
         (
@@ -57,7 +58,7 @@ export class RegPage {
           //alert("Success" +response);
           console.log(response);
           this.presentToast("Registration successful! Please log in");
-          this.navCtrl.push(LogPage);
+          this.navCtrl.push(AccountPage);
         },
         (error) => //Failure
         {

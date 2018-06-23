@@ -1,6 +1,6 @@
-import { ViewController, NavParams } from 'ionic-angular';
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
@@ -15,48 +15,63 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 export class SendAlert
 {
-  imageURI:any;
-  imageFileName:any;
+
+  @ViewChild('fileInput') fileInput;
+  isReadyToSave: boolean;
+  item: any;
+  form: FormGroup;
   sendAlert: any;
+  camera:any;
   address:any;
   currentLocation: any;
-  constructor(private transfer: FileTransfer, private camera: Camera, public loadingCtrl: LoadingController, public toastCtrl: ToastControllerpublic storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
+  constructor(public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
   {
     //this.currentLocation = JSON.parse(params.get('location'));
     this.currentLocation = CONFIG.currentLocation;
-    this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl(), severity: new FormControl()});
+    this.form = formBuilder.group({
+      title: [''],
+      profilePic: ['', Validators.required],
+      description: [''],
+      severity: ['']
+    });
+
+    this.form.valueChanges.subscribe((v) => {
+      this.isReadyToSave = this.form.valid;
+    });
+    //this.form = new FormGroup({title: new FormControl(), profilePic: new FormControl(), description: new FormControl(), severity: new FormControl()})
   }
 
-  uploadFile() {
-  let loader = this.loadingCtrl.create({
-    content: "Uploading..."
-  });
-  loader.present();
-  const fileTransfer: FileTransferObject = this.transfer.create();
+  processWebImage(event) {
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
 
-  let options: FileUploadOptions = {
-    fileKey: 'ionicfile',
-    fileName: 'ionicfile',
-    chunkedMode: false,
-    mimeType: "image/jpeg",
-    headers: {}
-  }
-}
+      let imageData = (readerEvent.target as any).result;
+      this.form.patchValue({ 'profilePic': imageData });
+    };
 
-  getImage() {
-  const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    reader.readAsDataURL(event.target.files[0]);
   }
 
-  this.camera.getPicture(options).then((imageData) => {
-    this.imageURI = imageData;
-  }, (err) => {
-    console.log(err);
-    this.presentToast(err);
-  });
-}
+  getProfileImageStyle() {
+    return 'url(' + this.form.controls['profilePic'].value + ')';
+  }
+
+  getPicture() {
+    if (Camera['installed']()) {
+      this.camera.getPicture({
+        destinationType: this.camera.DestinationType.DATA_URL,
+        targetWidth: 96,
+        targetHeight: 96
+      }).then((data) => {
+        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+      }, (err) => {
+        alert('Unable to take photo');
+      })
+    } else {
+      this.fileInput.nativeElement.click();
+    }
+    return false;
+  }
 
   public closeModal()
   {
@@ -68,10 +83,10 @@ export class SendAlert
       var jsonArr: any = {};
       jsonArr.title = value.title;
       jsonArr.description = value.description;
-      jsonArr.image = value.image;
-      jsonArr.severity = value.severity;
+      jsonArr.image = value.profilePic;
+      jsonArr.severity = parseInt(value.severity);
       jsonArr.location = this.currentLocation;
-      this.http.post("/add/"+CONFIG.area, jsonArr).subscribe
+      this.http.post("/alert/add/"+CONFIG.area, jsonArr).subscribe
       (
         function(response) //Success
         {

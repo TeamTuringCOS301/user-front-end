@@ -9,7 +9,7 @@
 </ion-header>
 <ion-content padding>
   <div class="divForm">
-    <form [formGroup]="sendAlert" (submit)="sendFunc(sendAlert.value)">
+    <form [formGroup]="form" (submit)="sendFunc(form.value)">
       <ion-list>
         <ion-grid>
           <ion-row>
@@ -38,9 +38,9 @@
               <ion-item>
                 <ion-label>Severity</ion-label>
                 <ion-select formControlName="severity">
-                  <ion-option value="0">Animal Sighting</ion-option>
-                  <ion-option value="1">Warning/Caution</ion-option>
-                  <ion-option value="2">Critical unicorn</ion-option>
+                  <ion-option value=0>Animal Sighting</ion-option>
+                  <ion-option value=1>Warning/Caution</ion-option>
+                  <ion-option value=2>Critical unicorn</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -49,10 +49,16 @@
           <ion-row>
             <ion-col col-1></ion-col>
             <ion-col col-10>
-              <ion-item no-lines>
+              <!--<ion-item no-lines>-->
                 <ion-label stacked>Image</ion-label>
-                <ion-input formControlName="image" accept="image/*" type="file"></ion-input>
-              </ion-item>
+                  <input type="file" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
+                  <div class="profile-image-wrapper" (click)="getPicture()">
+                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+                      <ion-icon name="add"></ion-icon>
+                    </div>
+                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+                  </div>
+              <!--</ion-item>-->
             </ion-col>
             <ion-col col-1></ion-col>
           </ion-row>
