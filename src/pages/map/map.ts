@@ -5,6 +5,8 @@ import { ModalController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
+import { Events } from 'ionic-angular';
+import { ViewAlert } from '../viewAlert/viewAlert';
 
 declare var google;
 
@@ -27,7 +29,7 @@ export class MapPage {
   marker:any;
   url: any;
   naviID: any;
-  constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
     this.alertsArr = [];
     this.naviID;
@@ -41,7 +43,7 @@ export class MapPage {
       this.patrol = {};
       this.patrol.coins = 0;
       this.LoadMap(this.area);
-      this.trackMe();
+      //this.trackMe();
   }
 
   public getOtherUserPoints(since)
@@ -50,7 +52,7 @@ export class MapPage {
         (data) => //success
         {
           var jsonResp = JSON.parse(data.text());
-          console.log("Returned: "+data.text());
+          //console.log("Returned: "+data.text());
           var points = jsonResp.points;
           this.pointsArr.forEach(
           (point) =>
@@ -86,10 +88,6 @@ export class MapPage {
   public trackMe() {
     if (navigator.geolocation) {
       this.isTracking = true;
-      /*if(!this.map)
-      {
-        this.LoadMap(this.area)
-      }*/
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
@@ -122,7 +120,7 @@ export class MapPage {
     this.marker = new google.maps.Marker({
       position: location,
       map: this.map,
-      zIndex: 5,
+      zIndex: 3,
       title: 'Got you!',
       icon: {
         url: "assets/imgs/people.png",
@@ -163,16 +161,16 @@ export class MapPage {
     var jsonArr: any = {};
     jsonArr.location = "";
     var since = 0; //CHANGE THIS
-    this.http.get("/alert/broadcasts/"+this.area+"/"+since, jsonArr).subscribe
+    this.http.get("/alert/broadcasts/"+this.area+"/"+since).subscribe
     (
       (data) => //Success
       {
       var jsonResp = JSON.parse(data.text());
-        this.alertArr = [];
-        this.alertArr = jsonResp.alerts;
+        var alertArr = [];
+        alertArr = jsonResp.alerts;
         this.alertsArr.forEach((alert) => {alert.setMap(null);});
-        this.alertArr.forEach((alert) =>{
-          console.log("Alert: ");
+        alertArr.forEach((alert) =>{
+          //console.log("Alert: ");
           var testLoc = new google.maps.LatLng(alert.location.lat, alert.location.lng);
           var iconPost = "Alert.png";
           var iconPre = "assets/imgs/"
@@ -185,7 +183,7 @@ export class MapPage {
           '<p>'+alert.description+'</p>'+
           '</div>'+
           '</div>';
-          console.log("Image: "+iconSelection);
+          //console.log("Image: "+iconSelection);
           this.alertsArr = [];
           var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -194,15 +192,15 @@ export class MapPage {
             position: testLoc,
             map: this.map,
             title: alert.title,
-            zIndex: 3,
+            zIndex: 5,
             icon: {
               url: iconSelection,
               scaledSize: new google.maps.Size(32, 32), // pixels
             }
           });
-          console.log("Marker: "+marker)
-          marker.addListener('click', function() {
-            infowindow.open(this.map, marker);
+          //console.log("Marker: "+marker)
+          marker.addListener('click', () => {
+            var modalPage = this.modalCtrl.create(ViewAlert, {alert: alert}); modalPage.present();
           });
           this.alertsArr.push(marker);
         });
@@ -242,6 +240,7 @@ LoadMap(areaName) {
       fillOpacity: 0.2,
     });
     mapObj.setMap(this.map);
+    this.trackMe();
     }
   },
   (error) =>//Failure
@@ -250,7 +249,7 @@ LoadMap(areaName) {
   });
 }
 
-navPop()
+public navPop()
 {
   clearInterval(this.naviID);
   this.navCtrl.pop();
@@ -258,9 +257,7 @@ navPop()
 
 public sendAlert()
 {
-  var jsonD: any = {};
-  jsonD.location = this.currentLocation;
-  var modalPage = this.modalCtrl.create(SendAlert); modalPage.present();
+  var modalPage = this.modalCtrl.create(SendAlert, {location: this.currentLocation}); modalPage.present();
 }
 
 }

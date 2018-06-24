@@ -1,7 +1,7 @@
 import { HomePage } from '../home/home';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage } from '../rewards/rewards';
-import { ModalController} from 'ionic-angular';
+import { ModalController, Events } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { SendPage } from '../sendErp/sendErp';
@@ -18,10 +18,48 @@ export class AccountPage {
   user:any;
   address:any ;
   rootPage: any = AccountPage;
-  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController, public modalCtrl : ModalController) {
+  constructor(public events: Events, public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController, public modalCtrl : ModalController) {
     this.user = {};
-    this.user.name = "Dave";
-    this.user.balance = 10;
+    this.http.get("/user/info").subscribe
+    (
+      (data) =>
+      {
+        var jsonResp = JSON.parse(data.text());
+        this.user.name = jsonResp.name;
+      },
+      (error) =>
+      {
+        alert(error);
+      }
+    );
+    this.getBalance();
+    //setInterval(this.getBalance(), 300);
+  }
+
+  ionViewDidLoad(){
+    this.events.subscribe("Reload Balance", () =>
+    {
+      this.getBalance();
+      //this.navCtrl.pop({animate:false});
+      //this.navCtrl.push(AccountPage);
+      //this.navCtrl.push(AccountPage,{},{animate:false});
+    });
+  }
+
+  public getBalance()
+  {
+    this.http.get("/user/coins").subscribe
+    (
+      (data) =>
+      {
+        var jsonResp = JSON.parse(data.text());
+        this.user.balance = jsonResp.balance;
+      },
+      (error) =>
+      {
+        alert(error);
+      }
+    );
   }
 
   public presentToast()

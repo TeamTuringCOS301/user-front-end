@@ -38,9 +38,9 @@
               <ion-item>
                 <ion-label>Severity</ion-label>
                 <ion-select formControlName="severity">
-                  <ion-option value=0>Animal Sighting</ion-option>
-                  <ion-option value=1>Warning/Caution</ion-option>
-                  <ion-option value=2>Critical unicorn</ion-option>
+                  <ion-option value=0>{{severities[0]}}</ion-option>
+                  <ion-option value=1>{{severities[1]}}</ion-option>
+                  <ion-option value=2>{{severities[2]}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -51,7 +51,7 @@
             <ion-col col-10>
               <!--<ion-item no-lines>-->
                 <ion-label stacked>Image</ion-label>
-                  <input type="file" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
+                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
                   <div class="profile-image-wrapper" (click)="getPicture()">
                     <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
                       <ion-icon name="add"></ion-icon>

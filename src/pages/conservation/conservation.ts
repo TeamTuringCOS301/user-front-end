@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
@@ -14,7 +14,7 @@ export class ConservationPage {
   area:any;
   areas:any;
   url:any;
-  constructor(public http: Http, public navCtrl: NavController, public storage: Storage) {
+  constructor(public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
     this.areas = [];
     this.area = {};
     this.http.get("/area/list").subscribe
@@ -41,6 +41,7 @@ export class ConservationPage {
 
   navPop()
   {
+    this.events.publish("Reload Balance");
     this.navCtrl.pop();
   }
 

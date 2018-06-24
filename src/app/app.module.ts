@@ -18,6 +18,7 @@ import { MapPage } from '../pages/map/map';
 import { SendPage } from '../pages/sendErp/sendErp';
 import { ReceivePage } from '../pages/receiveErp/receiveErp';
 import { SendAlert } from '../pages/sendAlert/sendAlert';
+import { ViewAlert } from '../pages/viewAlert/viewAlert';
 import { IonicStorageModule } from '@ionic/storage';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -42,7 +43,8 @@ import { Camera } from '@ionic-native/camera';
     MapPage,
     SendPage,
     ReceivePage,
-    SendAlert
+    SendAlert,
+    ViewAlert
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { Camera } from '@ionic-native/camera';
     MapPage,
     SendPage,
     ReceivePage,
-    SendAlert
+    SendAlert,
+    ViewAlert
   ],
   providers: [
     LocationService,

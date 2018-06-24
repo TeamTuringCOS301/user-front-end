@@ -26197,6 +26197,33 @@ page-rewards #backButton {
   }
 }
 
+page-sendAlert .profile-image-wrapper {
+  text-align: center;
+  margin: 20px 0;
+}
+
+page-sendAlert .profile-image-wrapper .profile-image {
+  width: 96px;
+  height: 96px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+page-sendAlert .profile-image-wrapper .profile-image-placeholder {
+  display: inline-block;
+  width: 96px;
+  height: 96px;
+  font-size: 12px;
+}
+
+page-sendAlert .profile-image-wrapper .profile-image-placeholder ion-icon {
+  font-size: 44px;
+  margin-bottom: -10px;
+  margin-top: 10px;
+}
+
 @media (max-width: 900px) {
   page-sendErp .divForm {
     display: block;

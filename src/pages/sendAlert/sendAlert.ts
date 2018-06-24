@@ -24,10 +24,11 @@ export class SendAlert
   camera:any;
   address:any;
   currentLocation: any;
-  constructor(public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public params: NavParams)
+  severities: any = [];
+  constructor(public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
-    //this.currentLocation = JSON.parse(params.get('location'));
-    this.currentLocation = CONFIG.currentLocation;
+    this.severities = CONFIG.severity;
+    this.currentLocation = navParams.get('location');
     this.form = formBuilder.group({
       title: [''],
       profilePic: ['', Validators.required],
@@ -48,7 +49,6 @@ export class SendAlert
       let imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
     };
-
     reader.readAsDataURL(event.target.files[0]);
   }
 
