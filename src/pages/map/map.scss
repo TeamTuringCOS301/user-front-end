@@ -1,6 +1,6 @@
 page-map{
 
-  ion-header{
+  /*ion-header{
     position:fixed;
     height:40px;
   }
@@ -20,10 +20,21 @@ page-map{
     padding-left:1%;
     text-align:center;
     width:100%;
+  }*/
+
+  #map {
+    width: 100%;
+    height:100%;
+  }
+
+  #coins{
+    position: absolute;
+    bottom: 50%;
+    z-index: 1000;
   }
 
 
-  @media(max-width: 900px) {
+  /*@media(max-width: 900px) {
 
     #backButton{
       background-color: white;
@@ -40,13 +51,7 @@ page-map{
       margin-left:auto;
       margin-right:auto;
     }
-
-    #map {
-      width: 100%;
-      height:60%;
-      margin-top: 5%;
-    }
-
+    
     #alertBtn{
       width:100%;
       background-color:white;
@@ -101,6 +106,6 @@ page-map{
       .scroll {
         height: 100%
       }
-
+*/
 
 }

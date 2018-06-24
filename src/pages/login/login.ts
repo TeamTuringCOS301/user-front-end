@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { AccountPage } from '../account/account';
+import { DashboardPage } from '../dashboard/dashboard';
+import { RegPage } from '../register/register';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
@@ -38,7 +39,10 @@ export class LogPage {
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-    var param = JSON.stringify(jsonArr);
+    //var param = JSON.stringify(jsonArr);
+
+    /*this.presentToast("Welcome!");
+    this.navCtrl.setRoot(DashboardPage);*/
     this.http.post("/user/login", jsonArr).subscribe
     (
       (data) => //Success
@@ -49,7 +53,7 @@ export class LogPage {
         if(jsonResp.success)
         {
           this.presentToast("Welcome!");
-          this.navCtrl.push(AccountPage);
+          this.navCtrl.setRoot(DashboardPage);
         }
         else
         {
@@ -58,13 +62,19 @@ export class LogPage {
       },
       (error) =>//Failure
       {
-        alert("Error: "+error);
+        //alert("Error: "+error);
       }
     );
-}
+  }
+  
   navPop()
   {
     this.navCtrl.pop();
+  }
+
+  registerPage()
+  {
+    this.navCtrl.push(RegPage);
   }
 
 }

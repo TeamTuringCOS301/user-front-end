@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormControl } from '@angular/forms';
-import { LogPage } from '../login/login';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
