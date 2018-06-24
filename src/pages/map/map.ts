@@ -105,16 +105,15 @@ export class MapPage {
         this.showPosition(position);
         this.map.panTo(this.currentLocation);
         this.map.setZoom(16);
-        this.alerts();
-        this.getOtherUserPoints(0);
+        //this.alerts();
       });
       this.naviID = setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
-        this.alerts();
-        this.getOtherUserPoints(0);
+        //this.alerts();
+        //this.getOtherUserPoints(0);
       });
     }, CONFIG.interval);
     } else {
@@ -139,6 +138,7 @@ export class MapPage {
       }
     });
     this.sendLocation(location);
+    this.alerts();
   }
 
   public sendLocation(location)
@@ -209,11 +209,32 @@ export class MapPage {
             }
           });
           //console.log("Marker: "+marker)
+          //this.alert = navParams.get('alert');
+          alert.severity = CONFIG.severity[alert.severity];
+          if(alert.image == 0)
+          {
+              alert("Image is blank");
+          }
+          else
+          {
+            var point = alert.image.indexOf("base64") + 6;
+            var pointTwo = alert.image.indexOf("base64");
+            var pointOne = alert.image.indexOf("image/") + 5;
+            var imageType = alert.image.substring(pointOne, pointTwo);
+            var newDataPre = "data:image";
+            var newDataPost = ";base64,";
+            var finalNewData = newDataPre + imageType + newDataPost;
+            var oldString = alert.image.substring(0, point);
+            alert.image.replace(oldString , finalNewData);
+            finalNewData = finalNewData + alert.image.substr(point);
+            alert.image = finalNewData;
+          }
           marker.addListener('click', () => {
             var modalPage = this.modalCtrl.create(ViewAlert, {alert: alert}); modalPage.present();
           });
           this.alertsArr.push(marker);
         });
+        this.getOtherUserPoints(0);
     },
     (error) =>//Failure
     {

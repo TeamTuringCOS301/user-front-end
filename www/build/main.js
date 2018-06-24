@@ -392,7 +392,7 @@ webpackEmptyAsyncContext.id = 158;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__map_map__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(53);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -457,7 +457,7 @@ var ConservationPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sendAlert_sendAlert__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__http_api__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__viewAlert_viewAlert__ = __webpack_require__(206);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -546,16 +546,15 @@ var MapPage = /** @class */ (function () {
                 _this.showPosition(position);
                 _this.map.panTo(_this.currentLocation);
                 _this.map.setZoom(16);
-                _this.alerts();
-                _this.getOtherUserPoints(0);
+                //this.alerts();
             });
             this.naviID = setInterval(function () {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     _this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].currentLocation = _this.currentLocation;
                     _this.showPosition(position);
-                    _this.alerts();
-                    _this.getOtherUserPoints(0);
+                    //this.alerts();
+                    //this.getOtherUserPoints(0);
                 });
             }, __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].interval);
         }
@@ -579,6 +578,7 @@ var MapPage = /** @class */ (function () {
             }
         });
         this.sendLocation(location);
+        this.alerts();
     };
     MapPage.prototype.sendLocation = function (location) {
         var _this = this;
@@ -636,12 +636,31 @@ var MapPage = /** @class */ (function () {
                     }
                 });
                 //console.log("Marker: "+marker)
+                //this.alert = navParams.get('alert');
+                alert.severity = __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].severity[alert.severity];
+                if (alert.image == 0) {
+                    alert("Image is blank");
+                }
+                else {
+                    var point = alert.image.indexOf("base64") + 6;
+                    var pointTwo = alert.image.indexOf("base64");
+                    var pointOne = alert.image.indexOf("image/") + 5;
+                    var imageType = alert.image.substring(pointOne, pointTwo);
+                    var newDataPre = "data:image";
+                    var newDataPost = ";base64,";
+                    var finalNewData = newDataPre + imageType + newDataPost;
+                    var oldString = alert.image.substring(0, point);
+                    alert.image.replace(oldString, finalNewData);
+                    finalNewData = finalNewData + alert.image.substr(point);
+                    alert.image = finalNewData;
+                }
                 marker.addListener('click', function () {
                     var modalPage = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__viewAlert_viewAlert__["a" /* ViewAlert */], { alert: alert });
                     modalPage.present();
                 });
                 _this.alertsArr.push(marker);
             });
+            _this.getOtherUserPoints(0);
         }, function (error) {
             alert("Error" + error);
         });
@@ -706,7 +725,7 @@ var MapPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(205);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -821,7 +840,6 @@ var SendAlert = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewAlert; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_config__ = __webpack_require__(43);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -833,36 +851,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var ViewAlert = /** @class */ (function () {
     function ViewAlert(viewCtrl, navParams) {
         this.viewCtrl = viewCtrl;
         this.navParams = navParams;
         this.alert = navParams.get('alert');
-        this.alert.severity = __WEBPACK_IMPORTED_MODULE_2__app_config__["a" /* CONFIG */].severity[this.alert.severity];
-        if (this.alert.image == 0) {
-            alert("Image is blank");
-        }
-        else {
-            var point = this.alert.image.indexOf("base64") + 6;
-            var pointTwo = this.alert.image.indexOf("base64");
-            var pointOne = this.alert.image.indexOf("image/") + 5;
-            var imageType = this.alert.image.substring(pointOne, pointTwo);
-            var newDataPre = "data:image";
-            var newDataPost = ";base64,";
-            var finalNewData = newDataPre + imageType + newDataPost;
-            var oldString = this.alert.image.substring(0, point);
-            this.alert.image.replace(oldString, finalNewData);
-            finalNewData = finalNewData + this.alert.image.substr(point);
-            this.alert.image = finalNewData;
-        }
     }
-    ViewAlert.prototype.blobToDataURL = function (blob, callback) {
-        var a = new FileReader();
-        //a.onload = function(e) {callback(e.target.result);}
-        alert(blob);
-        //a.readAsDataURL(blob);
-    };
     ViewAlert.prototype.closeModal = function () {
         this.viewCtrl.dismiss();
     };
@@ -1223,7 +1217,7 @@ var Splash = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Http; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_config__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_config__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(201);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1498,7 +1492,7 @@ var LocationTrackerProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 43:
+/***/ 53:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
