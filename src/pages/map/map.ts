@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -29,13 +29,24 @@ export class MapPage {
   marker:any;
   url: any;
   naviID: any;
-  constructor(public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
     this.alertsArr = [];
     this.naviID;
     this.pointsArr = [];
     this.isTracking = false;
     this.patrol = {};
+  }
+
+  public presentToast(message)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   ionViewDidLoad(){
@@ -141,12 +152,11 @@ export class MapPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.coin)
         {
-          alert("Yay, you got a coin!");
+          this.presentToast("Yay, you got a coin!");
           this.patrol.coins ++;
         }
         else
         {
-          //alert("Awww, you did not get a coin!");
         }
       },
       (error) =>

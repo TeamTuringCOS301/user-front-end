@@ -479,7 +479,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MapPage = /** @class */ (function () {
-    function MapPage(events, http, storage, navCtrl, modalCtrl) {
+    function MapPage(toastCtrl, events, http, storage, navCtrl, modalCtrl) {
+        this.toastCtrl = toastCtrl;
         this.events = events;
         this.http = http;
         this.storage = storage;
@@ -492,6 +493,14 @@ var MapPage = /** @class */ (function () {
         this.isTracking = false;
         this.patrol = {};
     }
+    MapPage.prototype.presentToast = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 1500,
+            position: 'bottom'
+        });
+        toast.present();
+    };
     MapPage.prototype.ionViewDidLoad = function () {
         this.area = __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].area;
         this.patrol = {};
@@ -578,11 +587,10 @@ var MapPage = /** @class */ (function () {
         this.http.post("/point/add/" + this.area, jsonArr).subscribe(function (data) {
             var jsonResp = JSON.parse(data.text());
             if (jsonResp.coin) {
-                alert("Yay, you got a coin!");
+                _this.presentToast("Yay, you got a coin!");
                 _this.patrol.coins++;
             }
             else {
-                //alert("Awww, you did not get a coin!");
             }
         }, function (error) {
             alert("Error: " + error);
@@ -679,7 +687,7 @@ var MapPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>\n\n  <ion-title>Map</ion-title>\n\n</ion-header>\n\n<ion-content>\n\n  <div #map id="map"></div>\n\n  <div id="details">\n\n    <p>You have found: {{patrol.coins}} ERP-Coins this patrol.</p>\n\n    <button id="alertBtn" (click)="sendAlert()">Send Out Alert</button>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_5__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* ModalController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_5__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* ModalController */]])
     ], MapPage);
     return MapPage;
 }());
@@ -795,7 +803,7 @@ var SendAlert = /** @class */ (function () {
     ], SendAlert.prototype, "fileInput", void 0);
     SendAlert = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form [formGroup]="form" (submit)="sendFunc(form.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Alert Title</ion-label>\n\n                <ion-input formControlName="title" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Description</ion-label>\n\n                <ion-input formControlName="description" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item>\n\n                <ion-label>Severity</ion-label>\n\n                <ion-select formControlName="severity">\n\n                  <ion-option value=0>{{severities[0]}}</ion-option>\n\n                  <ion-option value=1>{{severities[1]}}</ion-option>\n\n                  <ion-option value=2>{{severities[2]}}</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col  col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <!--<ion-item no-lines>-->\n\n                <ion-label stacked>Image</ion-label>\n\n                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />\n\n                  <div class="profile-image-wrapper" (click)="getPicture()">\n\n                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">\n\n                      <ion-icon name="add"></ion-icon>\n\n                    </div>\n\n                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>\n\n                  </div>\n\n              <!--</ion-item>-->\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button ion-button type="submit" class="submitBtn" block>Send</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
+            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form [formGroup]="form" (submit)="sendFunc(form.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Alert Title</ion-label>\n\n                <ion-input formControlName="title" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Description</ion-label>\n\n                <ion-input formControlName="description" maxlength="300" size="300" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item>\n\n                <ion-label>Severity</ion-label>\n\n                <ion-select formControlName="severity">\n\n                  <ion-option value=0>{{severities[0]}}</ion-option>\n\n                  <ion-option value=1>{{severities[1]}}</ion-option>\n\n                  <ion-option value=2>{{severities[2]}}</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col  col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <!--<ion-item no-lines>-->\n\n                <ion-label stacked>Image</ion-label>\n\n                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />\n\n                  <div class="profile-image-wrapper" (click)="getPicture()">\n\n                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">\n\n                      <ion-icon name="add"></ion-icon>\n\n                    </div>\n\n                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>\n\n                  </div>\n\n              <!--</ion-item>-->\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button ion-button type="submit" class="submitBtn" block>Send</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]])
     ], SendAlert);
@@ -832,17 +840,22 @@ var ViewAlert = /** @class */ (function () {
         this.navParams = navParams;
         this.alert = navParams.get('alert');
         this.alert.severity = __WEBPACK_IMPORTED_MODULE_2__app_config__["a" /* CONFIG */].severity[this.alert.severity];
-        var point = this.alert.image.indexOf("base64") + 6;
-        var pointTwo = this.alert.image.indexOf("base64");
-        var pointOne = this.alert.image.indexOf("image/") + 5;
-        var imageType = this.alert.image.substring(pointOne, pointTwo);
-        var newDataPre = "data:image";
-        var newDataPost = ";base64,";
-        var finalNewData = newDataPre + imageType + newDataPost;
-        var oldString = this.alert.image.substring(0, point);
-        this.alert.image.replace(oldString, finalNewData);
-        finalNewData = finalNewData + this.alert.image.substr(point);
-        this.alert.image = finalNewData;
+        if (this.alert.image == 0) {
+            alert("Image is blank");
+        }
+        else {
+            var point = this.alert.image.indexOf("base64") + 6;
+            var pointTwo = this.alert.image.indexOf("base64");
+            var pointOne = this.alert.image.indexOf("image/") + 5;
+            var imageType = this.alert.image.substring(pointOne, pointTwo);
+            var newDataPre = "data:image";
+            var newDataPost = ";base64,";
+            var finalNewData = newDataPre + imageType + newDataPost;
+            var oldString = this.alert.image.substring(0, point);
+            this.alert.image.replace(oldString, finalNewData);
+            finalNewData = finalNewData + this.alert.image.substr(point);
+            this.alert.image = finalNewData;
+        }
     }
     ViewAlert.prototype.blobToDataURL = function (blob, callback) {
         var a = new FileReader();
@@ -855,7 +868,7 @@ var ViewAlert = /** @class */ (function () {
     };
     ViewAlert = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-viewAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{alert.title}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div>\n\n                <p>{{alert.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p>{{alert.severity}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div>\n\n                <ion-img [src]="alert.image"></ion-img>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/
+            selector: 'page-viewAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{alert.title}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p><u>Severity:</u> {{alert.severity}}</p>\n\n                <p> <u>Description:</u> <br>{{alert.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div>\n\n                <ion-img center style=" background-color: white;" [src]="alert.image"></ion-img>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]])
     ], ViewAlert);

@@ -22,16 +22,18 @@ page-map{
     width:100%;
   }
 
-  #backButton{
-    background-color: white;
-    width:5%;
-    position:relative;
-	float:left;
-    margin-left:0%;
-	z-index:5;
-  }
 
   @media(max-width: 900px) {
+
+    #backButton{
+      background-color: white;
+      width:10%;
+      position:relative;
+  	  float:left;
+      margin-left:0%;
+  	  z-index:5;
+    }
+
     .divForm{
       display:block;
       width:80%;
@@ -58,6 +60,16 @@ page-map{
   }
 
   @media(min-width: 900px) {
+
+    #backButton{
+      background-color: white;
+      width:5%;
+      position:relative;
+  	  float:left;
+      margin-left:0%;
+  	  z-index:5;
+    }
+
     #map {
       margin-left:5%;
       height: 80%;

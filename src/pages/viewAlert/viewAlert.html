@@ -18,17 +18,9 @@
           <ion-row>
             <ion-col col-1></ion-col>
             <ion-col col-10>
-              <div>
-                <p>{{alert.description}}</p>
-              </div>
-            </ion-col>
-            <ion-col col-1></ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col col-1></ion-col>
-            <ion-col col-10>
               <div><!--Severity-->
-                <p>{{alert.severity}}</p>
+                <p><u>Severity:</u> {{alert.severity}}</p>
+                <p> <u>Description:</u> <br>{{alert.description}}</p>
               </div>
             </ion-col>
             <ion-col col-1></ion-col>
@@ -37,7 +29,7 @@
             <ion-col col-1></ion-col>
             <ion-col col-10>
               <div>
-                <ion-img [src]="alert.image"></ion-img>
+                <ion-img center style=" background-color: white;" [src]="alert.image"></ion-img>
               </div>
             </ion-col>
             <ion-col col-1></ion-col>

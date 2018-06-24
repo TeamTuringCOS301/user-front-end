@@ -22,15 +22,6 @@ page-conservation{
     width:100%;
   }
 
-  #backButton{
-    background-color: white;
-    width:5%;
-	float:left;
-    margin-left:0%;
-	position:relative;
-	z-index:5;
-  }
-
   @media(max-width: 900px) {
     .divForm{
       display:block;
@@ -38,11 +29,28 @@ page-conservation{
       margin-left:auto;
       margin-right:auto;
     }
+
+    #backButton{
+      background-color: white;
+      width:10%;
+  	  float:left;
+      margin-left:0%;
+  	  position:relative;
+  	  z-index:5;
+    }
   }
 
   @media(min-width: 900px) {
     ion-content{
       width:40%;
+    }
+    #backButton{
+      background-color: white;
+      width:5%;
+  	  float:left;
+      margin-left:0%;
+  	  position:relative;
+  	   z-index:5;
     }
   }
 }
