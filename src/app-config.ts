@@ -3,5 +3,5 @@ export let CONFIG ={
   interval: 10000, //in milliseconds
   area: 1,
   currentLocation: {latitude: 0, longitude: 0},
-  severity: ["Animal Sighting", "Warning/Caution", "Critical Unicorn"]
+  severity: ["Animal Sighting", "Warning/Caution", "Critical Alert"]
 };
