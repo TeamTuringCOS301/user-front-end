@@ -9,31 +9,17 @@ import { Http } from '../../http-api';
 
 export class ViewAlert{
   alert:any;
-  constructor(public viewCtrl: ViewController, public navParams: NavParams)
+  constructor(public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
     this.alert = navParams.get('alert');
   }
 
   public ionViewDidLoad()
   {
-
-    if(alert.image == 0)
+    if(this.alert.hasImage)
     {
-        alert("Image is blank");
-    }
-    else
-    {
-      var point = alert.image.indexOf("base64") + 6;
-      var pointTwo = alert.image.indexOf("base64");
-      var pointOne = alert.image.indexOf("image/") + 5;
-      var imageType = alert.image.substring(pointOne, pointTwo);
-      var newDataPre = "data:image";
-      var newDataPost = ";base64,";
-      var finalNewData = newDataPre + imageType + newDataPost;
-      var oldString = alert.image.substring(0, point);
-      alert.image.replace(oldString , finalNewData);
-      finalNewData = finalNewData + alert.image.substr(point);
-      alert.image = finalNewData;
+      alert("alert has image");
+      this.alert.image = CONFIG.url +"/alerts/image/"+this.alert.id;
     }
   }
 

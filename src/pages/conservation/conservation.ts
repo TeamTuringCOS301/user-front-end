@@ -22,7 +22,6 @@ export class ConservationPage {
       (data) => //Success
       {
         var jsonResp = JSON.parse(data.text());
-        //alert(data.text());
         this.areas = jsonResp.areas;
       });
 }

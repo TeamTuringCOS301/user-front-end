@@ -19,6 +19,7 @@ export class SendAlert
   @ViewChild('fileInput') fileInput;
   isReadyToSave: boolean;
   item: any;
+  imageBlob: any;
   form: FormGroup;
   sendAlert: any;
   camera:any;
@@ -39,14 +40,14 @@ export class SendAlert
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
-    //this.form = new FormGroup({title: new FormControl(), profilePic: new FormControl(), description: new FormControl(), severity: new FormControl()})
   }
 
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-
       let imageData = (readerEvent.target as any).result;
+      var position = imageData.indexOf(",");
+      this.imageBlob = imageData.slice(position);;
       this.form.patchValue({ 'profilePic': imageData });
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -83,7 +84,7 @@ export class SendAlert
       var jsonArr: any = {};
       jsonArr.title = value.title;
       jsonArr.description = value.description;
-      jsonArr.image = value.profilePic;
+      jsonArr.image = this.imageBlob;
       jsonArr.severity = parseInt(value.severity);
       jsonArr.location = this.currentLocation;
       this.http.post("/alert/add/"+CONFIG.area, jsonArr).subscribe
