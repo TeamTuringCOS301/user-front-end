@@ -6,7 +6,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col class="area-card" col-12 col-sm-9 col-md-6 col-lg-4>
+      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>
         <ion-card *ngFor="let reward of rewards" (click)="picked(reward.id)">
           <ion-card-header>
             <b>{{reward.name}}</b>
