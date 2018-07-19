@@ -13,7 +13,7 @@
         <ion-grid>
           <ion-row>
             <ion-col col-10 offset-1>
-              <ion-item>
+              <ion-item no-lines>
                 <ion-label></ion-label>
                 <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>
               </ion-item>
@@ -21,7 +21,7 @@
           </ion-row>
           <ion-row>
             <ion-col col-10 offset-1>
-              <ion-item>
+              <ion-item no-lines>
                 <ion-label></ion-label>
                 <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>
               </ion-item>
@@ -29,7 +29,7 @@
           </ion-row>
           <ion-row>
             <ion-col col-10 offset-1>
-              <ion-item>
+              <ion-item no-lines>
                 <ion-label>Severity</ion-label>
                 <ion-select formControlName="severity">
                   <ion-option value=0>{{severities[0]}}</ion-option>
@@ -59,7 +59,7 @@
         <ion-row>
           <ion-col col-8 offset-2>
             <button ion-button round outline type="submit" color="tertiary" block>Send</button>
-          </ion-col>  
+          </ion-col>
         </ion-row>
       </ion-grid>
     </form>

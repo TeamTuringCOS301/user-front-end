@@ -18,7 +18,7 @@ export class ViewAlert{
   {
     if(this.alert.hasImage)
     {
-      this.alert.image = CONFIG.url +"/alerts/image/"+this.alert.id;
+      this.alert.image = CONFIG.url +"/alert/image/"+this.alert.id;
     }
   }
 
