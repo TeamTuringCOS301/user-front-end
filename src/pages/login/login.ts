@@ -47,12 +47,9 @@ export class LogPage {
     (
       (data) => //Success
       {
-        //alert("Success: " +data.text());
         var jsonResp = JSON.parse(data.text());
-        //alert(jsonResp);
         if(jsonResp.success)
         {
-          this.presentToast("Welcome!");
           this.navCtrl.setRoot(DashboardPage);
         }
         else
@@ -62,11 +59,11 @@ export class LogPage {
       },
       (error) =>//Failure
       {
-        //alert("Error: "+error);
+        alert("Error: "+error);
       }
     );
   }
-  
+
   navPop()
   {
     this.navCtrl.pop();

@@ -48,13 +48,10 @@ export class RegPage {
         jsonArr.name = value.fName;
         jsonArr.surname = value.sName;
         jsonArr.walletAddress = value.walletAddress;
-        //jsonArr.vehicleRegistration = value.vehicleReg;
         this.http.post("/user/add", jsonArr).subscribe
         (
           (response) => //Success
           {
-          //Handle successful register
-          //alert("Success" +response);
           console.log(response);
           this.presentToast("Registration successful! Please log in");
           this.navCtrl.push(AccountPage);
@@ -66,7 +63,6 @@ export class RegPage {
         console.log("Error");
       }
     );
-    //window.alert("Success!");
   }
 }
 

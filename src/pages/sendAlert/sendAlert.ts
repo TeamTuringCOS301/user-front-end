@@ -26,7 +26,7 @@ export class SendAlert
   address:any;
   currentLocation: any;
   severities: any = [];
-  constructor(public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
+  constructor(public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
@@ -42,12 +42,23 @@ export class SendAlert
     });
   }
 
+  presentToast(message)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
       var position = imageData.indexOf(",");
-      this.imageBlob = imageData.slice(position);;
+      this.imageBlob = imageData.slice(position+1);
       this.form.patchValue({ 'profilePic': imageData });
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -89,11 +100,11 @@ export class SendAlert
       jsonArr.location = this.currentLocation;
       this.http.post("/alert/add/"+CONFIG.area, jsonArr).subscribe
       (
-        function(response) //Success
+        (response)=> //Success
         {
-          alert(response);//Handle successful register
+          this.presentToast("Alert sent");
         },
-        function(error) //Failure
+        (error)=> //Failure
         {
           alert(error);//Handle error
         }

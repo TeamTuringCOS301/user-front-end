@@ -19,18 +19,16 @@
             <ion-col col-1></ion-col>
             <ion-col col-10>
               <div><!--Severity-->
-                <p><u>Severity:</u> {{alert.severity}}</p>
-                <p> <u>Description:</u> <br>{{alert.description}}</p>
+                <p text-center><u>Severity:</u> {{alert.severity}}</p>
+                <p text-center> <u>Description:</u> <br>{{alert.description}}</p>
               </div>
             </ion-col>
             <ion-col col-1></ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row style="height:100%;">
             <ion-col col-1></ion-col>
-            <ion-col col-10>
-              <div>
-                <ion-img center style=" background-color: white;" [src]="alert.image"></ion-img>
-              </div>
+            <ion-col align-self-center col-10 style="height:100%;">
+                <ion-img  text-center center [src]="alert.image"></ion-img>
             </ion-col>
             <ion-col col-1></ion-col>
           </ion-row>

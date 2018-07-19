@@ -27,8 +27,6 @@ export class ConservationPage {
 }
   picked(area)
   {
-    //this.storage.set('area', area);
-    //alert(area);
     CONFIG.area = area;
     this.navCtrl.push(MapPage);
   }

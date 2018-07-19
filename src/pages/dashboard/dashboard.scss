@@ -26,7 +26,8 @@ page-dashboard {
     }
 
     .balance {
-        background: linear-gradient(45deg, rgba(93,85,255,1) 0%, rgba(162,56,255,1) 50%, rgba(194,59,255,1) 100%);
+        border-color: color($colors, tertiary);
+        border-right-width: 3px;
     }
 
     .item-md, .item-ios, .grad {

@@ -3,22 +3,21 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Account</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-content class="card-background-page">
     <ion-row>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>
-        <ion-card no-padding>
-          <img src="assets/imgs/group.jpeg" />
-          <div class="card-title">{{user.name}}</div>
-        </ion-card>
-        <button col-12 ion-button round outline color="black">Edit Account</button>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 align-self-center padding>
+        <img src="assets/imgs/Artboard 1-1.png" />
+        <h1 ion-text text-center>Welcome {{user.name}}</h1>
+        <button col-12 ion-button round outline color="tertiary" (click)="conservationAreas()">Start Patrol</button>
+        <button col-12 ion-button round outline color="tertiary" (click)="rewardsPage()">Start Patrol</button>
       </ion-col>
       <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>
-        <ion-card class="balance" no-padding>
+        <ion-card class="balance">
           <h1><b>{{user.balance}}</b> ERP</h1>
           <ion-row>
             <ion-col text-center>
@@ -30,24 +29,6 @@
           </ion-row>
         </ion-card>
       </ion-col>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>
-        <ion-card class="grad" no-padding>
-          <h1><b>History</b></h1>
-          <ion-list>
-            <ion-item>
-              <h2>25/6/2018 | 10:24</h2>
-              <h4 text-wrap>1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2</h4>
-              <button ion-button round color="safe" item-end>+0.0024</button>
-            </ion-item>
-            <ion-item>
-              <h2>25/6/2018 | 10:54</h2>
-              <h4 text-wrap>1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2</h4>
-              <button ion-button round color="danger" item-end>-0.0024</button>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-      </ion-col>
-
     </ion-row>
   </ion-content>
 </ion-content>
