@@ -8,8 +8,6 @@ export class RewardsPage {
   constructor(public navCtrl: NavController) {
   }
 
-
-
   navPop()
   {
     this.navCtrl.pop();

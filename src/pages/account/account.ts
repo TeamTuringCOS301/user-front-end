@@ -1,4 +1,3 @@
-import { HomePage } from '../home/home';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage } from '../rewards/rewards';
 import { ModalController, Events } from 'ionic-angular';
@@ -9,6 +8,7 @@ import { ReceivePage } from '../receiveErp/receiveErp';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
+import { LogPage } from '../login/login';
 
 @Component({
   selector: 'page-account',
@@ -91,7 +91,7 @@ export class AccountPage {
       (data) => //Success
       {
         this.presentToast();
-        this.navCtrl.push(HomePage);
+        this.navCtrl.push(LogPage);
       },
       (error) =>//Failure
       {

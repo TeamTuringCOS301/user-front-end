@@ -4,8 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicPageModule } from 'ionic-angular';
 import { Splash } from '../pages/splash/splash';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { RegPage } from '../pages/register/register';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,12 +26,11 @@ import { LocationService, GoogleMap, GoogleMapOptions, MyLocation } from '@ionic
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
     Splash,
     RegPage,
     LogPage,
@@ -44,7 +41,8 @@ import { Camera } from '@ionic-native/camera';
     SendPage,
     ReceivePage,
     SendAlert,
-    ViewAlert
+    ViewAlert,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
@@ -55,8 +53,6 @@ import { Camera } from '@ionic-native/camera';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
     Splash,
     RegPage,
     LogPage,
@@ -67,7 +63,8 @@ import { Camera } from '@ionic-native/camera';
     SendPage,
     ReceivePage,
     SendAlert,
-    ViewAlert
+    ViewAlert,
+    DashboardPage
   ],
   providers: [
     LocationService,

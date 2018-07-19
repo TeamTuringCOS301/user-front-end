@@ -1,0 +1,43 @@
+page-dashboard {
+    .card-background-page {
+
+        ion-card {
+            position: relative;
+            text-align: center;
+        }
+      
+        .card-title {
+          position: absolute;
+          bottom: 15%;
+          font-size: 2.0em;
+          width: 100%;
+          font-weight: bold;
+          color: black;
+        }
+      
+        .card-subtitle {
+          font-size: 1.0em;
+          position: absolute;
+          bottom: 5%;
+          width: 100%;
+          color: black;
+        }
+      
+    }
+
+    .balance {
+        background: linear-gradient(45deg, rgba(93,85,255,1) 0%, rgba(162,56,255,1) 50%, rgba(194,59,255,1) 100%);
+    }
+
+    .item-md, .item-ios, .grad {
+        background: linear-gradient(90deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+    }
+
+    .send{
+        color: color($colors, danger);
+    }
+
+    .receive {
+        color: color($colors, safe);
+    }
+}

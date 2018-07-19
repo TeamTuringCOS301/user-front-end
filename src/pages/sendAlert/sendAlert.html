@@ -3,38 +3,32 @@
 <ion-navbar>
     <ion-title>Send Alert</ion-title>
     <ion-buttons end>
-    <button ion-button (click)="closeModal()">Close</button>
+    <button ion-button (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></button>
     </ion-buttons>
 </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <div class="divForm">
     <form [formGroup]="form" (submit)="sendFunc(form.value)">
       <ion-list>
         <ion-grid>
           <ion-row>
-            <ion-col col-1></ion-col>
-            <ion-col col-10>
-              <ion-item no-lines>
-                <ion-label floating>Alert Title</ion-label>
-                <ion-input formControlName="title" type="text"></ion-input>
+            <ion-col col-10 offset-1>
+              <ion-item>
+                <ion-label></ion-label>
+                <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>
               </ion-item>
             </ion-col>
-            <ion-col col-1></ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-1></ion-col>
-            <ion-col col-10>
-              <ion-item no-lines>
-                <ion-label floating>Description</ion-label>
-                <ion-input formControlName="description" maxlength="300" size="300" type="text"></ion-input>
+            <ion-col col-10 offset-1>
+              <ion-item>
+                <ion-label></ion-label>
+                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>
               </ion-item>
             </ion-col>
-            <ion-col col-1></ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-1></ion-col>
-            <ion-col col-10>
+            <ion-col col-10 offset-1>
               <ion-item>
                 <ion-label>Severity</ion-label>
                 <ion-select formControlName="severity">
@@ -44,11 +38,9 @@
                 </ion-select>
               </ion-item>
             </ion-col>
-            <ion-col  col-1></ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-1></ion-col>
-            <ion-col col-10>
+            <ion-col col-12>
               <!--<ion-item no-lines>-->
                 <ion-label stacked>Image</ion-label>
                   <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
@@ -60,19 +52,15 @@
                   </div>
               <!--</ion-item>-->
             </ion-col>
-            <ion-col col-1></ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
       <ion-grid>
         <ion-row>
-          <ion-col col-1></ion-col>
-          <ion-col col-10>
-            <button ion-button type="submit" class="submitBtn" block>Send</button>
-          </ion-col>
-          <ion-col col-1></ion-col>
+          <ion-col col-8 offset-2>
+            <button ion-button round outline type="submit" color="tertiary" block>Send</button>
+          </ion-col>  
         </ion-row>
       </ion-grid>
     </form>
-  </div>
 </ion-content>

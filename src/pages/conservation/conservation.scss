@@ -1,6 +1,6 @@
 page-conservation{
 
-  ion-header{
+  /*ion-header{
     position:fixed;
     height:40px;
   }
@@ -52,5 +52,22 @@ page-conservation{
   	  position:relative;
   	   z-index:5;
     }
-  }
+  }*/
+
+  //Tristan CSS
+  .card-ios p {
+    color: color($colors, white);
+}
+
+.card-md p {
+    color: color($colors, white);
+}
+
+.area-card .card-ios {
+    background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+}
+
+.area-card .card-md {
+    background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+}
 }

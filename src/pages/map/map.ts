@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
-import { ModalController} from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
@@ -18,15 +18,15 @@ declare var google;
 
 export class MapPage {
   map: any;
-  patrol:any;
-  isTracking:any;
-  address:any;
+  patrol: any;
+  isTracking: any;
+  address: any;
   area: any;
   currentLocation: any;
   pointsArr: any;
   myVar: any;
   alertsArr: any;
-  marker:any;
+  marker: any;
   url: any;
   naviID: any;
   constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
@@ -70,29 +70,27 @@ export class MapPage {
           {
             point.setMap(null);
           });
-          this.pointsArr = [];
-          points.forEach(
-            (point) =>
-            {
-              var pointLocation = new google.maps.LatLng(point.lat, point.lng);
-              var marker = new google.maps.Marker({
-                position: pointLocation,
-                map: this.map,
-                title: 'Other User',
-                zIndex:0,
-                icon: {
-                  url: "assets/imgs/userPoint.png",
-                  scaledSize: new google.maps.Size(16, 16) // pixels
-                }
-              });
-              this.pointsArr.push(marker);
-            }
-          );
-        },
-        (error) =>
-        {
-          alert(error);
-        }
+        this.pointsArr = [];
+        points.forEach(
+          (point) => {
+            var pointLocation = new google.maps.LatLng(point.lat, point.lng);
+            var marker = new google.maps.Marker({
+              position: pointLocation,
+              map: this.map,
+              title: 'Other User',
+              zIndex: 0,
+              icon: {
+                url: "assets/imgs/userPoint.png",
+                scaledSize: new google.maps.Size(16, 16) // pixels
+              }
+            });
+            this.pointsArr.push(marker);
+          }
+        );
+      },
+      (error) => {
+        alert(error);
+      }
     );
   }
 
@@ -123,8 +121,7 @@ export class MapPage {
 
   public showPosition(position) {
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        if(this.marker)
-    {
+    if (this.marker) {
       this.marker.setMap(null);
     }
     this.marker = new google.maps.Marker({
@@ -141,14 +138,12 @@ export class MapPage {
     this.alerts();
   }
 
-  public sendLocation(location)
-  {
+  public sendLocation(location) {
     var jsonArr: any = {};
     jsonArr = location;
-    this.http.post("/point/add/"+this.area, jsonArr).subscribe
-    (
-      (data) =>
-      {
+    this.http.post("/point/add/" + this.area, jsonArr).subscribe
+      (
+      (data) => {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.coin)
         {
@@ -159,15 +154,13 @@ export class MapPage {
         {
         }
       },
-      (error) =>
-      {
-        alert("Error: "+error);
+      (error) => {
+        alert("Error: " + error);
       }
-    );
+      );
   }
 
-  public alerts()
-  {
+  public alerts() {
     var jsonArr: any = {};
     jsonArr.location = "";
     var since = 0; //CHANGE THIS

@@ -1,5 +1,5 @@
 page-register{
- ion-title{
+ /*ion-title{
     text-align: center;
     float:right;
     width:100%;
@@ -85,5 +85,28 @@ page-register{
 	float:left;
 	position:relative;
 	z-index:5;
+  }*/
+
+  //Tristan CSS
+  .list-ios .item-input:last-child {
+    border-bottom: 1px solid #dedede;
+  }
+
+  .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+    color: #000000;
+  }
+
+  .mobile-login {
+    background-image: url('../assets/imgs/mobile_login.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .core-login {
+    background-image: url('../assets/imgs/core_login.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 }
