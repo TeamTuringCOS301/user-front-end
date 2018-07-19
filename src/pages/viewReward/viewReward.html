@@ -1,0 +1,41 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>{{reward.name}}</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="divForm">
+    <form>
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <div><!--Severity-->
+                <p><u>Conservation Area:</u> {{reward.area}}</p>
+                <p> <u>Description:</u> <br>{{reward.description}}</p>
+              </div>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <div>
+                <ion-img center style=" background-color: white;" [src]="reward.image"></ion-img>
+              </div>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

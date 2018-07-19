@@ -27,6 +27,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { DashboardPage } from '../pages/dashboard/dashboard';
+import { ViewReward } from '../pages/viewReward/viewReward';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
     ReceivePage,
     SendAlert,
     ViewAlert,
-    DashboardPage
+    DashboardPage,
+    ViewReward
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,7 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
     ReceivePage,
     SendAlert,
     ViewAlert,
+    ViewReward,
     DashboardPage
   ],
   providers: [
@@ -76,7 +79,6 @@ import { DashboardPage } from '../pages/dashboard/dashboard';
     LocationTrackerProvider,
     Http,
     FileTransfer,
-    //FileUploadOptions,
     FileTransferObject,
     File,
     Camera

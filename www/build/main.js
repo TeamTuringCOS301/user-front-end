@@ -6,7 +6,7 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_dashboard__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_register__ = __webpack_require__(204);
@@ -98,7 +98,7 @@ var LogPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__receiveErp_receiveErp__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sendErp_sendErp__ = __webpack_require__(108);
@@ -188,7 +188,7 @@ var DashboardPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReceivePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -230,7 +230,7 @@ var ReceivePage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SendPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(17);
@@ -292,7 +292,7 @@ var SendPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConservationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__map_map__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(17);
@@ -342,10 +342,9 @@ var ConservationPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-conservation',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Conservation Areas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-12 col-sm-9 col-md-6 col-lg-4>\n\n        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">\n\n          <ion-card-header>\n\n            <b>{{area.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Province: {{area.province}}</p>\n\n            <p> City: {{area.city}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
     ], ConservationPage);
     return ConservationPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=conservation.js.map
@@ -358,7 +357,9 @@ var ConservationPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RewardsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__viewReward_viewReward__ = __webpack_require__(297);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -370,20 +371,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var RewardsPage = /** @class */ (function () {
-    function RewardsPage(navCtrl) {
+    function RewardsPage(navCtrl, http, modalCtrl) {
+        var _this = this;
         this.navCtrl = navCtrl;
+        this.http = http;
+        this.modalCtrl = modalCtrl;
+        this.http.get("/reward/list").subscribe(function (data) {
+            var jsonResp = JSON.parse(data.text());
+            _this.rewards = jsonResp.rewards;
+        }, function (error) {
+            alert(error);
+        });
     }
+    RewardsPage.prototype.picked = function (id) {
+        var _this = this;
+        var reward = {};
+        this.rewards.forEach(function (reward) {
+            if (reward.id == id) {
+                var modalPage = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__viewReward_viewReward__["a" /* ViewReward */], { reward: reward });
+                modalPage.present();
+            }
+        });
+    };
     RewardsPage.prototype.navPop = function () {
         this.navCtrl.pop();
     };
     RewardsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-rewards',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/'<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>Rewards</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/
+            selector: 'page-rewards',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/'<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>Rewards</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-12 col-sm-9 col-md-6 col-lg-4>\n\n        <ion-card *ngFor="let reward of rewards" (click)="picked(reward.id)">\n\n          <ion-card-header>\n\n            <b>{{reward.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Conservation Area: {{reward.area}}</p>\n\n            <p> Cost: {{reward.coinValue}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__http_api__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__http_api__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* ModalController */]) === "function" && _c || Object])
     ], RewardsPage);
     return RewardsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=rewards.js.map
@@ -475,7 +498,7 @@ var Http = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(17);
@@ -568,7 +591,7 @@ var RegPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conservation_conservation__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rewards_rewards__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sendErp_sendErp__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__receiveErp_receiveErp__ = __webpack_require__(107);
@@ -686,7 +709,7 @@ var AccountPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sendAlert_sendAlert__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(43);
@@ -770,23 +793,25 @@ var MapPage = /** @class */ (function () {
     };
     MapPage.prototype.trackMe = function () {
         var _this = this;
+        console.log("Entered trackMe()");
         if (navigator.geolocation) {
             this.isTracking = true;
             navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("Got current position");
                 _this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].currentLocation = _this.currentLocation;
                 _this.showPosition(position);
                 _this.map.panTo(_this.currentLocation);
-                _this.map.setZoom(16);
+                _this.map.setZoom(46); //16
                 //this.alerts();
-            });
+            }, function (error) {
+                alert(error.message);
+            }, { timeout: 10000 });
             this.naviID = setInterval(function () {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     _this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].currentLocation = _this.currentLocation;
                     _this.showPosition(position);
-                    //this.alerts();
-                    //this.getOtherUserPoints(0);
                 });
             }, __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].interval);
         }
@@ -805,7 +830,7 @@ var MapPage = /** @class */ (function () {
             zIndex: 3,
             title: 'Got you!',
             icon: {
-                url: "assets/imgs/people.png",
+                url: "assets/imgs/userIcon.png",
                 scaledSize: new google.maps.Size(48, 48) // pixels
             }
         });
@@ -839,7 +864,6 @@ var MapPage = /** @class */ (function () {
             alertArr = jsonResp.alerts;
             _this.alertsArr.forEach(function (alert) { alert.setMap(null); });
             alertArr.forEach(function (alert) {
-                //console.log("Alert: ");
                 var testLoc = new google.maps.LatLng(alert.location.lat, alert.location.lng);
                 var iconPost = "Alert.png";
                 var iconPre = "assets/imgs/";
@@ -852,7 +876,6 @@ var MapPage = /** @class */ (function () {
                     '<p>' + alert.description + '</p>' +
                     '</div>' +
                     '</div>';
-                //console.log("Image: "+iconSelection);
                 _this.alertsArr = [];
                 var infowindow = new google.maps.InfoWindow({
                     content: contentString
@@ -867,8 +890,6 @@ var MapPage = /** @class */ (function () {
                         scaledSize: new google.maps.Size(32, 32),
                     }
                 });
-                //console.log("Marker: "+marker)
-                //this.alert = navParams.get('alert');
                 alert.severity = __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* CONFIG */].severity[alert.severity];
                 marker.addListener('click', function () {
                     var modalPage = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__viewAlert_viewAlert__["a" /* ViewAlert */], { alert: alert });
@@ -884,9 +905,7 @@ var MapPage = /** @class */ (function () {
     MapPage.prototype.LoadMap = function (areaName) {
         var _this = this;
         this.http.get("/area/info/" + areaName).subscribe(function (data) {
-            console.log(data.text());
             var jsonResp = JSON.parse(data.text());
-            console.log(jsonResp.middle);
             if (jsonResp) {
                 var mapDetails;
                 _this.map = new google.maps.Map(document.getElementById('map'), {
@@ -920,7 +939,7 @@ var MapPage = /** @class */ (function () {
     };
     MapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Map</ion-title>\n\n  </ion-navbar>\n\n  <ion-toolbar color="secondary" text-center>\n\n      You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content no-padding>\n\n  <div #map id="map">\n\n\n\n  </div>\n\n  <ion-fab left bottom>\n\n    <button ion-fab color="danger" (click)="sendAlert()">\n\n      <ion-icon name="alert"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
+            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Map</ion-title>\n\n  </ion-navbar>\n\n  <ion-toolbar color="secondary" text-center>\n\n      You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content no-padding>\n\n  <div #map id="map">\n\n\n\n  </div>\n\n  <ion-fab left bottom>\n\n    <button ion-fab color="danger" (click)="sendAlert()">\n\n      <ion-icon name="alert"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* Events */], __WEBPACK_IMPORTED_MODULE_5__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* ModalController */]])
     ], MapPage);
@@ -936,7 +955,7 @@ var MapPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SendAlert; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
@@ -1042,10 +1061,9 @@ var SendAlert = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <form [formGroup]="form" (submit)="sendFunc(form.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label>Severity</ion-label>\n\n                <ion-select formControlName="severity">\n\n                  <ion-option value=0>{{severities[0]}}</ion-option>\n\n                  <ion-option value=1>{{severities[1]}}</ion-option>\n\n                  <ion-option value=2>{{severities[2]}}</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-12>\n\n              <!--<ion-item no-lines>-->\n\n                <ion-label stacked>Image</ion-label>\n\n                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />\n\n                  <div class="profile-image-wrapper" (click)="getPicture()">\n\n                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">\n\n                      <ion-icon name="add"></ion-icon>\n\n                    </div>\n\n                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>\n\n                  </div>\n\n              <!--</ion-item>-->\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-8 offset-2>\n\n            <button ion-button round outline type="submit" color="tertiary" block>Send</button>\n\n          </ion-col>  \n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]])
     ], SendAlert);
     return SendAlert;
-    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=sendAlert.js.map
@@ -1057,7 +1075,7 @@ var SendAlert = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewAlert; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_config__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(17);
@@ -1083,7 +1101,6 @@ var ViewAlert = /** @class */ (function () {
     }
     ViewAlert.prototype.ionViewDidLoad = function () {
         if (this.alert.hasImage) {
-            alert("alert has image");
             this.alert.image = __WEBPACK_IMPORTED_MODULE_2__app_config__["a" /* CONFIG */].url + "/alerts/image/" + this.alert.id;
         }
     };
@@ -1094,10 +1111,9 @@ var ViewAlert = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-viewAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{alert.title}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p><u>Severity:</u> {{alert.severity}}</p>\n\n                <p> <u>Description:</u> <br>{{alert.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div>\n\n                <ion-img center style=" background-color: white;" [src]="alert.image"></ion-img>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]])
     ], ViewAlert);
     return ViewAlert;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=viewAlert.js.map
@@ -1125,7 +1141,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_splash_splash__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(286);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_register_register__ = __webpack_require__(204);
@@ -1151,12 +1167,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_file__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_camera__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__ = __webpack_require__(297);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1203,7 +1221,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15__pages_receiveErp_receiveErp__["a" /* ReceivePage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_sendAlert_sendAlert__["a" /* SendAlert */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_viewAlert_viewAlert__["a" /* ViewAlert */],
-                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */]
+                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__["a" /* ViewReward */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1227,6 +1246,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15__pages_receiveErp_receiveErp__["a" /* ReceivePage */],
                 __WEBPACK_IMPORTED_MODULE_16__pages_sendAlert_sendAlert__["a" /* SendAlert */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_viewAlert_viewAlert__["a" /* ViewAlert */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__["a" /* ViewReward */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */]
             ],
             providers: [
@@ -1239,7 +1259,6 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_21__providers_location_tracker_location_tracker__["a" /* LocationTrackerProvider */],
                 __WEBPACK_IMPORTED_MODULE_22__http_api__["a" /* Http */],
                 __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_transfer__["a" /* FileTransfer */],
-                //FileUploadOptions,
                 __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_transfer__["b" /* FileTransferObject */],
                 __WEBPACK_IMPORTED_MODULE_25__ionic_native_file__["a" /* File */],
                 __WEBPACK_IMPORTED_MODULE_26__ionic_native_camera__["a" /* Camera */]
@@ -1259,7 +1278,7 @@ var AppModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Splash; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1304,7 +1323,7 @@ var Splash = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(105);
@@ -1495,6 +1514,55 @@ var LocationTrackerProvider = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=location-tracker.js.map
+
+/***/ }),
+
+/***/ 297:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewReward; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_config__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(17);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ViewReward = /** @class */ (function () {
+    function ViewReward(viewCtrl, navParams, http) {
+        this.viewCtrl = viewCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.reward = navParams.get('reward');
+    }
+    ViewReward.prototype.ionViewDidLoad = function () {
+        this.reward.image = __WEBPACK_IMPORTED_MODULE_2__app_config__["a" /* CONFIG */].url + "/reward/image/" + this.reward.id;
+    };
+    ViewReward.prototype.closeModal = function () {
+        this.viewCtrl.dismiss();
+    };
+    ViewReward = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
+            selector: 'page-viewReward',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{reward.name}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p><u>Conservation Area:</u> {{reward.area}}</p>\n\n                <p> <u>Description:</u> <br>{{reward.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div>\n\n                <ion-img center style=" background-color: white;" [src]="reward.image"></ion-img>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["k" /* ViewController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]) === "function" && _c || Object])
+    ], ViewReward);
+    return ViewReward;
+    var _a, _b, _c;
+}());
+
+//# sourceMappingURL=viewReward.js.map
 
 /***/ }),
 

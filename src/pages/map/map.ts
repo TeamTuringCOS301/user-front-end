@@ -95,23 +95,26 @@ export class MapPage {
   }
 
   public trackMe() {
+    console.log("Entered trackMe()");
     if (navigator.geolocation) {
       this.isTracking = true;
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log("Got current position");
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
         this.map.panTo(this.currentLocation);
-        this.map.setZoom(16);
+        this.map.setZoom(46);//16
         //this.alerts();
-      });
+      },
+      (error) =>{
+        alert(error.message);
+      }, {timeout:10000});
       this.naviID = setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
-        //this.alerts();
-        //this.getOtherUserPoints(0);
       });
     }, CONFIG.interval);
     } else {
@@ -130,7 +133,7 @@ export class MapPage {
       zIndex: 3,
       title: 'Got you!',
       icon: {
-        url: "assets/imgs/people.png",
+        url: "assets/imgs/userIcon.png",
         scaledSize: new google.maps.Size(48, 48) // pixels
       }
     });
@@ -173,7 +176,6 @@ export class MapPage {
         alertArr = jsonResp.alerts;
         this.alertsArr.forEach((alert) => {alert.setMap(null);});
         alertArr.forEach((alert) =>{
-          //console.log("Alert: ");
           var testLoc = new google.maps.LatLng(alert.location.lat, alert.location.lng);
           var iconPost = "Alert.png";
           var iconPre = "assets/imgs/"
@@ -186,7 +188,6 @@ export class MapPage {
           '<p>'+alert.description+'</p>'+
           '</div>'+
           '</div>';
-          //console.log("Image: "+iconSelection);
           this.alertsArr = [];
           var infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -201,8 +202,6 @@ export class MapPage {
               scaledSize: new google.maps.Size(32, 32), // pixels
             }
           });
-          //console.log("Marker: "+marker)
-          //this.alert = navParams.get('alert');
           alert.severity = CONFIG.severity[alert.severity];
 
           marker.addListener('click', () => {
@@ -225,9 +224,7 @@ LoadMap(areaName) {
   (
     (data) => //Success
     {
-    console.log(data.text());
     var jsonResp = JSON.parse(data.text());
-    console.log(jsonResp.middle);
     if(jsonResp)
     {
       var mapDetails:any;
