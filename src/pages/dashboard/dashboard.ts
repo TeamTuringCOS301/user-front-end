@@ -3,6 +3,8 @@ import { NavController, ToastController, Events, ModalController } from 'ionic-a
 import { Http } from '../../http-api';
 import { ReceivePage } from '../receiveErp/receiveErp';
 import { SendPage} from '../sendErp/sendErp';
+import { ConservationPage } from '../conservation/conservation';
+import { RewardsPage} from '../rewards/rewards';
 
 @Component({
   selector: 'page-dashboard',
@@ -93,7 +95,7 @@ export class DashboardPage {
         alert("Error: " +error);
       }
     );
-  }
+  }*/
 
   public rewardsPage()
   {
@@ -103,6 +105,6 @@ export class DashboardPage {
   public conservationAreas()
   {
     this.navCtrl.push(ConservationPage);
-  }*/
+  }
 
 }

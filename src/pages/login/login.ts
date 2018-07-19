@@ -52,7 +52,7 @@ export class LogPage {
         //alert(jsonResp);
         if(jsonResp.success)
         {
-          this.presentToast("Welcome!");
+          //this.presentToast("Welcome!");
           this.navCtrl.setRoot(DashboardPage);
         }
         else
