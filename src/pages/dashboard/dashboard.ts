@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, Events, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, Events, ModalController } from 'ionic-angular';
 import { Http } from '../../http-api';
 import { ReceivePage } from '../receiveErp/receiveErp';
 import { SendPage} from '../sendErp/sendErp';
@@ -104,7 +104,7 @@ export class DashboardPage {
 
   public conservationAreas()
   {
-    this.navCtrl.push(ConservationPage);
+    this.navCtrl.push(ConservationPage, {});
   }
 
 }

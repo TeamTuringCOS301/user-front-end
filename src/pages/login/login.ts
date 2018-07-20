@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { DashboardPage } from '../dashboard/dashboard';
 import { RegPage } from '../register/register';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
+import { DashboardPage } from '../dashboard/dashboard';
 
 @Component({
   selector: 'page-login',

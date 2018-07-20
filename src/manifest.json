@@ -2,7 +2,7 @@
   "name": "ERP Coin",
   "short_name": "ERP Coin",
   "start_url": "index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "icons": [{
     "src": "assets/imgs/logo.png",
     "sizes": "512x512",

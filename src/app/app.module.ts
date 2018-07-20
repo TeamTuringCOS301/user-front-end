@@ -28,6 +28,23 @@ import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ViewReward } from '../pages/viewReward/viewReward';
+import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
+/*import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'crisis-center', component: CrisisListComponent },
+  { path: 'hero/:id',      component: HeroDetailComponent },
+  {
+    path: 'heroes',
+    component: HeroListComponent,
+    data: { title: 'Heroes List' }
+  },
+  { path: '',
+    redirectTo: '/heroes',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }
+];*/
 
 @NgModule({
   declarations: [
@@ -43,14 +60,19 @@ import { ViewReward } from '../pages/viewReward/viewReward';
     ReceivePage,
     SendAlert,
     ViewAlert,
-    DashboardPage,
-    ViewReward
+    ViewReward,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicPageModule.forChild(DashboardPage)
+    /*RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )*/
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -70,6 +92,7 @@ import { ViewReward } from '../pages/viewReward/viewReward';
     DashboardPage
   ],
   providers: [
+    HardwareButtons,
     LocationService,
     Geolocation,
     StatusBar,

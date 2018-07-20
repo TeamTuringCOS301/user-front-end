@@ -49,7 +49,7 @@ export class MapPage {
     toast.present();
   }
 
-  ionViewDidLoad(){
+  ionViewDidEnter(){
       this.area = CONFIG.area;
       this.patrol = {};
       this.patrol.coins = 0;
@@ -110,7 +110,7 @@ export class MapPage {
       (error) =>{
         alert(error.message);
       }, {timeout:10000});
-      this.naviID = setInterval(() => {
+      CONFIG.tracking = setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
@@ -131,7 +131,7 @@ export class MapPage {
       position: location,
       map: this.map,
       zIndex: 3,
-      title: 'Got you!',
+      title: 'You',
       icon: {
         url: "assets/imgs/userIcon.png",
         scaledSize: new google.maps.Size(48, 48) // pixels
@@ -155,6 +155,7 @@ export class MapPage {
         }
         else
         {
+          this.presentToast("No coin");
         }
       },
       (error) => {
@@ -255,8 +256,13 @@ LoadMap(areaName) {
 
 public navPop()
 {
-  clearInterval(this.naviID);
+  clearInterval(CONFIG.tracking);
   this.navCtrl.pop();
+}
+
+ionViewDidLeave()
+{
+  clearInterval(CONFIG.tracking);
 }
 
 public sendAlert()
