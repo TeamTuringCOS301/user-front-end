@@ -159,7 +159,10 @@ export class MapPage {
         }
       },
       (error) => {
-        alert("Error: " + error);
+        if(error.status == 418)
+        {
+          this.presentToast("You are not inside the specified conservation area");
+        }
       }
       );
   }
