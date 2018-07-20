@@ -80,7 +80,7 @@ export class MapPage {
               title: 'Other User',
               zIndex: 0,
               icon: {
-                url: "assets/imgs/userPoint.png",
+                url: "assets/imgs/pointIcon.png",
                 scaledSize: new google.maps.Size(16, 16) // pixels
               }
             });
@@ -155,7 +155,7 @@ export class MapPage {
         }
         else
         {
-          this.presentToast("No coin");
+
         }
       },
       (error) => {
