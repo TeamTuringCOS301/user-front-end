@@ -80,7 +80,11 @@ export class MapPage {
               title: 'Other User',
               zIndex: 0,
               icon: {
+<<<<<<< HEAD
                 url: "assets/imgs/pointIcon.png",
+=======
+                url: "assets/imgs/userIcon.png",
+>>>>>>> 2c313d5fb9b2b15bad35c14a0fdbbbe62c009bcb
                 scaledSize: new google.maps.Size(16, 16) // pixels
               }
             });
