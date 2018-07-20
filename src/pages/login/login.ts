@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { AccountPage } from '../account/account';
+import { RegPage } from '../register/register';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http } from '../../http-api';
+import { DashboardPage } from '../dashboard/dashboard';
 
 @Component({
   selector: 'page-login',
@@ -12,10 +13,9 @@ import { Storage } from '@ionic/storage';
 })
 export class LogPage {
   logUser: any;
-  address: any;
+  url:any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
   this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
-  this.storage.get('address').then(val=>{this.address = val;});
 }
 
   public presentToast(text)
@@ -36,26 +36,21 @@ export class LogPage {
       this.presentToast("Please fill out all of the fields");
       return;
     }
-    var addr = "http://192.168.43.72:8080/user/login";
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    //this.navCtrl.push(AccountPage);
-    this.http.post(addr, param, options).subscribe
+    //var param = JSON.stringify(jsonArr);
+
+    /*this.presentToast("Welcome!");
+    this.navCtrl.setRoot(DashboardPage);*/
+    this.http.post("/user/login", jsonArr).subscribe
     (
       (data) => //Success
       {
-        //alert("Success: " +data.text());
         var jsonResp = JSON.parse(data.text());
-        //alert(jsonResp);
         if(jsonResp.success)
         {
-          this.presentToast("Welcome!");
-          this.navCtrl.push(AccountPage);
+          this.navCtrl.setRoot(DashboardPage);
         }
         else
         {
@@ -67,10 +62,16 @@ export class LogPage {
         alert("Error: "+error);
       }
     );
-}
+  }
+
   navPop()
   {
     this.navCtrl.pop();
+  }
+
+  registerPage()
+  {
+    this.navCtrl.push(RegPage);
   }
 
 }

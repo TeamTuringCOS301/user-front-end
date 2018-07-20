@@ -1,0 +1,39 @@
+<ion-header>
+
+<ion-navbar>
+    <ion-title>{{alert.title}}</ion-title>
+    <ion-buttons end>
+    <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="divForm">
+    <form>
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+              <div><!--Severity-->
+                <p text-center><u>Severity:</u> {{alert.severity}}</p>
+                <p text-center> <u>Description:</u> <br>{{alert.description}}</p>
+              </div>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-10>
+                <img src={{alert.image}}>
+            </ion-col>
+            <ion-col col-1></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

@@ -4,8 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicPageModule } from 'ionic-angular';
 import { Splash } from '../pages/splash/splash';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { RegPage } from '../pages/register/register';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,12 +16,39 @@ import { MapPage } from '../pages/map/map';
 import { SendPage } from '../pages/sendErp/sendErp';
 import { ReceivePage } from '../pages/receiveErp/receiveErp';
 import { SendAlert } from '../pages/sendAlert/sendAlert';
+import { ViewAlert } from '../pages/viewAlert/viewAlert';
 import { IonicStorageModule } from '@ionic/storage';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
+import { Http } from '../http-api';
+import { LocationService, GoogleMap, GoogleMapOptions, MyLocation } from '@ionic-native/google-maps';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { ViewReward } from '../pages/viewReward/viewReward';
+import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
+/*import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'crisis-center', component: CrisisListComponent },
+  { path: 'hero/:id',      component: HeroDetailComponent },
+  {
+    path: 'heroes',
+    component: HeroListComponent,
+    data: { title: 'Heroes List' }
+  },
+  { path: '',
+    redirectTo: '/heroes',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }
+];*/
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
     Splash,
     RegPage,
     LogPage,
@@ -33,19 +58,25 @@ import { IonicStorageModule } from '@ionic/storage';
     MapPage,
     SendPage,
     ReceivePage,
-    SendAlert
+    SendAlert,
+    ViewAlert,
+    ViewReward,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicPageModule.forChild(DashboardPage)
+    /*RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )*/
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
     Splash,
     RegPage,
     LogPage,
@@ -55,12 +86,25 @@ import { IonicStorageModule } from '@ionic/storage';
     MapPage,
     SendPage,
     ReceivePage,
-    SendAlert
+    SendAlert,
+    ViewAlert,
+    ViewReward,
+    DashboardPage
   ],
   providers: [
+    HardwareButtons,
+    LocationService,
+    Geolocation,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BackgroundGeolocation,
+    LocationTrackerProvider,
+    Http,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Camera
   ]
 })
 export class AppModule {}

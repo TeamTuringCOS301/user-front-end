@@ -1,6 +1,6 @@
 page-conservation{
 
-  ion-header{
+  /*ion-header{
     position:fixed;
     height:40px;
   }
@@ -22,15 +22,6 @@ page-conservation{
     width:100%;
   }
 
-  #backButton{
-    background-color: white;
-    width:5%;
-	float:left;
-    margin-left:0%;
-	position:relative;
-	z-index:5;
-  }
-
   @media(max-width: 900px) {
     .divForm{
       display:block;
@@ -38,11 +29,45 @@ page-conservation{
       margin-left:auto;
       margin-right:auto;
     }
+
+    #backButton{
+      background-color: white;
+      width:10%;
+  	  float:left;
+      margin-left:0%;
+  	  position:relative;
+  	  z-index:5;
+    }
   }
 
   @media(min-width: 900px) {
     ion-content{
       width:40%;
     }
-  }
+    #backButton{
+      background-color: white;
+      width:5%;
+  	  float:left;
+      margin-left:0%;
+  	  position:relative;
+  	   z-index:5;
+    }
+  }*/
+
+  //Tristan CSS
+  .card-ios p {
+    color: color($colors, white);
+}
+
+.card-md p {
+    color: color($colors, white);
+}
+
+.area-card .card-ios {
+    background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+}
+
+.area-card .card-md {
+    background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+}
 }

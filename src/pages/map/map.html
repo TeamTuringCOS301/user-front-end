@@ -1,11 +1,18 @@
 <ion-header>
-  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>
-  <ion-title>Map</ion-title>
+  <ion-navbar>
+    <ion-title>Map</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="secondary" text-center>
+      You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.
+  </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div #map id="map"></div>
-  <div id="details">
-    <p>You have found: {{patrol.coins}} ERP-Coins this patrol.</p>
-    <button id="alertBtn" (click)="sendAlert()">Send Out Alert</button>
+<ion-content no-padding>
+  <div #map id="map">
+
   </div>
+  <ion-fab left bottom>
+    <button ion-fab color="danger" (click)="sendAlert()">
+      <ion-icon name="alert"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

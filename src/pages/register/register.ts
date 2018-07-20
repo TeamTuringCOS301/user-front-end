@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { LogPage } from '../login/login';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Http } from '../../http-api';
+import { AccountPage } from '../account/account';
 
 @Component({
   selector: 'page-register',
@@ -12,10 +12,9 @@ import { Storage } from '@ionic/storage';
 })
 export class RegPage {
   regUser: any;
-  address: any;
+  url: any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
-    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), cellNumber: new FormControl(), vehicleModel: new FormControl(), vehicleReg: new FormControl()});
-    this.storage.get('address').then(val=>{this.address = val});
+    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), walletAddress: new FormControl()});
   }
 
   public presentToast(message)
@@ -42,35 +41,20 @@ export class RegPage {
       }
       else
       {
-        var addr= this.address+"/user/add";
-        alert(addr);
         var jsonArr: any = {};
         jsonArr.username = value.username;
         jsonArr.password = value.password;
         jsonArr.email = value.email;
         jsonArr.name = value.fName;
         jsonArr.surname = value.sName;
-        jsonArr.cellNumber = value.cellNumber;
-        jsonArr.walletAddress = value.vehicleModel;
-        //jsonArr.vehicleRegistration = value.vehicleReg;
-        var param = jsonArr;
-        //alert(addr);
-        console.log("Param:");
-        console.log(param);
-        //alert(param);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let options = new RequestOptions({headers: headers});
-        //alert("Post options set");
-        this.http.post(addr, param, options).subscribe
+        jsonArr.walletAddress = value.walletAddress;
+        this.http.post("/user/add", jsonArr).subscribe
         (
           (response) => //Success
           {
-          //Handle successful register
-          //alert("Success" +response);
           console.log(response);
           this.presentToast("Registration successful! Please log in");
-          this.navCtrl.push(LogPage);
+          this.navCtrl.push(AccountPage);
         },
         (error) => //Failure
         {
@@ -79,7 +63,6 @@ export class RegPage {
         console.log("Error");
       }
     );
-    //window.alert("Success!");
   }
 }
 

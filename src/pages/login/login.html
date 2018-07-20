@@ -1,8 +1,121 @@
-<ion-header>
-  <button id="backButton" (click)="navPop()"><ion-icon id="backIcon" name="arrow-dropleft"></ion-icon></button>
+<ion-content showWhen="core">
+  <div id=register-container class="container">
+    <div class="login-pane">
+      <div style="margin-bottom:auto; margin-top: auto">
+        <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">
+          <ion-list>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-10 offset-1>
+                  <ion-item>
+                    <ion-label>
+                      <ion-icon name="person"></ion-icon>
+                    </ion-label>
+                    <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-10 offset-1>
+                  <ion-item>
+                    <ion-label>
+                      <ion-icon name="lock"></ion-icon>
+                    </ion-label>
+                    <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-8 offset-2>
+                  <button ion-button outline round block type="submit" color="tertiary">Login</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+        </form>
+      </div>
+
+      <div style="position:relative; margin-bottom: 12px">
+        <ion-row>
+          <ion-col text-right>
+            <p ion-text>Don't have an account?</p>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button outline round (click)="registerPage()">Sign Up</button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+    <div id="register-info">
+      <p ion-text text-center>Welcome to</p>
+      <h1 ion-text text-center>ERP Coin</h1>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content class="mobile-login" showWhen="ios,android">
+  <h3 ion-text text-center color="white">Welcome to</h3>
+  <h1 ion-text text-center color="white">
+    <b>ERP Coin</b>
+  </h1>
+
+  <ion-card color="white">
+    <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">
+      <ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-10 offset-1>
+              <ion-item>
+                <ion-label>
+                  <ion-icon name="person"></ion-icon>
+                </ion-label>
+                <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-10 offset-1>
+              <ion-item>
+                <ion-label>
+                  <ion-icon name="lock"></ion-icon>
+                </ion-label>
+                <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-8 offset-2>
+              <button ion-button outline round block type="submit" color="tertiary">Login</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </form>
+  </ion-card>
+
+  <ion-footer no-border>
+    <ion-toolbar position="bottom">
+      <ion-row>
+        <ion-col text-right col-auto>
+          <p ion-text color="white">
+            <b>Don't have an account?</b>
+          </p>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button round color="white" (click)="registerPage()">Sign Up</button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+
+<!--<ion-header showWhen="ios,android">
+  <button id="backButton" (click)="navPop()">
+    <ion-icon id="backIcon" name="arrow-dropleft"></ion-icon>
+  </button>
   <ion-title>Login</ion-title>
 </ion-header>
-<ion-content>
+<ion-content showWhen="ios,android">
   <div class="divForm">
     <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">
       <ion-list>
@@ -33,11 +146,11 @@
         <ion-row>
           <ion-col col-1></ion-col>
           <ion-col col-10>
-            <button type="submit" class="submitBtn" block >Log In</button>
+            <button type="submit" class="submitBtn" block>Log In</button>
           </ion-col>
           <ion-col col-1></ion-col>
         </ion-row>
       </ion-grid>
     </form>
   </div>
-</ion-content>
+</ion-content>-->

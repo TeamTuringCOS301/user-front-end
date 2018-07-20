@@ -1,11 +1,15 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
-import { ModalController} from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { CONFIG } from '../../app-config';
+import { Http } from '../../http-api';
+import { Events } from 'ionic-angular';
+import { ViewAlert } from '../viewAlert/viewAlert';
 
 declare var google;
+
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
@@ -13,67 +17,172 @@ declare var google;
 
 
 export class MapPage {
-  Gmap: any;
-  patrol:any;
-  address:any;
-  constructor(public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  map: any;
+  patrol: any;
+  isTracking: any;
+  address: any;
+  area: any;
+  currentLocation: any;
+  pointsArr: any;
+  myVar: any;
+  alertsArr: any;
+  marker: any;
+  url: any;
+  naviID: any;
+  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+    this.area;
+    this.alertsArr = [];
+    this.naviID;
+    this.pointsArr = [];
+    this.isTracking = false;
     this.patrol = {};
-    this.storage.get('address').then(val=>{this.address = val;});
   }
 
-  @ViewChild('map') mapElement: ElementRef;
-  map: any;
+  public presentToast(message)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
 
-  ionViewDidLoad(){
-    this.storage.get('area').then(val=>{
-      let area = val;
-      //alert("Received area is: " +area);
-      while(area == "null")
-      {
-        this.storage.get('area').then(val=>{this.area = val;});
-        //alert("Area is: "+this.area);
-      }
-      //alert("New area is: "+area);
-      //var polygonPoints:any = [];
-      //polygonPoints = this.getPolygonPoints(area);
-      //this.loadMap(polygonPoints);
+  ionViewDidEnter(){
+      this.area = CONFIG.area;
       this.patrol = {};
       this.patrol.coins = 0;
-      var polygonPoints = [
-        {lat: 25.774, lng: -80.190},
-        {lat: 18.466, lng: -66.118},
-        {lat: 32.321, lng: -64.757},
-        {lat: 25.774, lng: -80.190}
-      ];
-      this.LoadMap(area);
-      //this.alerts();
-    });
+      this.LoadMap(this.area);
+      //this.trackMe();
   }
 
-  public alerts()
+  public getOtherUserPoints(since)
   {
+    this.http.get("/point/list/"+this.area+"/"+since).subscribe(
+        (data) => //success
+        {
+          var jsonResp = JSON.parse(data.text());
+          //console.log("Returned: "+data.text());
+          var points = jsonResp.points;
+          this.pointsArr.forEach(
+          (point) =>
+          {
+            point.setMap(null);
+          });
+        this.pointsArr = [];
+        points.forEach(
+          (point) => {
+            var pointLocation = new google.maps.LatLng(point.lat, point.lng);
+            var marker = new google.maps.Marker({
+              position: pointLocation,
+              map: this.map,
+              title: 'Other User',
+              zIndex: 0,
+              icon: {
+                url: "assets/imgs/pointIcon.png",
+                scaledSize: new google.maps.Size(16, 16) // pixels
+              }
+            });
+            this.pointsArr.push(marker);
+          }
+        );
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+  }
+
+  public trackMe() {
+    console.log("Entered trackMe()");
+    if (navigator.geolocation) {
+      this.isTracking = true;
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log("Got current position");
+        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        CONFIG.currentLocation = this.currentLocation;
+        this.showPosition(position);
+        this.map.panTo(this.currentLocation);
+        this.map.setZoom(46);//16
+        //this.alerts();
+      },
+      (error) =>{
+        alert(error.message);
+      }, {timeout:10000});
+      CONFIG.tracking = setInterval(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        CONFIG.currentLocation = this.currentLocation;
+        this.showPosition(position);
+      });
+    }, CONFIG.interval);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  public showPosition(position) {
+    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    if (this.marker) {
+      this.marker.setMap(null);
+    }
+    this.marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      zIndex: 3,
+      title: 'You',
+      icon: {
+        url: "assets/imgs/userIcon.png",
+        scaledSize: new google.maps.Size(48, 48) // pixels
+      }
+    });
+    this.sendLocation(location);
+    this.alerts();
+  }
+
+  public sendLocation(location) {
+    var jsonArr: any = {};
+    jsonArr = location;
+    this.http.post("/point/add/" + this.area, jsonArr).subscribe
+      (
+      (data) => {
+        var jsonResp = JSON.parse(data.text());
+        if(jsonResp.coin)
+        {
+          this.presentToast("Yay, you got a coin!");
+          this.patrol.coins ++;
+        }
+        else
+        {
+
+        }
+      },
+      (error) => {
+        if(error.status == 418)
+        {
+          this.presentToast("You are not inside the specified conservation area");
+        }
+      }
+      );
+  }
+
+  public alerts() {
     var jsonArr: any = {};
     jsonArr.location = "";
-    var param = JSON.stringify(jsonArr);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({headers: headers});
-    var addr = "http://192.168.43.19/area/info/"; // ID is area ID from database
-    this.http.post(addr, param, options).subscribe
+    var since = 0; //CHANGE THIS
+    this.http.get("/alert/broadcasts/"+this.area+"/"+since).subscribe
     (
       (data) => //Success
       {
-      //alert("Success: " +data.text());
       var jsonResp = JSON.parse(data.text());
-      //alert(jsonResp);
-      if(jsonResp.success)
-      {
-        var iconPost = "Alert.png";
-        var iconPre = "assets/imgs/";
-        alertArr = [];
+        var alertArr = [];
         alertArr = jsonResp.alerts;
+        this.alertsArr.forEach((alert) => {alert.setMap(null);});
         alertArr.forEach((alert) =>{
-          console.log("Alert: "+alert.secerity);
+          var testLoc = new google.maps.LatLng(alert.location.lat, alert.location.lng);
+          var iconPost = "Alert.png";
+          var iconPre = "assets/imgs/"
           var iconSelection = iconPre + alert.severity+ iconPost;
           var contentString = '<div id="content">'+
           '<div id="siteNotice">'+
@@ -83,206 +192,85 @@ export class MapPage {
           '<p>'+alert.description+'</p>'+
           '</div>'+
           '</div>';
-
+          this.alertsArr = [];
           var infowindow = new google.maps.InfoWindow({
             content: contentString
           });
           var marker = new google.maps.Marker({
-            position: alert.location,
-            map: this.Gmap,
+            position: testLoc,
+            map: this.map,
             title: alert.title,
+            zIndex: 5,
             icon: {
               url: iconSelection,
-              scaledSize: new google.maps.Size(16, 16) // pixels
+              scaledSize: new google.maps.Size(32, 32), // pixels
             }
           });
-          marker.addListener('click', function() {
-            infowindow.open(this.Gmap, marker);
+          alert.severity = CONFIG.severity[alert.severity];
+
+          marker.addListener('click', () => {
+            var modalPage = this.modalCtrl.create(ViewAlert, {alert: alert}); modalPage.present();
           });
+          this.alertsArr.push(marker);
         });
-      }
-      else
-      {
-        alert("Invalid username/password combination");
-      }
+        this.getOtherUserPoints(0);
     },
     (error) =>//Failure
     {
-    alert("Error: "+error);
-  },
-);
-var alertArr: any = [];
-var testalert: any = {};
-var iconPost = "Alert.png";
-var iconPre = "assets/imgs/";
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "red";
-testalert.location = {lat: 24.886, lng: -70.268};
-alertArr.push(testalert);
-testalert = {};
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "orange";
-testalert.location = {lat: 23.886, lng: -70.268};
-alertArr.push(testalert);
-testalert = {};
-testalert.title = "Test Alert";
-testalert.description = "This is a sample description for ERP-Coin App Alerts.";
-testalert.severity = "blue";
-testalert.location = {lat: 25.886, lng: -70.268};
-alertArr.push(testalert);
-alertArr.forEach((alert) =>{
-  console.log("Alert: "+alert.severity);
-  var iconSelection = iconPre + alert.severity+ iconPost;
-  var contentString = '<div id="content">'+
-  '<div id="siteNotice">'+
-  '</div>'+
-  '<h1 id="firstHeading" class="firstHeading">'+alert.title+'</h1>'+
-  '<div id="bodyContent">'+
-  '<p>'+alert.description+'</p>'+
-  '</div>'+
-  '</div>';
-
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
-  var marker = new google.maps.Marker({
-    position: alert.location,
-    map: this.Gmap,
-    title: 'Test Alert',
-    icon: {
-      url: iconSelection,
-      scaledSize: new google.maps.Size(16, 16) // pixels
+    alert("Error"+error);
     }
-  });
-  marker.addListener('click', function() {
-    infowindow.open(this.Gmap, marker);
-  });
-});
+);
 }
 
 
 LoadMap(areaName) {
-  var jsonArr: any = {};
-  jsonArr.id = areaName;
-  var param = JSON.stringify(jsonArr);
-  let headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  let options = new RequestOptions({headers: headers});
-  var addr = this.address+"/area/info/"+areaName;
-  this.http.get(addr).subscribe
+  this.http.get("/area/info/"+areaName).subscribe
   (
     (data) => //Success
     {
-    //alert("Success: " +data.text());
     var jsonResp = JSON.parse(data.text());
-    //alert(jsonResp);
     if(jsonResp)
     {
       var mapDetails:any;
-      mapDetails = JSON.parse(data.text());
-      var test:any = [];
-      test = [{lat: -25.75565, lng: 28.23938},	//to be replaced with server request
-			{lat: -25.75392, lng: 28.23217}];
-    //alert("Middle: "+mapDetails.middle);
-      //alert("Middle: "+JSON.parse(mapDetails.middle));
-      this.Gmap = new google.maps.Map(document.getElementById('map'), {
-        zoom: 5,
-        center: JSON.parse(mapDetails.middle),
-        mapTypeId: 'terrain'
-      });
-      // Construct the polygon.
-      var mapObj = new google.maps.Polygon({
-      paths: JSON.parse(mapDetails.border),
+      this.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 5,
+      center: jsonResp.middle,
+      mapTypeId: 'terrain'
+    });
+    // Construct the polygon.
+    var mapObj = new google.maps.Polygon
+    ({
+      paths: jsonResp.border,
       strokeColor: '#0000FF',
       strokeOpacity: 0.8,
       strokeWeight: 2,
       fillColor: '#0000ff',
       fillOpacity: 0.2,
     });
-    this.Gmap.zoom = 12;
-    mapObj.setMap(this.Gmap);
-    this.Gmap.zoomo = 12;
-    /*findMe() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.showTrackingPosition(position);
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-    showTrackingPosition(position) {
-    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
-    this.currentLat = position.coords.latitude;
-    this.currentLong = position.coords.longitude;
-
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
-
-    if (!this.marker) {
-      this.marker = new google.maps.Marker({
-        position: location,
-        map: this.map,
-        title: 'Got you!'
-      });
-    }
-    else {
-      this.marker.setPosition(location);
-    }
-  }*/
-    /*google.maps.Polygon.prototype.getBounds = function() {
-      var bounds = new google.maps.LatLngBounds();
-      var paths = this.getPaths();
-      var path;
-      for (var i = 0; i < paths.getLength(); i++) {
-        path = paths.getAt(i);
-        for (var ii = 0; ii < path.getLength(); ii++) {
-          bounds.extend(path.getAt(ii));
-        }
-      }
-      return bounds;
-    }
-    map.fitBounds(area.getBounds());
-
-    var listener = google.maps.event.addListener(this.Gmap, "idle", function() {
-      this.Gmap.setZoom(map.getZoom() * 1.03);			//if the polygon does not fit in the screen, adjust this value.
-      google.maps.event.removeListener(listener);
-    });
-
-    infoWindow = new google.maps.InfoWindow;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-      });
-    }
-      else
-      {
-        alert("Browser does not support geolocation");
-      }*/
+    mapObj.setMap(this.map);
+    this.trackMe();
     }
   },
-    (error) =>//Failure
-    {
+  (error) =>//Failure
+  {
     alert("Error: " +error);
-  }
-);
-
+  });
 }
 
-navPop()
+public navPop()
 {
+  clearInterval(CONFIG.tracking);
   this.navCtrl.pop();
+}
+
+ionViewDidLeave()
+{
+  clearInterval(CONFIG.tracking);
 }
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create(SendAlert); modalPage.present();
+  var modalPage = this.modalCtrl.create(SendAlert, {location: this.currentLocation}); modalPage.present();
 }
 
 }

@@ -1,8 +1,12 @@
-import { ViewController } from 'ionic-angular';
-import { Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { FormGroup, FormControl } from '@angular/forms';
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
+import { Http } from '../../http-api';
+import { CONFIG } from '../../app-config';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-sendAlert',
@@ -11,12 +15,74 @@ import { Storage } from '@ionic/storage';
 
 export class SendAlert
 {
+
+  @ViewChild('fileInput') fileInput;
+  isReadyToSave: boolean;
+  item: any;
+  imageBlob: any;
+  form: FormGroup;
   sendAlert: any;
+  camera:any;
   address:any;
-  constructor(public storage: Storage, public viewCtrl: ViewController, public http: Http)
+  currentLocation: any;
+  severities: any = [];
+  constructor(public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
-    this.sendAlert = new FormGroup({title: new FormControl(), description: new FormControl(), image: new FormControl()});
-    this.storage.get('address').then(val=>{this.address = val;});
+    this.severities = CONFIG.severity;
+    this.currentLocation = navParams.get('location');
+    this.form = formBuilder.group({
+      title: [''],
+      profilePic: ['', Validators.required],
+      description: [''],
+      severity: ['']
+    });
+
+    this.form.valueChanges.subscribe((v) => {
+      this.isReadyToSave = this.form.valid;
+    });
+  }
+
+  presentToast(message)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  processWebImage(event) {
+    let reader = new FileReader();
+    reader.onload = (readerEvent) => {
+      let imageData = (readerEvent.target as any).result;
+      var position = imageData.indexOf(",");
+      this.imageBlob = imageData.slice(position+1);
+      this.form.patchValue({ 'profilePic': imageData });
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  getProfileImageStyle() {
+    return 'url(' + this.form.controls['profilePic'].value + ')';
+  }
+
+  getPicture() {
+    if (Camera['installed']()) {
+      this.camera.getPicture({
+        destinationType: this.camera.DestinationType.DATA_URL,
+        targetWidth: 96,
+        targetHeight: 96
+      }).then((data) => {
+        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
+      }, (err) => {
+        alert('Unable to take photo');
+      })
+    } else {
+      this.fileInput.nativeElement.click();
+    }
+    return false;
   }
 
   public closeModal()
@@ -28,19 +94,19 @@ export class SendAlert
   {
       var jsonArr: any = {};
       jsonArr.title = value.title;
-      jsonArr.description = value.amount;
-      jsonArr.image = value.image;
-      var param = JSON.stringify(jsonArr);
-      var addr = this.address+"/user/alert";
-      this.http.get(addr, param).subscribe
+      jsonArr.description = value.description;
+      jsonArr.image = this.imageBlob;
+      jsonArr.severity = parseInt(value.severity);
+      jsonArr.location = this.currentLocation;
+      this.http.post("/alert/add/"+CONFIG.area, jsonArr).subscribe
       (
-        function(response) //Success
+        (response)=> //Success
         {
-          //Handle successful register
+          this.presentToast("Alert sent");
         },
-        function(error) //Failure
+        (error)=> //Failure
         {
-          //Handle error
+          alert(error);//Handle error
         }
       );
       this.viewCtrl.dismiss();
@@ -48,6 +114,7 @@ export class SendAlert
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
+
     //console.log(this.navParams.get('message'));
 }
 }
