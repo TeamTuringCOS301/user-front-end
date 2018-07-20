@@ -32,11 +32,13 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      window.addEventListener('popstate', () => {
+            if (this.nav.canGoBack()) { //Can we go back?
+              //if(this.nav.length()>2){history.pushState(null, null, document.URL);}
+              this.nav.pop();
+            }
+      });
       this.statusBar.styleDefault();
-      //let splash = this.modalCtrl.create(Splash);
-      //splash.present();
       this.splashScreen.hide();
     });
   }
