@@ -29,6 +29,9 @@ import { Camera } from '@ionic-native/camera';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ViewReward } from '../pages/viewReward/viewReward';
 import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
+import { EditPage } from '../pages/editProfile/editProfile';
+import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
+import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 /*import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
@@ -61,7 +64,10 @@ const appRoutes: Routes = [
     SendAlert,
     ViewAlert,
     ViewReward,
-    DashboardPage
+    DashboardPage,
+    EditPage,
+    UpdatePasswordPage,
+    LinkWalletPage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +95,10 @@ const appRoutes: Routes = [
     SendAlert,
     ViewAlert,
     ViewReward,
-    DashboardPage
+    DashboardPage,
+    EditPage,
+    UpdatePasswordPage,
+    LinkWalletPage
   ],
   providers: [
     HardwareButtons,

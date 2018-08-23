@@ -22,13 +22,14 @@ export class DashboardPage {
         var jsonResp = JSON.parse(data.text());
         console.log(jsonResp);
         this.user.name = jsonResp.name;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
         alert(error);
       }
     );
-    this.getBalance();
+    //this.getBalance();
   }
 
   ionViewDidLoad(){
@@ -39,16 +40,37 @@ export class DashboardPage {
       //this.navCtrl.push(AccountPage);
       //this.navCtrl.push(AccountPage,{},{animate:false});
     });
+
+    this.events.subscribe("UpdatedDetails", () =>
+    {
+      this.http.get("/user/info").subscribe
+      (
+        (data) =>
+        {
+          var jsonResp = JSON.parse(data.text());
+          console.log(jsonResp);
+          this.user.name = jsonResp.name;
+          this.user.balance = jsonResp.coinBalance;
+        },
+        (error) =>
+        {
+          alert(error);
+        }
+      );
+      //this.navCtrl.pop({animate:false});
+      //this.navCtrl.push(AccountPage);
+      //this.navCtrl.push(AccountPage,{},{animate:false});
+    });
   }
 
-  getBalance()
+  public getBalance()
   {
-    this.http.get("/user/coins").subscribe
+    this.http.get("/user/info").subscribe
     (
       (data) =>
       {
         var jsonResp = JSON.parse(data.text());
-        this.user.balance = jsonResp.balance;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {

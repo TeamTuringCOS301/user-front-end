@@ -4,6 +4,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-searchbar
+  [(ngModel)]="myInput"
+  [showCancelButton]="shouldShowCancel"
+  (ionInput)="onSearchInput($event)"
+  (ionCancel)="onSearchCancel($event)">
+  </ion-searchbar>
   <ion-grid>
     <ion-row>
       <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>

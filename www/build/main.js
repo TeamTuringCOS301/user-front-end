@@ -6,11 +6,11 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__register_register__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_dashboard__ = __webpack_require__(110);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -78,7 +78,7 @@ var LogPage = /** @class */ (function () {
     };
     LogPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\login\login.html"*/'<ion-content showWhen="core">\n\n  <div id=register-container class="container">\n\n    <div class="login-pane">\n\n      <div style="margin-bottom:auto; margin-top: auto">\n\n        <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n          <ion-list>\n\n            <ion-grid>\n\n              <ion-row>\n\n                <ion-col col-10 offset-1>\n\n                  <ion-item>\n\n                    <ion-label>\n\n                      <ion-icon name="person"></ion-icon>\n\n                    </ion-label>\n\n                    <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n                  </ion-item>\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                <ion-col col-10 offset-1>\n\n                  <ion-item>\n\n                    <ion-label>\n\n                      <ion-icon name="lock"></ion-icon>\n\n                    </ion-label>\n\n                    <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n                  </ion-item>\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                <ion-col col-8 offset-2>\n\n                  <button ion-button outline round block type="submit" color="tertiary">Login</button>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-list>\n\n        </form>\n\n      </div>\n\n\n\n      <div style="position:relative; margin-bottom: 12px">\n\n        <ion-row>\n\n          <ion-col text-right>\n\n            <p ion-text>Don\'t have an account?</p>\n\n          </ion-col>\n\n          <ion-col text-center>\n\n            <button ion-button outline round (click)="registerPage()">Sign Up</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </div>\n\n    </div>\n\n    <div id="register-info">\n\n      <p ion-text text-center>Welcome to</p>\n\n      <h1 ion-text text-center>ERP Coin</h1>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n\n\n<ion-content class="mobile-login" showWhen="ios,android">\n\n  <h3 ion-text text-center color="white">Welcome to</h3>\n\n  <h1 ion-text text-center color="white">\n\n    <b>ERP Coin</b>\n\n  </h1>\n\n\n\n  <ion-card color="white">\n\n    <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label>\n\n                  <ion-icon name="person"></ion-icon>\n\n                </ion-label>\n\n                <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label>\n\n                  <ion-icon name="lock"></ion-icon>\n\n                </ion-label>\n\n                <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-8 offset-2>\n\n              <button ion-button outline round block type="submit" color="tertiary">Login</button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </ion-card>\n\n\n\n  <ion-footer no-border>\n\n    <ion-toolbar position="bottom">\n\n      <ion-row>\n\n        <ion-col text-right col-auto>\n\n          <p ion-text color="white">\n\n            <b>Don\'t have an account?</b>\n\n          </p>\n\n        </ion-col>\n\n        <ion-col text-center>\n\n          <button ion-button round color="white" (click)="registerPage()">Sign Up</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-toolbar>\n\n  </ion-footer>\n\n</ion-content>\n\n\n\n<!--<ion-header showWhen="ios,android">\n\n  <button id="backButton" (click)="navPop()">\n\n    <ion-icon id="backIcon" name="arrow-dropleft"></ion-icon>\n\n  </button>\n\n  <ion-title>Login</ion-title>\n\n</ion-header>\n\n<ion-content showWhen="ios,android">\n\n  <div class="divForm">\n\n    <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Username</ion-label>\n\n                <ion-input formControlName="username" type="text" required></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Password</ion-label>\n\n                <ion-input formControlName="password" type="password" required></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button type="submit" class="submitBtn" block>Log In</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>-->\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\login\login.html"*/
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\login\login.html"*/'<ion-content showWhen="core">\n\n  <div id=register-container class="container">\n\n    <div class="login-pane">\n\n      <div style="margin-bottom:auto; margin-top: auto">\n\n        <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n          <ion-list>\n\n            <ion-grid>\n\n              <ion-row>\n\n                <ion-col col-10 offset-1>\n\n                  <ion-item>\n\n                    <ion-label>\n\n                      <ion-icon name="person"></ion-icon>\n\n                    </ion-label>\n\n                    <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n                  </ion-item>\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                <ion-col col-10 offset-1>\n\n                  <ion-item>\n\n                    <ion-label>\n\n                      <ion-icon name="lock"></ion-icon>\n\n                    </ion-label>\n\n                    <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n                  </ion-item>\n\n                </ion-col>\n\n              </ion-row>\n\n              <ion-row>\n\n                <ion-col col-8 offset-2>\n\n                  <button ion-button outline round block type="submit" color="tertiary">Login</button>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-grid>\n\n          </ion-list>\n\n        </form>\n\n      </div>\n\n\n\n      <div style="position:relative; margin-bottom: 12px">\n\n        <ion-row>\n\n          <ion-col text-right>\n\n            <p ion-text>Don\'t have an account?</p>\n\n          </ion-col>\n\n          <ion-col text-center>\n\n            <button ion-button outline round (click)="registerPage()">Sign Up</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </div>\n\n    </div>\n\n    <div id="register-info">\n\n      <p ion-text text-center>Welcome to</p>\n\n      <h1 ion-text text-center>ERP Coin</h1>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n\n\n<ion-content class="mobile-login" showWhen="ios,android">\n\n  <h3 ion-text text-center color="white">Welcome to</h3>\n\n  <h1 ion-text text-center color="white">\n\n    <b>ERP Coin</b>\n\n  </h1>\n\n\n\n  <ion-card color="white">\n\n    <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label>\n\n                  <ion-icon name="person"></ion-icon>\n\n                </ion-label>\n\n                <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item>\n\n                <ion-label>\n\n                  <ion-icon name="lock"></ion-icon>\n\n                </ion-label>\n\n                <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-8 offset-2>\n\n              <button ion-button outline round block type="submit" color="tertiary">Login</button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </ion-card>\n\n\n\n  <ion-footer no-border>\n\n    <ion-toolbar position="bottom">\n\n      <ion-row>\n\n        <ion-col text-right col-auto>\n\n          <p ion-text color="white">\n\n            <b>Don\'t have an account?</b>\n\n          </p>\n\n        </ion-col>\n\n        <ion-col text-center>\n\n          <button ion-button round color="white" (click)="registerPage()">Sign Up</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-toolbar>\n\n  </ion-footer>\n\n</ion-content>\n\n\n\n<!--<ion-header showWhen="ios,android">\n\n  <button id="backButton" (click)="navPop()">\n\n    <ion-icon id="backIcon" name="arrow-dropleft"></ion-icon>\n\n  </button>\n\n  <ion-title>Login</ion-title>\n\n</ion-header>\n\n<ion-content showWhen="ios,android">\n\n  <div class="divForm">\n\n    <form (submit)="loginUser(logUser.value)" [formGroup]="logUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Username</ion-label>\n\n                <ion-input formControlName="username" type="text" required></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Password</ion-label>\n\n                <ion-input formControlName="password" type="password" required></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button type="submit" class="submitBtn" block>Log In</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>-->\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\login\login.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_5__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
     ], LogPage);
@@ -94,10 +94,10 @@ var LogPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SendPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -139,7 +139,7 @@ var SendPage = /** @class */ (function () {
     };
     SendPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-sendErp',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendErp\sendErp.html"*/'<ion-header>\n\n\n\n  <ion-navbar hideBackButton>\n\n      <ion-buttons start>\n\n          <button ion-button>\n\n            <ion-icon name="barcode"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n    <ion-title>Send ERP Coin</ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button (click)="closeModal()">\n\n        <ion-icon name="close-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-row>\n\n    <ion-col col-12 text-center>\n\n      <ion-icon name="paper-plane" style="font-size:150px"></ion-icon>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="address" type="text" placeholder="Address"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="amount" type="number" placeholder="Amount"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="message" type="text" placeholder="Message"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" color="tertiary" block>Send</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendErp\sendErp.html"*/
+            selector: 'page-sendErp',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\sendErp\sendErp.html"*/'<ion-header>\n\n\n\n  <ion-navbar hideBackButton>\n\n      <ion-buttons start>\n\n          <button ion-button>\n\n            <ion-icon name="barcode"></ion-icon>\n\n          </button>\n\n      </ion-buttons>\n\n    <ion-title>Send ERP Coin</ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button (click)="closeModal()">\n\n        <ion-icon name="close-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-row>\n\n    <ion-col col-12 text-center>\n\n      <ion-icon name="paper-plane" style="font-size:150px"></ion-icon>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="address" type="text" placeholder="Address"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="amount" type="number" placeholder="Amount"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <ion-col col-10 offset-1>\n\n            <ion-item>\n\n              <ion-label></ion-label>\n\n              <ion-input formControlName="message" type="text" placeholder="Message"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" color="tertiary" block>Send</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\sendErp\sendErp.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]])
     ], SendPage);
@@ -155,7 +155,7 @@ var SendPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReceivePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -181,7 +181,7 @@ var ReceivePage = /** @class */ (function () {
     };
     ReceivePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-receiveErp',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\receiveErp\receiveErp.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Receive ERP Coin</ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button (click)="closeModal()">\n\n        <ion-icon name="close-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-row padding>\n\n    <ion-col col-8 offset-2>\n\n      <img src="assets/imgs/qr.png"/>\n\n    </ion-col>\n\n    <ion-col col-12 text-center>\n\n      <h1 ion-text>1GoBTCTiC8TEVoLmrGk4CQFXiVbRr7ktoz</h1>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\receiveErp\receiveErp.html"*/
+            selector: 'page-receiveErp',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\receiveErp\receiveErp.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Receive ERP Coin</ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button (click)="closeModal()">\n\n        <ion-icon name="close-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-row padding>\n\n    <ion-col col-8 offset-2>\n\n      <img src="assets/imgs/qr.png"/>\n\n    </ion-col>\n\n    <ion-col col-12 text-center>\n\n      <h1 ion-text>1GoBTCTiC8TEVoLmrGk4CQFXiVbRr7ktoz</h1>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\receiveErp\receiveErp.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["m" /* ViewController */]])
     ], ReceivePage);
@@ -198,8 +198,8 @@ var ReceivePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__receiveErp_receiveErp__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sendErp_sendErp__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__conservation_conservation__ = __webpack_require__(54);
@@ -233,10 +233,11 @@ var DashboardPage = /** @class */ (function () {
             var jsonResp = JSON.parse(data.text());
             console.log(jsonResp);
             _this.user.name = jsonResp.name;
+            _this.user.balance = jsonResp.coinBalance;
         }, function (error) {
             alert(error);
         });
-        this.getBalance();
+        //this.getBalance();
     }
     DashboardPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -246,12 +247,25 @@ var DashboardPage = /** @class */ (function () {
             //this.navCtrl.push(AccountPage);
             //this.navCtrl.push(AccountPage,{},{animate:false});
         });
+        this.events.subscribe("UpdatedDetails", function () {
+            _this.http.get("/user/info").subscribe(function (data) {
+                var jsonResp = JSON.parse(data.text());
+                console.log(jsonResp);
+                _this.user.name = jsonResp.name;
+                _this.user.balance = jsonResp.coinBalance;
+            }, function (error) {
+                alert(error);
+            });
+            //this.navCtrl.pop({animate:false});
+            //this.navCtrl.push(AccountPage);
+            //this.navCtrl.push(AccountPage,{},{animate:false});
+        });
     };
     DashboardPage.prototype.getBalance = function () {
         var _this = this;
-        this.http.get("/user/coins").subscribe(function (data) {
+        this.http.get("/user/info").subscribe(function (data) {
             var jsonResp = JSON.parse(data.text());
-            _this.user.balance = jsonResp.balance;
+            _this.user.balance = jsonResp.coinBalance;
         }, function (error) {
             alert(error);
         });
@@ -298,7 +312,7 @@ var DashboardPage = /** @class */ (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\dashboard\dashboard.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-content class="card-background-page">\n\n    <ion-row>\n\n      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 align-self-center padding>\n\n        <img src="assets/imgs/Artboard 1-1.png" />\n\n        <h1 ion-text text-center>Welcome {{user.name}}</h1>\n\n        <button col-12 ion-button round outline color="tertiary" (click)="conservationAreas()">Start Patrol</button>\n\n        <button col-12 ion-button round outline color="tertiary" (click)="rewardsPage()">View Available Rewards</button>\n\n      </ion-col>\n\n      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>\n\n        <ion-card class="balance">\n\n          <h1><b>{{user.balance}}</b> ERP</h1>\n\n          <ion-row>\n\n            <ion-col text-center>\n\n              <button ion-button round color="danger" (click)="sendErp()">Send</button>\n\n            </ion-col>\n\n            <ion-col text-center>\n\n              <button ion-button round color="safe" (click)="receiveErp()">Receive</button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-content>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\dashboard\dashboard.html"*/
+            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\dashboard\dashboard.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-content class="card-background-page">\n\n    <ion-row>\n\n      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 align-self-center padding>\n\n        <img src="assets/imgs/Artboard 1-1.png" />\n\n        <h1 ion-text text-center>Welcome {{user.name}}</h1>\n\n        <button col-12 ion-button round outline color="tertiary" (click)="conservationAreas()">Start Patrol</button>\n\n        <button col-12 ion-button round outline color="tertiary" (click)="rewardsPage()">View Available Rewards</button>\n\n      </ion-col>\n\n      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>\n\n        <ion-card class="balance">\n\n          <h1><b>{{user.balance}}</b> ERP</h1>\n\n          <ion-row>\n\n            <ion-col text-center>\n\n              <button ion-button round color="danger" (click)="sendErp()">Send</button>\n\n            </ion-col>\n\n            <ion-col text-center>\n\n              <button ion-button round color="safe" (click)="receiveErp()">Receive</button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-content>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\dashboard\dashboard.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
     ], DashboardPage);
@@ -326,7 +340,7 @@ webpackEmptyAsyncContext.id = 119;
 
 /***/ }),
 
-/***/ 14:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -394,10 +408,10 @@ webpackEmptyAsyncContext.id = 160;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__account_account__ = __webpack_require__(205);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -421,7 +435,7 @@ var RegPage = /** @class */ (function () {
         this.toastCtrl = toastCtrl;
         this.navCtrl = navCtrl;
         this.http = http;
-        this.regUser = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormGroup */]({ username: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), email: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), fName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), sName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), password: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), confirmPassword: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */](), walletAddress: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]() });
+        this.regUser = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormGroup */]({ username: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), email: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), fName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), sName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), password: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), confirmPassword: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), walletAddress: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required) });
     }
     RegPage.prototype.presentToast = function (message) {
         var toast = this.toastCtrl.create({
@@ -465,7 +479,7 @@ var RegPage = /** @class */ (function () {
     };
     RegPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-register',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\register\register.html"*/'<ion-content class="core-login"showWhen="ios,android,core">\n\n\n\n  <ion-card>\n\n\n\n  <ion-navbar color="white">\n\n  </ion-navbar>\n\n  <form (submit)="registerUser(regUser.value)" [formGroup]="regUser">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="person"></ion-icon></ion-label>\n\n              <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="mail"></ion-icon></ion-label>\n\n              <ion-input formControlName="email" type="email" placeholder="Mail"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="fName" type="text" placeholder="Name"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="sName" type="text" placeholder="Surname"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="lock"></ion-icon></ion-label>\n\n              <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="confirmPassword" type="password" placeholder="Confirm Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="card"></ion-icon></ion-label>\n\n              <ion-input formControlName="walletAddress" type="text" placeholder="Wallet Address"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" block>Register</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-card>\n\n</ion-content>\n\n\n\n<!--<ion-header showWhen="core">\n\n  <button id="backButton" (click)="navPop()">\n\n    <ion-icon id="backIcon" name="arrow-dropleft"></ion-icon>\n\n  </button>\n\n  <ion-title>Registration</ion-title>\n\n</ion-header>\n\n<ion-content showWhen="core">\n\n  <div class="divForm">\n\n    <form (submit)="registerUser(regUser.value)" [formGroup]="regUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Username</ion-label>\n\n                <ion-input formControlName="username" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Email Address</ion-label>\n\n                <ion-input formControlName="email" type="email"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Name</ion-label>\n\n                <ion-input formControlName="fName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Surname</ion-label>\n\n                <ion-input formControlName="sName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Password</ion-label>\n\n                <ion-input formControlName="password" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Confim password</ion-label>\n\n                <ion-input formControlName="confirmPassword" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Wallet Address</ion-label>\n\n                <ion-input formControlName="walletAddress" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button type="submit" class="submitBtn" block>Register</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>-->'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\register\register.html"*/
+            selector: 'page-register',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\register\register.html"*/'<ion-content class="core-login"showWhen="ios,android,core">\n\n\n\n  <ion-card>\n\n\n\n  <ion-navbar color="white">\n\n  </ion-navbar>\n\n  <form (submit)="registerUser(regUser.value)" [formGroup]="regUser">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="person"></ion-icon></ion-label>\n\n              <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="mail"></ion-icon></ion-label>\n\n              <ion-input formControlName="email" type="email" placeholder="Mail"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="fName" type="text" placeholder="Name"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="sName" type="text" placeholder="Surname"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="lock"></ion-icon></ion-label>\n\n              <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="confirmPassword" type="password" placeholder="Confirm Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" block>Register</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-card>\n\n</ion-content>\n\n\n\n<!--<ion-header showWhen="core">\n\n  <button id="backButton" (click)="navPop()">\n\n    <ion-icon id="backIcon" name="arrow-dropleft"></ion-icon>\n\n  </button>\n\n  <ion-title>Registration</ion-title>\n\n</ion-header>\n\n<ion-content showWhen="core">\n\n  <div class="divForm">\n\n    <form (submit)="registerUser(regUser.value)" [formGroup]="regUser">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Username</ion-label>\n\n                <ion-input formControlName="username" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Email Address</ion-label>\n\n                <ion-input formControlName="email" type="email"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Name</ion-label>\n\n                <ion-input formControlName="fName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Surname</ion-label>\n\n                <ion-input formControlName="sName" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Password</ion-label>\n\n                <ion-input formControlName="password" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Confim password</ion-label>\n\n                <ion-input formControlName="confirmPassword" type="password"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <ion-item no-lines>\n\n                <ion-label floating>Wallet Address</ion-label>\n\n                <ion-input formControlName="walletAddress" type="text"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-1></ion-col>\n\n          <ion-col col-10>\n\n            <button type="submit" class="submitBtn" block>Register</button>\n\n          </ion-col>\n\n          <ion-col col-1></ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n  </div>\n\n</ion-content>-->\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\register\register.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */]])
     ], RegPage);
@@ -483,12 +497,12 @@ var RegPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__conservation_conservation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rewards_rewards__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sendErp_sendErp__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__receiveErp_receiveErp__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -524,11 +538,10 @@ var AccountPage = /** @class */ (function () {
         this.http.get("/user/info").subscribe(function (data) {
             var jsonResp = JSON.parse(data.text());
             _this.user.name = jsonResp.name;
+            _this.user.balance = jsonResp.coinBalance;
         }, function (error) {
             alert(error);
         });
-        this.getBalance();
-        //setInterval(this.getBalance(), 300);
     }
     AccountPage_1 = AccountPage;
     AccountPage.prototype.ionViewDidLoad = function () {
@@ -542,9 +555,9 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage.prototype.getBalance = function () {
         var _this = this;
-        this.http.get("/user/coins").subscribe(function (data) {
+        this.http.get("/user/info").subscribe(function (data) {
             var jsonResp = JSON.parse(data.text());
-            _this.user.balance = jsonResp.balance;
+            _this.user.balance = jsonResp.coinBalance;
         }, function (error) {
             alert(error);
         });
@@ -583,7 +596,7 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage = AccountPage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["m" /* Component */])({
-            selector: 'page-account',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/'<ion-header>\n\n  <ion-navbar hideBackButton>\n\n    <button ion-button start color="primary">\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>My Account</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div class="userAccountDiv">\n\n    <ion-grid>\n\n      <ion-row style="height:40vh;">\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4 >\n\n          <div id="leftDiv">\n\n            <p><b>Welcome {{user.name}}</b></p>\n\n            <div id="erpLogo"><img src="assets/imgs/background.png" alt="ERP Image"></div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <div id="rightDiv">\n\n            <p><b>ERP-Coin Balance:<br>{{user.balance}} ERP Coins</b></p>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="conservationAreas()">View List of Conservation Areas</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="rewardsPage()">View Rewards</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="sendErp()">Send ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="receiveErp()">Receive ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Manage Account</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton">View Leaderboard</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Help and Support</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="logout()">Logout</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\account\account.html"*/
+            selector: 'page-account',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\account\account.html"*/'<ion-header>\n\n  <ion-navbar hideBackButton>\n\n    <button ion-button start color="primary">\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>My Account</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div class="userAccountDiv">\n\n    <ion-grid>\n\n      <ion-row style="height:40vh;">\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4 >\n\n          <div id="leftDiv">\n\n            <p><b>Welcome {{user.name}}</b></p>\n\n            <div id="erpLogo"><img src="assets/imgs/background.png" alt="ERP Image"></div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <div id="rightDiv">\n\n            <p><b>ERP-Coin Balance:<br>{{user.balance}} ERP Coins</b></p>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="conservationAreas()">View List of Conservation Areas</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="rewardsPage()">View Rewards</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton" (click)="sendErp()">Send ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="receiveErp()">Receive ERP</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Manage Account</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton">View Leaderboard</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-1.5></ion-col>\n\n        <ion-col col-4>\n\n          <button id="leftButton">Help and Support</button>\n\n        </ion-col>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-4>\n\n          <button id="rightButton" (click)="logout()">Logout</button>\n\n        </ion-col>\n\n        <ion-col col-1.5></ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\account\account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_6__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_7__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]])
     ], AccountPage);
@@ -601,11 +614,11 @@ var AccountPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sendAlert_sendAlert__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__viewAlert_viewAlert__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -836,7 +849,7 @@ var MapPage = /** @class */ (function () {
     };
     MapPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Map</ion-title>\n\n  </ion-navbar>\n\n  <ion-toolbar color="secondary" text-center>\n\n      You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content no-padding>\n\n  <div #map id="map">\n\n\n\n  </div>\n\n  <ion-fab left bottom>\n\n    <button ion-fab color="danger" (click)="sendAlert()">\n\n      <ion-icon name="alert"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\map\map.html"*/
+            selector: 'page-map',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\map\map.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Map</ion-title>\n\n  </ion-navbar>\n\n  <ion-toolbar color="secondary" text-center>\n\n      You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.\n\n  </ion-toolbar>\n\n</ion-header>\n\n<ion-content no-padding>\n\n  <div #map id="map">\n\n\n\n  </div>\n\n  <ion-fab left bottom>\n\n    <button ion-fab color="danger" (click)="sendAlert()">\n\n      <ion-icon name="alert"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\map\map.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_5__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
     ], MapPage);
@@ -852,11 +865,11 @@ var MapPage = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SendAlert; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(208);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -966,7 +979,7 @@ var SendAlert = /** @class */ (function () {
     ], SendAlert.prototype, "fileInput", void 0);
     SendAlert = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <form [formGroup]="form" (submit)="sendFunc(form.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label>Severity</ion-label>\n\n                <ion-select formControlName="severity">\n\n                  <ion-option value=0>{{severities[0]}}</ion-option>\n\n                  <ion-option value=1>{{severities[1]}}</ion-option>\n\n                  <ion-option value=2>{{severities[2]}}</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-12>\n\n              <!--<ion-item no-lines>-->\n\n                <ion-label stacked>Image</ion-label>\n\n                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />\n\n                  <div class="profile-image-wrapper" (click)="getPicture()">\n\n                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">\n\n                      <ion-icon name="add"></ion-icon>\n\n                    </div>\n\n                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>\n\n                  </div>\n\n              <!--</ion-item>-->\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-8 offset-2>\n\n            <button ion-button round outline type="submit" color="tertiary" block>Send</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
+            selector: 'page-sendAlert',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>Send Alert</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()"><ion-icon name="close-circle"></ion-icon></button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <form [formGroup]="form" (submit)="sendFunc(form.value)">\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label></ion-label>\n\n                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-10 offset-1>\n\n              <ion-item no-lines>\n\n                <ion-label>Severity</ion-label>\n\n                <ion-select formControlName="severity">\n\n                  <ion-option value=0>{{severities[0]}}</ion-option>\n\n                  <ion-option value=1>{{severities[1]}}</ion-option>\n\n                  <ion-option value=2>{{severities[2]}}</ion-option>\n\n                </ion-select>\n\n              </ion-item>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-12>\n\n              <!--<ion-item no-lines>-->\n\n                <ion-label stacked>Image</ion-label>\n\n                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />\n\n                  <div class="profile-image-wrapper" (click)="getPicture()">\n\n                    <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">\n\n                      <ion-icon name="add"></ion-icon>\n\n                    </div>\n\n                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>\n\n                  </div>\n\n              <!--</ion-item>-->\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-8 offset-2>\n\n            <button ion-button round outline type="submit" color="tertiary" block>Send</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </form>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\sendAlert\sendAlert.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* NavParams */]])
     ], SendAlert);
@@ -982,10 +995,10 @@ var SendAlert = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewAlert; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_config__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1016,7 +1029,7 @@ var ViewAlert = /** @class */ (function () {
     };
     ViewAlert = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-viewAlert',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{alert.title}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p text-center><u>Severity:</u> {{alert.severity}}</p>\n\n                <p text-center> <u>Description:</u> <br>{{alert.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n                <img src={{alert.image}}>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/
+            selector: 'page-viewAlert',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{alert.title}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p text-center><u>Severity:</u> {{alert.severity}}</p>\n\n                <p text-center> <u>Description:</u> <br>{{alert.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n                <img src={{alert.image}}>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\viewAlert\viewAlert.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]])
     ], ViewAlert);
@@ -1032,10 +1045,10 @@ var ViewAlert = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewReward; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_config__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1064,7 +1077,7 @@ var ViewReward = /** @class */ (function () {
     };
     ViewReward = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-viewReward',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{reward.name}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p><u>Conservation Area:</u> {{reward.area}}</p>\n\n                <p> <u>Description:</u> <br>{{reward.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n                <img src={{reward.image}}>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/
+            selector: 'page-viewReward',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/'<ion-header>\n\n\n\n<ion-navbar>\n\n    <ion-title>{{reward.name}}</ion-title>\n\n    <ion-buttons end>\n\n    <button ion-button (click)="closeModal()">Close</button>\n\n    </ion-buttons>\n\n</ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <div class="divForm">\n\n    <form>\n\n      <ion-list>\n\n        <ion-grid>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n              <div><!--Severity-->\n\n                <p><u>Conservation Area:</u> {{reward.area}}</p>\n\n                <p> <u>Description:</u> <br>{{reward.description}}</p>\n\n              </div>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-1></ion-col>\n\n            <ion-col col-10>\n\n                <img src={{reward.image}}>\n\n            </ion-col>\n\n            <ion-col col-1></ion-col>\n\n          </ion-row>\n\n        </ion-grid>\n\n      </ion-list>\n\n    </form>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\viewReward\viewReward.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */]])
     ], ViewReward);
@@ -1075,13 +1088,174 @@ var ViewReward = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 213:
+/***/ 211:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var EditPage = /** @class */ (function () {
+    function EditPage(events, toastCtrl, storage, http, navCtrl) {
+        var _this = this;
+        this.events = events;
+        this.toastCtrl = toastCtrl;
+        this.storage = storage;
+        this.http = http;
+        this.navCtrl = navCtrl;
+        this.updateUser = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormGroup */]({ email: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), fName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), sName: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required) });
+        this.currentDetails = {};
+        this.http.get("/user/info").subscribe(function (data) {
+            var jsonResp = JSON.parse(data.text());
+            _this.currentDetails.email = jsonResp.email;
+            _this.currentDetails.name = jsonResp.name;
+            _this.currentDetails.surname = jsonResp.surname;
+            _this.currentDetails.walletAddress = jsonResp.walletAddress;
+            //username, email, naime, surname, walletAddress, coinbalance, counsEarned
+        }, function (error) {
+            alert("Error: " + error);
+        });
+    }
+    EditPage.prototype.presentToast = function (text) {
+        var toast = this.toastCtrl.create({
+            message: text,
+            duration: 1500,
+            position: 'bottom',
+            dismissOnPageChange: false
+        });
+        toast.present();
+    };
+    EditPage.prototype.upUser = function (value) {
+        var _this = this;
+        if (!this.updateUser.valid) {
+            this.presentToast("Please fill out all of the fields");
+            return;
+        }
+        var jsonArr = {};
+        var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!regexEmail.test(value.email)) {
+            this.presentToast("Please enter a valid email address");
+        }
+        else {
+            jsonArr.email = value.email;
+            jsonArr.name = value.fName;
+            jsonArr.surname = value.sName;
+            this.http.post("/user/update", jsonArr).subscribe(function (data) {
+                var jsonResp = JSON.parse(data.text());
+                _this.events.publish("UpdatedDetails");
+                _this.navCtrl.pop();
+            }, function (error) {
+                alert("Error: " + error);
+            });
+        }
+    };
+    EditPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-edit',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\editProfile\editProfile.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Edit Profile</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <form (submit)="upUser(updateUser.value)" [formGroup]="updateUser">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="mail"></ion-icon></ion-label>\n\n              <ion-input formControlName="email" type="email" value="{{currentDetails.email}}"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="fName" type="text" value="{{currentDetails.name}}"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="sName" type="text" value="{{currentDetails.surname}}"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" block>Update</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\editProfile\editProfile.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+    ], EditPage);
+    return EditPage;
+}());
+
+//# sourceMappingURL=editProfile.js.map
+
+/***/ }),
+
+/***/ 212:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UpdatePasswordPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__http_api__ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var UpdatePasswordPage = /** @class */ (function () {
+    function UpdatePasswordPage(toastCtrl, http, navCtrl) {
+        this.toastCtrl = toastCtrl;
+        this.http = http;
+        this.navCtrl = navCtrl;
+        this.updatePassword = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormGroup */]({ oldPassword: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), password: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required), confirmPassword: new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormControl */]("", __WEBPACK_IMPORTED_MODULE_2__angular_forms__["h" /* Validators */].required) });
+    }
+    UpdatePasswordPage.prototype.presentToast = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            duration: 1500,
+            position: 'bottom',
+            dismissOnPageChange: false
+        });
+        toast.present();
+    };
+    UpdatePasswordPage.prototype.updatePass = function (value) {
+        var _this = this;
+        if (value.password != value.confirmPassword) {
+            this.presentToast("Please ensure that your passwords match");
+        }
+        else {
+            var jsonArr = {};
+            jsonArr.old = value.oldPassword;
+            jsonArr.new = value.password;
+            this.http.post("/user/password", jsonArr).subscribe(function (data) {
+                _this.navCtrl.pop();
+            }, function (error) {
+                alert("Error: " + error);
+            });
+        }
+    };
+    UpdatePasswordPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-updatePassword',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\updatePassword\updatePassword.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>New Password</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <form (submit)="updatePass(updatePassword.value)" [formGroup]="updatePassword">\n\n    <ion-list>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="lock"></ion-icon></ion-label>\n\n              <ion-input formControlName="oldPassword" type="password" placeholder="Old Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>\n\n            <ion-item>\n\n              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>\n\n              <ion-input formControlName="confirmPassword" type="password" placeholder="Confirm Password"></ion-input>\n\n            </ion-item>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    </ion-list>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-8 offset-2>\n\n          <button ion-button outline round type="submit" block>Update</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </form>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\updatePassword\updatePassword.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_3__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+    ], UpdatePasswordPage);
+    return UpdatePasswordPage;
+}());
+
+//# sourceMappingURL=updatePassword.js.map
+
+/***/ }),
+
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(238);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1089,16 +1263,16 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 236:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_splash_splash__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_splash_splash__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(289);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_register_register__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_splash_screen__ = __webpack_require__(105);
@@ -1112,24 +1286,28 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_receiveErp_receiveErp__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_sendAlert_sendAlert__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_viewAlert_viewAlert__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_background_geolocation__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_geolocation__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_location_tracker_location_tracker__ = __webpack_require__(291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__http_api__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_google_maps__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_transfer__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_file__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_background_geolocation__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_geolocation__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_location_tracker_location_tracker__ = __webpack_require__(293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__http_api__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_google_maps__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_transfer__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_file__ = __webpack_require__(299);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_camera__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__scaffold_digital_ionic_hardware_buttons__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__scaffold_digital_ionic_hardware_buttons__ = __webpack_require__(300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_editProfile_editProfile__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__pages_updatePassword_updatePassword__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1196,7 +1374,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_16__pages_sendAlert_sendAlert__["a" /* SendAlert */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_viewAlert_viewAlert__["a" /* ViewAlert */],
                 __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__["a" /* ViewReward */],
-                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */]
+                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_editProfile_editProfile__["a" /* EditPage */],
+                __WEBPACK_IMPORTED_MODULE_31__pages_updatePassword_updatePassword__["a" /* UpdatePasswordPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1226,7 +1406,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_16__pages_sendAlert_sendAlert__["a" /* SendAlert */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_viewAlert_viewAlert__["a" /* ViewAlert */],
                 __WEBPACK_IMPORTED_MODULE_28__pages_viewReward_viewReward__["a" /* ViewReward */],
-                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */]
+                __WEBPACK_IMPORTED_MODULE_27__pages_dashboard_dashboard__["a" /* DashboardPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_editProfile_editProfile__["a" /* EditPage */],
+                __WEBPACK_IMPORTED_MODULE_31__pages_updatePassword_updatePassword__["a" /* UpdatePasswordPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_29__scaffold_digital_ionic_hardware_buttons__["a" /* HardwareButtons */],
@@ -1252,13 +1434,13 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 279:
+/***/ 281:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Splash; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1286,7 +1468,7 @@ var Splash = /** @class */ (function () {
     };
     Splash = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-splash',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\splash\splash.html"*/'<ion-content>\n\n  <img src="assets/imgs/ERP-Loading.png" alt="Splash Loading Image">\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\splash\splash.html"*/,
+            selector: 'page-splash',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\splash\splash.html"*/'<ion-content>\n\n  <img src="assets/imgs/ERP-Loading.png" alt="Splash Loading Image">\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\splash\splash.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], Splash);
@@ -1297,20 +1479,22 @@ var Splash = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 287:
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_dashboard_dashboard__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_conservation_conservation__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_rewards_rewards__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_editProfile_editProfile__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__http_api__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_updatePassword_updatePassword__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1320,6 +1504,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -1344,7 +1530,9 @@ var MyApp = /** @class */ (function () {
         this.pages = [
             { title: 'Account', component: __WEBPACK_IMPORTED_MODULE_5__pages_dashboard_dashboard__["a" /* DashboardPage */] },
             { title: 'Conservation Areas', component: __WEBPACK_IMPORTED_MODULE_6__pages_conservation_conservation__["a" /* ConservationPage */] },
-            { title: 'Rewards', component: __WEBPACK_IMPORTED_MODULE_7__pages_rewards_rewards__["a" /* RewardsPage */] }
+            { title: 'Rewards', component: __WEBPACK_IMPORTED_MODULE_7__pages_rewards_rewards__["a" /* RewardsPage */] },
+            { title: 'Edit Profile', component: __WEBPACK_IMPORTED_MODULE_8__pages_editProfile_editProfile__["a" /* EditPage */] },
+            { title: 'Change Password', component: __WEBPACK_IMPORTED_MODULE_10__pages_updatePassword_updatePassword__["a" /* UpdatePasswordPage */] }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -1394,9 +1582,9 @@ var MyApp = /** @class */ (function () {
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar color="primary">\n\n      <ion-title>Menu</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        <button style="background-color:white;">\n\n          {{p.title}}\n\n        </button>\n\n      </ion-item>\n\n      <!--<ion-item>\n\n        <button style="background-color:white;">\n\n          Leaderboard\n\n        </button>\n\n      </ion-item>-->\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n  <ion-footer>\n\n    <button ion-button round col-12 color="tertiary" (click)="logOut()" menuToggle>Log Out</button>\n\n  </ion-footer>>\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\app\app.html"*/'<ion-menu [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar color="primary">\n\n      <ion-title>Menu</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n\n\n  <ion-content>\n\n    <ion-list>\n\n      <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n        <button style="background-color:white;">\n\n          {{p.title}}\n\n        </button>\n\n      </ion-item>\n\n      <!--<ion-item>\n\n        <button style="background-color:white;">\n\n          Leaderboard\n\n        </button>\n\n      </ion-item>-->\n\n    </ion-list>\n\n  </ion-content>\n\n\n\n  <ion-footer>\n\n    <button ion-button round col-12 color="tertiary" (click)="logOut()" menuToggle>Log Out</button>\n\n  </ion-footer>>\n\n</ion-menu>\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_8__http_api__["a" /* Http */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_9__http_api__["a" /* Http */]])
     ], MyApp);
     return MyApp;
 }());
@@ -1405,15 +1593,15 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 291:
+/***/ 293:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocationTrackerProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_background_geolocation__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_background_geolocation__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1529,10 +1717,10 @@ var CONFIG = {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConservationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__map_map__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_config__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1558,14 +1746,37 @@ var ConservationPage = /** @class */ (function () {
         this.storage = storage;
         this.areas = [];
         this.area = {};
+        this.allAreas = [];
         this.http.get("/area/list").subscribe(function (data) {
             var jsonResp = JSON.parse(data.text());
             _this.areas = jsonResp.areas;
+            _this.allAreas = jsonResp.areas;
         });
     }
     ConservationPage.prototype.picked = function (area) {
         __WEBPACK_IMPORTED_MODULE_5__app_config__["a" /* CONFIG */].area = area;
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__map_map__["a" /* MapPage */]);
+    };
+    ConservationPage.prototype.onSearchInput = function (data) {
+        var _this = this;
+        this.areas = [];
+        var searched = data.target.value;
+        if (searched && searched.trim() != '') {
+            this.area = this.allAreas.filter(function (item) {
+                var lowName = item.name.toLowerCase();
+                var lowSearch = searched.toLowerCase();
+                var lowProv = item.province.toLowerCase();
+                if (lowName.indexOf(lowSearch) >= 0 || lowProv.indexOf(lowSearch) >= 0) {
+                    _this.areas.push(item);
+                }
+            });
+        }
+        else {
+            this.areas = this.allAreas;
+        }
+    };
+    ConservationPage.prototype.onSearchCancel = function (data) {
+        this.areas = this.allAreas;
     };
     ConservationPage.prototype.ionViewDidLoad = function () {
     };
@@ -1575,7 +1786,7 @@ var ConservationPage = /** @class */ (function () {
     };
     ConservationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-conservation',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Conservation Areas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>\n\n        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">\n\n          <ion-card-header>\n\n            <b>{{area.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Province: {{area.province}}</p>\n\n            <p> City: {{area.city}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/
+            selector: 'page-conservation',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Conservation Areas</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-searchbar\n\n  [(ngModel)]="myInput"\n\n  [showCancelButton]="shouldShowCancel"\n\n  (ionInput)="onSearchInput($event)"\n\n  (ionCancel)="onSearchCancel($event)">\n\n  </ion-searchbar>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>\n\n        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">\n\n          <ion-card-header>\n\n            <b>{{area.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Province: {{area.province}}</p>\n\n            <p> City: {{area.city}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\conservation\conservation.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* Events */], __WEBPACK_IMPORTED_MODULE_4__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__ionic_storage__["b" /* Storage */]])
     ], ConservationPage);
@@ -1592,8 +1803,8 @@ var ConservationPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RewardsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_api__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__viewReward_viewReward__ = __webpack_require__(210);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1636,7 +1847,7 @@ var RewardsPage = /** @class */ (function () {
     };
     RewardsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-rewards',template:/*ion-inline-start:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/'<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>Rewards</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>\n\n        <ion-card *ngFor="let reward of rewards" (click)="picked(reward.id)">\n\n          <ion-card-header>\n\n            <b>{{reward.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Conservation Area: {{reward.area}}</p>\n\n            <p> Cost: {{reward.coinValue}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\github\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/
+            selector: 'page-rewards',template:/*ion-inline-start:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/'<ion-header>\n\n  <ion-navbar>\n\n      <ion-title>Rewards</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>\n\n        <ion-card *ngFor="let reward of rewards" (click)="picked(reward.id)">\n\n          <ion-card-header>\n\n            <b>{{reward.name}}</b>\n\n          </ion-card-header>\n\n          <ion-card-content>\n\n            <p>Conservation Area: {{reward.area}}</p>\n\n            <p> Cost: {{reward.coinValue}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Richard\Documents\ERP-Coin\user-front-end\src\pages\rewards\rewards.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__http_api__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
     ], RewardsPage);
@@ -1647,5 +1858,5 @@ var RewardsPage = /** @class */ (function () {
 
 /***/ })
 
-},[213]);
+},[215]);
 //# sourceMappingURL=main.js.map

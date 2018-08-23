@@ -7,8 +7,11 @@ import { LogPage } from '../pages/login/login';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ConservationPage } from '../pages/conservation/conservation';
 import { RewardsPage } from '../pages/rewards/rewards';
+import { EditPage } from '../pages/editProfile/editProfile';
 import { Http } from '../http-api';
 import { CONFIG } from '../app-config';
+import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
+import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +29,10 @@ export class MyApp {
     this.pages = [
       { title: 'Account', component: DashboardPage},
       { title: 'Conservation Areas', component: ConservationPage},
-      { title: 'Rewards', component: RewardsPage }
+      { title: 'Rewards', component: RewardsPage},
+      { title: 'Edit Profile', component: EditPage},
+      { title: 'Change Password', component: UpdatePasswordPage},
+      { title: 'Link Wallet', component: LinkWalletPage}
     ];
   }
 

@@ -26,14 +26,13 @@ export class AccountPage {
       {
         var jsonResp = JSON.parse(data.text());
         this.user.name = jsonResp.name;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
         alert(error);
       }
     );
-    this.getBalance();
-    //setInterval(this.getBalance(), 300);
   }
 
   ionViewDidLoad(){
@@ -48,12 +47,12 @@ export class AccountPage {
 
   public getBalance()
   {
-    this.http.get("/user/coins").subscribe
+    this.http.get("/user/info").subscribe
     (
       (data) =>
       {
         var jsonResp = JSON.parse(data.text());
-        this.user.balance = jsonResp.balance;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {

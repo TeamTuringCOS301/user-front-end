@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
@@ -14,7 +14,7 @@ export class RegPage {
   regUser: any;
   url: any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
-    this.regUser = new FormGroup({username: new FormControl(), email:new FormControl(), fName: new FormControl(), sName: new FormControl(), password: new FormControl(), confirmPassword: new FormControl(), walletAddress: new FormControl()});
+    this.regUser = new FormGroup({username: new FormControl("", Validators.required), email:new FormControl("", Validators.required), fName: new FormControl("", Validators.required), sName: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
   }
 
   public presentToast(message)
@@ -47,7 +47,6 @@ export class RegPage {
         jsonArr.email = value.email;
         jsonArr.name = value.fName;
         jsonArr.surname = value.sName;
-        jsonArr.walletAddress = value.walletAddress;
         this.http.post("/user/add", jsonArr).subscribe
         (
           (response) => //Success
