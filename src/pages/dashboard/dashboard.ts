@@ -5,6 +5,7 @@ import { ReceivePage } from '../receiveErp/receiveErp';
 import { SendPage} from '../sendErp/sendErp';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
+import web3 from 'web3';
 
 @Component({
   selector: 'page-dashboard',
@@ -29,6 +30,7 @@ export class DashboardPage {
         alert(error);
       }
     );
+    console.log(web3);
     //this.getBalance();
   }
 

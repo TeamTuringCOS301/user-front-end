@@ -9,6 +9,7 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { LogPage } from '../login/login';
+import web3 from 'web3';
 
 @Component({
   selector: 'page-account',
@@ -33,6 +34,7 @@ export class AccountPage {
         alert(error);
       }
     );
+    console.log(web3);
   }
 
   ionViewDidLoad(){

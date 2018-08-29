@@ -32,6 +32,7 @@ import { HardwareButtons } from '@scaffold-digital/ionic-hardware-buttons';
 import { EditPage } from '../pages/editProfile/editProfile';
 import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
 import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
+import  web3  from 'web3';
 /*import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
