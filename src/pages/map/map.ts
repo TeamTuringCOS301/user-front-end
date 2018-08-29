@@ -110,7 +110,8 @@ export class MapPage {
       (error) =>{
         alert(error.message);
       }, {timeout:10000});
-      CONFIG.tracking = setInterval(() => {
+      CONFIG.tracking = 1;
+      setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         CONFIG.currentLocation = this.currentLocation;
