@@ -20,18 +20,19 @@
       <ion-icon name="paper-plane" style="font-size:150px"></ion-icon>
     </ion-col>
   </ion-row>
-  <div class="modal-body">
-        <p id="addressModal"></p>
-        <video id="preview"></video>
-      </div>
   <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">
     <ion-list>
       <ion-grid>
         <ion-row>
           <ion-col col-10 offset-1>
+            <zxing-scanner #scanner [class.hide]="scanning == false" [autofocusEnabled]="true" (camerasFound)="cameras($event)" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-10 offset-1>
             <ion-item>
               <ion-label></ion-label>
-              <ion-input formControlName="address" type="text" placeholder="Address"></ion-input>
+              <ion-input id="adr" formControlName="address" type="text" value="{{otherKey}}" placeholder="Address"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>

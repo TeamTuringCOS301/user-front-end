@@ -89,7 +89,7 @@ export class MapPage {
         );
       },
       (error) => {
-        alert(error);
+        console.log(error);
       }
     );
   }
@@ -108,7 +108,7 @@ export class MapPage {
         //this.alerts();
       },
       (error) =>{
-        alert(error.message);
+        console.log(error.message);
       }, {timeout:10000});
       CONFIG.tracking = setInterval(() => {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -217,7 +217,7 @@ export class MapPage {
     },
     (error) =>//Failure
     {
-    alert("Error"+error);
+      console.log("Error"+error);
     }
 );
 }
@@ -253,7 +253,7 @@ LoadMap(areaName) {
   },
   (error) =>//Failure
   {
-    alert("Error: " +error);
+    console.log("Error: " +error);
   });
 }
 

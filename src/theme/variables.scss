@@ -54,6 +54,8 @@ $text-input-ios-highlight-color: color($colors, tertiary);
 $card-ios-border-radius: 15px;
 //$card-ios-box-shadow-color: rgba(0, 0, 0, .5);
 $card-ios-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .4);
+$toolbar-ios-title-text-color: white;
+$toolbar-ios-button-color: white;
 
 
 // App Material Design Variables
@@ -62,7 +64,9 @@ $card-ios-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .4);
 $text-input-md-highlight-color: color($colors, tertiary);
 $card-md-border-radius: 15px;
 $card-md-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .4);
-
+$toolbar-md-title-text-color: white;
+$toolbar-md-button-color: white;
+$toolbar-md-color:white;
 
 // App Windows Variables
 // --------------------------------------------------

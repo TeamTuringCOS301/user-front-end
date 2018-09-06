@@ -1,5 +1,8 @@
 page-map{
 
+  ion-toolbar, .toolbar{
+    background: white;
+  }
   /*ion-header{
     position:fixed;
     height:40px;
@@ -51,7 +54,7 @@ page-map{
       margin-left:auto;
       margin-right:auto;
     }
-    
+
     #alertBtn{
       width:100%;
       background-color:white;

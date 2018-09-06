@@ -23,13 +23,23 @@ ion-backdrop{
 @media(max-width: 900px) {
   .modal-wrapper{
       width: 70%;
-      height: 80%;
+      object-fit:contain;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      max-height: 68%;
       margin-top: 20%;
       margin-left: 15%;
 
   }
 }
 
+.toolbar-background-ios, .toolbar-background-md{
+  background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, tertiary) 100%);
+}
+
+ion-title{
+  color:white !important;
+}
 /*@media(min-width: 900px) {
   .modal-wrapper{
       width: 40%;

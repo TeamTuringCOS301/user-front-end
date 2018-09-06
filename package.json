@@ -36,6 +36,7 @@
         "@ngx-translate/http-loader": "^3.0.1",
         "@scaffold-digital/ionic-hardware-buttons": "^1.0.0",
         "@types/jquery": "^3.3.6",
+        "@zxing/ngx-scanner": "^1.2.1",
         "angularx-qrcode": "^1.2.2",
         "cordova-browser": "5.0.4",
         "cordova-plugin-advanced-http": "^1.11.1",

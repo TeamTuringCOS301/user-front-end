@@ -34,10 +34,13 @@ import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
 import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 import  web3  from 'web3';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ScanModal } from '../pages/scanModal/scanModal';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
     MyApp,
+    ScanModal,
     Splash,
     RegPage,
     LogPage,
@@ -57,6 +60,7 @@ import { QRCodeModule } from 'angularx-qrcode';
   ],
   imports: [
     QRCodeModule,
+    ZXingScannerModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
@@ -65,6 +69,7 @@ import { QRCodeModule } from 'angularx-qrcode';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ScanModal,
     Splash,
     RegPage,
     LogPage,
