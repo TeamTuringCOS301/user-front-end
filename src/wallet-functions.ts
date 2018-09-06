@@ -1,3 +1,4 @@
+import { Http } from './http-api';
 import Web3 from 'web3';
 
 let web3;
@@ -56,4 +57,15 @@ export function getAddress() {
       reject(error);
     });
   });*/
+}
+
+export function buyReward(reward: any, http: Http) {
+  init();
+  http.get('/contract').subscribe((data) => {
+    const {abi, address} = data.json();
+    web3.eth.contract(abi).at(address)
+      .buyReward(reward.id, reward.coinValue, {from: web3.eth.accounts[0]});
+  }, (error) => {
+    console.error(error);
+  });
 }
