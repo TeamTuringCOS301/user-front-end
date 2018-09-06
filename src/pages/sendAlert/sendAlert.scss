@@ -1,5 +1,15 @@
 page-sendAlert {
 
+  #photoLabel{
+    font-size:1.1em;
+    color: #999;
+  }
+
+  #photoDiv{
+    border: solid 1px #999;
+    border-radius: 5px;
+  }
+
   .profile-image-wrapper {
     text-align: center;
     margin: 20px 0;
@@ -25,6 +35,7 @@ page-sendAlert {
         font-size: 44px;
         margin-bottom: -10px;
         margin-top: 10px;
+        color: #999;
       }
     }
   }

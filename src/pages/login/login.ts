@@ -7,6 +7,9 @@ import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { DashboardPage } from '../dashboard/dashboard';
 
+/*@IonicPage({
+  name: 'login'
+})*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -51,6 +54,7 @@ export class LogPage {
         if(jsonResp.success)
         {
           this.navCtrl.setRoot(DashboardPage);
+          //window.location.href = '/#/account';
         }
         else
         {

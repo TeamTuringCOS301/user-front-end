@@ -12,8 +12,10 @@
             <b>{{reward.name}}</b>
           </ion-card-header>
           <ion-card-content>
-            <p>Conservation Area: {{reward.area}}</p>
-            <p> Cost: {{reward.coinValue}}</p>
+            <ion-list>
+              <ion-item><h2 id="left">{{reward.areaName}}</h2><h2 id="right"><b>Cost:</b> {{reward.coinValue}} ERP-Coin</h2></ion-item>
+              <ion-item><p>{{reward.description}}</p></ion-item>
+            </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-col>

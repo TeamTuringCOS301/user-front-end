@@ -44,6 +44,9 @@ export class MyApp {
               this.nav.pop();
             }
       });
+      window.onpopstate = (evt) => {
+        this.nav.pop();
+      };
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

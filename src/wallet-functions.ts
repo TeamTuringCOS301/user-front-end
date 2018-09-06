@@ -10,10 +10,50 @@ function init() {
 
 export function hasWallet() {
   init();
-  return web3 !== undefined && web3.eth.accounts.length > 0;
+  /*console.log(web3);
+  console.log(web3.eth.accounts[0]);
+  web3.eth.getAccounts().then(console.log);
+  return new Promise((resolve, reject) => {
+    if(web3!== undefined)
+    {
+
+      web3.eth.getAccounts().then((val) =>
+      {
+        console.log(val.length);
+        if(val.length > 0)
+        {
+          alert("aaah");
+          resolve(true);
+        }
+        else
+        {
+          resolve(false);
+        }
+      },
+      (error) =>
+      {
+        console.log(error);
+      });
+    }
+    else
+    {
+      resolve(false);
+    }
+  });*/
+  return (web3 !== undefined && web3.eth.accounts.length > 0)
 }
 
 export function getAddress() {
   init();
   return web3.eth.accounts[0];
+  /*return new Promise((resolve, reject) => {
+    web3.eth.getAccounts().then((val) =>
+    {
+      resolve(val[0]);
+    },
+    (error) =>
+    {
+      reject(error);
+    });
+  });*/
 }

@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
 import { ViewReward } from '../viewReward/viewReward';
+import { DashboardPage } from '../dashboard/dashboard';
 
+/*@IonicPage({
+  name: 'rewards',
+  defaultHistory: ['dashboard']
+})*/
 @Component({
   selector: 'page-rewards',
   templateUrl: 'rewards.html'
@@ -18,6 +23,7 @@ export class RewardsPage {
       {
         var jsonResp = JSON.parse(data.text());
         this.rewards = jsonResp.rewards;
+        console.log(this.rewards);
       },
       (error) =>
       {
@@ -40,7 +46,7 @@ export class RewardsPage {
 
   navPop()
   {
-    this.navCtrl.pop();
+    //this.navCtrl.pop();
   }
 
 }

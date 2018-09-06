@@ -2,7 +2,7 @@
 
   <ion-navbar hideBackButton>
       <ion-buttons start>
-          <button ion-button>
+          <button (click)="scan()" ion-button>
             <ion-icon name="barcode"></ion-icon>
           </button>
       </ion-buttons>
@@ -20,7 +20,10 @@
       <ion-icon name="paper-plane" style="font-size:150px"></ion-icon>
     </ion-col>
   </ion-row>
-
+  <div class="modal-body">
+        <p id="addressModal"></p>
+        <video id="preview"></video>
+      </div>
   <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">
     <ion-list>
       <ion-grid>

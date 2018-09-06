@@ -2,6 +2,9 @@ import { ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
+import QRCode from '../../qrcode';
+import * as $ from 'jquery';
+//import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @Component({
   selector: 'page-sendErp',
@@ -11,9 +14,23 @@ import { Http } from '../../http-api';
 export class SendPage
 {
   sendDetails: any;
-  constructor(public viewCtrl: ViewController, public http: Http)
+  scannedCode = null;
+  constructor(/*public barcodeScanner: BarcodeScanner,*/ public viewCtrl: ViewController, public http: Http)
   {
     this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl(), message: new FormControl()});
+  }
+
+  /*scan() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.scannedCode = barcodeData.text;
+    }, (err) => {
+        console.log('Error: ', err);
+    });
+  }*/
+
+  scan()
+  {
+
   }
 
   public closeModal()
@@ -48,4 +65,5 @@ export class SendPage
     console.log('ionViewDidLoad ModalPage');
     //console.log(this.navParams.get('message'));
 }
+
 }

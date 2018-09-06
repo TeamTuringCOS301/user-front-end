@@ -33,6 +33,8 @@ import { EditPage } from '../pages/editProfile/editProfile';
 import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
 import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 import  web3  from 'web3';
+import { QRCodeModule } from 'angularx-qrcode';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 /*import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
@@ -71,11 +73,12 @@ const appRoutes: Routes = [
     LinkWalletPage
   ],
   imports: [
+    QRCodeModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    IonicPageModule.forChild(DashboardPage)
+    //IonicPageModule.forChild(DashboardPage)
     /*RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -113,7 +116,7 @@ const appRoutes: Routes = [
     Http,
     FileTransfer,
     FileTransferObject,
-    File,
+    BarcodeScanner,
     Camera
   ]
 })

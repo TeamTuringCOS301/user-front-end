@@ -7,6 +7,9 @@ import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
 import web3 from 'web3';
 
+/*@IonicPage({
+  name:'account'
+})*/
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'

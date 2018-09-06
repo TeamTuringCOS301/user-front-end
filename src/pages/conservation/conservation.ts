@@ -41,9 +41,10 @@ export class ConservationPage {
     if (searched && searched.trim() != '') {
       this.area = this.allAreas.filter((item) => {
         var lowName = item.name.toLowerCase();
+        var lowCity = item.city.toLowerCase();
         var lowSearch = searched.toLowerCase();
         var lowProv = item.province.toLowerCase();
-        if(lowName.indexOf(lowSearch) >= 0 || lowProv.indexOf(lowSearch) >= 0)
+        if(lowName.indexOf(lowSearch) >= 0 || lowProv.indexOf(lowSearch) >= 0 || lowCity.indexOf(lowSearch) >= 0)
         {
             this.areas.push(item);
         }

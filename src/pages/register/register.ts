@@ -5,6 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { AccountPage } from '../account/account';
+import { DashboardPage } from '../dashboard/dashboard';
 
 @Component({
   selector: 'page-register',
@@ -53,7 +54,7 @@ export class RegPage {
           {
           console.log(response);
           this.presentToast("Registration successful! Please log in");
-          this.navCtrl.push(AccountPage);
+          this.navCtrl.push(DashboardPage);
         },
         (error) => //Failure
         {

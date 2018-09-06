@@ -22,8 +22,15 @@
     </ion-list>
     <ion-grid>
       <ion-row>
-        <ion-col col-8 offset-2>
-          <button ion-button outline round type="submit" block>Register</button>
+        <ion-col col-4 offset-4>
+          <button ion-button outline round type="submit" block>Link</button>
+        </ion-col>
+      </ion-row>
+      <h4 style="color: red;">{{message}}{{noMessage}}</h4>
+      <a style="font-size:1.1em;" *ngIf='noMessage != ""' href="https://metamask.io/">MetaMask</a>
+      <ion-row *ngIf='message != ""'>
+        <ion-col col-4 offset-4>
+          <button ion-button outline round (click)="loadAddr()" block>Load from wallet</button>
         </ion-col>
       </ion-row>
     </ion-grid>

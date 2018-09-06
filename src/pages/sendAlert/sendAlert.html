@@ -14,7 +14,6 @@
           <ion-row>
             <ion-col col-10 offset-1>
               <ion-item no-lines>
-                <ion-label></ion-label>
                 <ion-input formControlName="title" type="text" placeholder="Title"></ion-input>
               </ion-item>
             </ion-col>
@@ -22,16 +21,15 @@
           <ion-row>
             <ion-col col-10 offset-1>
               <ion-item no-lines>
-                <ion-label></ion-label>
-                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="description"></ion-input>
+                <ion-input formControlName="description" maxlength="300" size="300" type="text" placeholder="Description"></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-10 offset-1>
               <ion-item no-lines>
-                <ion-label>Severity</ion-label>
-                <ion-select formControlName="severity">
+                <ion-label>&ensp;Severity</ion-label>
+                <ion-select text-left formControlName="severity">
                   <ion-option value=0>{{severities[0]}}</ion-option>
                   <ion-option value=1>{{severities[1]}}</ion-option>
                   <ion-option value=2>{{severities[2]}}</ion-option>
@@ -40,16 +38,18 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-12>
+            <ion-col col-10 offset-1>
               <!--<ion-item no-lines>-->
-                <ion-label stacked>Image</ion-label>
-                  <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
+              <ion-label id="photoLabel">Image</ion-label>
+              <div id="photoDiv">
+                <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
                   <div class="profile-image-wrapper" (click)="getPicture()">
                     <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
                       <ion-icon name="add"></ion-icon>
                     </div>
                     <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
                   </div>
+                </div>
               <!--</ion-item>-->
             </ion-col>
           </ion-row>
