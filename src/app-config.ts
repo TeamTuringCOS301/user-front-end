@@ -4,5 +4,5 @@ export let CONFIG ={
   area: 1,
   currentLocation: {latitude: 0, longitude: 0},
   severity: ["Animal Sighting", "Warning/Caution", "Critical Alert"],
-  tracking: -1
+  tracking: null
 };
