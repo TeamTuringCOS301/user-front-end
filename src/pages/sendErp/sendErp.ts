@@ -15,7 +15,7 @@ export class SendPage
 {
   sendDetails: any;
   scannedCode = null;
-  constructor(/*public barcodeScanner: BarcodeScanner,*/ public viewCtrl: ViewController, public http: Http)
+  constructor(public viewCtrl: ViewController, public http: Http)
   {
     this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl(), message: new FormControl()});
   }

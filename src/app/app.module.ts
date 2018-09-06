@@ -34,23 +34,6 @@ import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
 import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 import  web3  from 'web3';
 import { QRCodeModule } from 'angularx-qrcode';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-/*import { RouterModule, Routes } from '@angular/router';
-
-const appRoutes: Routes = [
-  { path: 'crisis-center', component: CrisisListComponent },
-  { path: 'hero/:id',      component: HeroDetailComponent },
-  {
-    path: 'heroes',
-    component: HeroListComponent,
-    data: { title: 'Heroes List' }
-  },
-  { path: '',
-    redirectTo: '/heroes',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }
-];*/
 
 @NgModule({
   declarations: [
@@ -77,12 +60,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
-    //IonicPageModule.forChild(DashboardPage)
-    /*RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    )*/
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -116,7 +94,6 @@ const appRoutes: Routes = [
     Http,
     FileTransfer,
     FileTransferObject,
-    BarcodeScanner,
     Camera
   ]
 })
