@@ -1,6 +1,9 @@
-import { ViewController } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { App, ViewController, NavController, Nav } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
 import { Http } from '../../http-api';
+import { LinkWalletPage } from '../linkWallet/linkWallet';
+import { LogPage } from '../login/login';
+
 @Component({
   selector: 'page-receiveErp',
   templateUrl: 'receiveErp.html'
@@ -8,9 +11,12 @@ import { Http } from '../../http-api';
 
 export class ReceivePage
 {
+  //@ViewChild(Nav) nav: Nav;
+  //rootPage: any;
+
   public myAngularxQrCode: string = null;
   message: any;
-  constructor(public http: Http, public viewCtrl: ViewController)
+  constructor(public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
   {
     this.http.get("/user/info").subscribe
     (
@@ -26,7 +32,10 @@ export class ReceivePage
         }
         else
         {
-          this.message = "Please link an external wallet.";
+          this.viewCtrl.dismiss();
+          this.app.getRootNav().push(LinkWalletPage);
+          //this.nav.push(LinkWalletPage);
+          alert("Please link a wallet before trying to receive ERP-Coins.");
         }
       },
       (error) =>
@@ -41,8 +50,4 @@ export class ReceivePage
     this.viewCtrl.dismiss();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
-    //console.log(this.navParams.get('message'));
-}
 }

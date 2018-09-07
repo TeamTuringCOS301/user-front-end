@@ -11,7 +11,7 @@
 
 <ion-content>
   <div id="code">
-    <qrcode id="qr" [qrdata]="myAngularxQrCode" [size]="255" [level]="'M'"></qrcode>
-    <h3 ion-text>{{message}}</h3>
+    <qrcode id="qr" *ngIf="myAngularxQrCode != null" [qrdata]="myAngularxQrCode" [size]="255" [level]="'M'"></qrcode>
+    <h3 ion-text *ngIf="myAngularxQrCode != null" >{{message}}</h3>
   </div>
 </ion-content>

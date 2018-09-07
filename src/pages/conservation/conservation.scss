@@ -55,19 +55,23 @@ page-conservation{
   }*/
 
   //Tristan CSS
-  .card-ios p {
+  .card-ios p{
     color: color($colors, white);
 }
 
-.card-md p {
+.card-md p{
     color: color($colors, white);
 }
 
 .area-card .card-ios {
     background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+    //border: 4px solid color($colors, tertiary);
+    //box-shadow:none;
 }
 
 .area-card .card-md {
     background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
+    //border: 4px solid color($colors, tertiary);
+    //box-shadow:none;
 }
 }

@@ -1,10 +1,12 @@
-import { ViewController, Platform } from 'ionic-angular';
+import { ViewController, Platform, App } from 'ionic-angular';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
+import { hasWallet } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { LinkWalletPage } from '../linkWallet/linkWallet';
 
 @Component({
   selector: 'page-sendErp',
@@ -21,7 +23,7 @@ export class SendPage
   sendDetails: any;
   scannedCode = null;
   scanning: any = false;
-  constructor(public platform: Platform, public viewCtrl: ViewController, public http: Http)
+  constructor(public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
   {
     this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl(), message: new FormControl()});
   }
@@ -64,25 +66,43 @@ export class SendPage
 
   public sendFunc(value: any)
   {
-      var jsonArr: any = {};
-      jsonArr.address = value.address;
-      jsonArr.amount = value.amount;
-      jsonArr.message = value.message;
-      this.http.post("", jsonArr).subscribe
-      (
-        function(response) //Success
-        {
-          //Handle successful register
-        },
-        function(error) //Failure
-        {
-          //Handle error
-        },
-        function()
-        {
-          //Completion code
-        }
-      );
+    var walletAddress = null;
+    this.http.get("/user/info").subscribe(
+      (data) =>
+      {
+        var jsonResp = data.text();
+        var jsonArr = JSON.parse(jsonResp);
+        walletAddress = jsonArr.walletAddress;
+      });
+      if(hasWallet() == true && walletAddress != null)
+      {
+        var jsonArr: any = {};
+        jsonArr.address = value.address;
+        jsonArr.amount = value.amount;
+        jsonArr.message = value.message;
+        this.http.post("", jsonArr).subscribe
+        (
+          (response) => //Success
+          {
+            //Handle successful register
+          },
+          (error) =>//Failure
+          {
+            //Handle error
+          },
+          () =>
+          {
+            //Completion code
+          }
+        );
+      }
+      else
+      {
+        this.viewCtrl.dismiss();
+        this.app.getRootNav().push(LinkWalletPage);
+        //this.nav.push(LinkWalletPage);
+        alert("Please link a wallet before trying to send ERP-Coins.");
+      }
   }
 
   ionViewDidLoad() {
