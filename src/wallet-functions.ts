@@ -64,7 +64,11 @@ export function buyReward(reward: any, http: Http) {
   http.get('/contract').subscribe((data) => {
     const {abi, address} = data.json();
     web3.eth.contract(abi).at(address)
-      .buyReward(reward.id, reward.coinValue, {from: web3.eth.accounts[0]});
+      .buyReward(reward.id, reward.coinValue, {from: web3.eth.accounts[0]}, (error, result) => {
+        if(error) {
+          console.error(error);
+        }
+      });
   }, (error) => {
     console.error(error);
   });
