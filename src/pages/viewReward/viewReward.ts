@@ -36,19 +36,19 @@ export class ViewReward{
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
         walletAddress = jsonArr.walletAddress;
-      });
 
-    if(hasWallet() == false || walletAddress == null)
-    {
-      this.viewCtrl.dismiss();
-      this.app.getRootNav().push(LinkWalletPage);
-      alert("Please link a wallet before trying to purchase a reward.");
-    }
-    else
-    {
-      console.log(this.reward);
-      console.log(this.http);
-      buyReward(this.reward, this.http);
-    }
+        if(hasWallet() == false || walletAddress == null)
+        {
+          this.viewCtrl.dismiss();
+          this.app.getRootNav().push(LinkWalletPage);
+          alert("Please link a wallet before trying to purchase a reward.");
+        }
+        else
+        {
+          console.log(this.reward);
+          console.log(this.http);
+          buyReward(this.reward, this.http);
+        }
+      });
   }
 }

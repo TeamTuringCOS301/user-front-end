@@ -73,36 +73,36 @@ export class SendPage
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
         walletAddress = jsonArr.walletAddress;
+        if(hasWallet() == true && walletAddress != null)
+        {
+          var jsonArr: any = {};
+          jsonArr.address = value.address;
+          jsonArr.amount = value.amount;
+          jsonArr.message = value.message;
+          this.http.post("", jsonArr).subscribe
+          (
+            (response) => //Success
+            {
+              //Handle successful register
+            },
+            (error) =>//Failure
+            {
+              //Handle error
+            },
+            () =>
+            {
+              //Completion code
+            }
+          );
+        }
+        else
+        {
+          this.viewCtrl.dismiss();
+          this.app.getRootNav().push(LinkWalletPage);
+          //this.nav.push(LinkWalletPage);
+          alert("Please link a wallet before trying to send ERP-Coins.");
+        }
       });
-      if(hasWallet() == true && walletAddress != null)
-      {
-        var jsonArr: any = {};
-        jsonArr.address = value.address;
-        jsonArr.amount = value.amount;
-        jsonArr.message = value.message;
-        this.http.post("", jsonArr).subscribe
-        (
-          (response) => //Success
-          {
-            //Handle successful register
-          },
-          (error) =>//Failure
-          {
-            //Handle error
-          },
-          () =>
-          {
-            //Completion code
-          }
-        );
-      }
-      else
-      {
-        this.viewCtrl.dismiss();
-        this.app.getRootNav().push(LinkWalletPage);
-        //this.nav.push(LinkWalletPage);
-        alert("Please link a wallet before trying to send ERP-Coins.");
-      }
   }
 
   ionViewDidLoad() {
