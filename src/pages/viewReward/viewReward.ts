@@ -1,4 +1,4 @@
-import { ViewController, NavParams, App } from 'ionic-angular';
+import { ViewController, NavParams, App, ToastController } from 'ionic-angular';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
@@ -12,7 +12,7 @@ import { LinkWalletPage } from '../linkWallet/linkWallet';
 
 export class ViewReward{
   reward:any;
-  constructor(public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
+  constructor(public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
     this.reward = navParams.get('reward');
   }
@@ -20,6 +20,17 @@ export class ViewReward{
   public ionViewDidLoad()
   {
     this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
+  }
+
+  presentToast(message)
+  {
+    let toast = this.toastCtrl.create(
+    {
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   public closeModal()
@@ -36,18 +47,38 @@ export class ViewReward{
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
         walletAddress = jsonArr.walletAddress;
-
-        if(hasWallet() == false || walletAddress == null)
+        if(jsonArr.coinBalance >= this.reward.coinValue)
         {
-          this.viewCtrl.dismiss();
-          this.app.getRootNav().push(LinkWalletPage);
-          alert("Please link a wallet before trying to purchase a reward.");
+          if(walletAddress == null)
+          {
+            var jsonArrTwo: any = {};
+            this.http.post('/reward/buy/'+this.reward.id, jsonArrTwo).subscribe
+            (
+              (data) =>
+              {
+                this.presentToast("Purchase successful!");
+                this.closeModal();
+              },
+              (error) =>
+              {
+                console.log(error);
+              }
+            );
+          }
+          else if(hasWallet() == false)
+          {
+            alert("Could not connect to wallet plugin. Please check that it is installed and working.");
+          }
+          else
+          {
+            console.log(this.reward);
+            console.log(this.http);
+            buyReward(this.reward, this.http);
+          }
         }
         else
         {
-          console.log(this.reward);
-          console.log(this.http);
-          buyReward(this.reward, this.http);
+          alert("You don't have enough balance to buy this reward");
         }
       });
   }

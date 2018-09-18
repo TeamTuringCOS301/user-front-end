@@ -36,6 +36,7 @@ import  web3  from 'web3';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ScanModal } from '../pages/scanModal/scanModal';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { Ng2ImgToolsModule } from 'ng2-img-tools';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    Ng2ImgToolsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

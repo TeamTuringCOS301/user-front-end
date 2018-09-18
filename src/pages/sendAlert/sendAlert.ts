@@ -7,6 +7,7 @@ import { CONFIG } from '../../app-config';
 import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Ng2ImgToolsService } from 'ng2-img-tools';
 
 @Component({
   selector: 'page-sendAlert',
@@ -26,7 +27,9 @@ export class SendAlert
   address:any;
   currentLocation: any;
   severities: any = [];
-  constructor(public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
+  widthVal:any;
+  heightVal:any;
+  constructor(private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
@@ -40,6 +43,14 @@ export class SendAlert
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
+    if(window.screen.width <= 900)
+    {
+      this.widthVal = 0.7 * window.screen.width;
+    }
+    else
+    {
+
+    }
   }
 
   presentToast(message)
@@ -57,11 +68,24 @@ export class SendAlert
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       let imageData = (readerEvent.target as any).result;
+      console.log("Here");
+      console.log(imageData);
       var position = imageData.indexOf(",");
       this.imageBlob = imageData.slice(position+1);
       this.form.patchValue({ 'profilePic': imageData });
     };
-    reader.readAsDataURL(event.target.files[0]);
+    this.ng2ImgToolsService.resize([event.target.files[0]], 240, 280).subscribe((res) => {
+          //all good, result is a file
+          console.log(res);
+          console.log(window.screen.height);
+          console.log(window.screen.width);
+          reader.readAsDataURL(res);
+      }, (error) => {
+          //something went wrong
+          console.log(error);
+          //use result.compressedFile or handle specific error cases individually
+      });
+    //reader.readAsDataURL(event.target.files[0]);
   }
 
   getProfileImageStyle() {

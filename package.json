@@ -54,6 +54,7 @@
         "ionicons": "3.0.0",
         "jquery": "^3.3.1",
         "minimist": "^1.2.0",
+        "ng2-img-tools": "^1.1.5",
         "org.apache.cordova.geolocation": "^0.3.6",
         "rxjs": "5.5.8",
         "sw-toolbox": "3.6.0",

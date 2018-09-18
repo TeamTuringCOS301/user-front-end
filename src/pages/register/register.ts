@@ -54,7 +54,7 @@ export class RegPage {
           {
           console.log(response);
           this.presentToast("Registration successful! Please log in");
-          this.navCtrl.push(DashboardPage);
+          this.navCtrl.setRoot(DashboardPage);
         },
         (error) => //Failure
         {
