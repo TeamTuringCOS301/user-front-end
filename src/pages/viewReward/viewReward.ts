@@ -4,6 +4,7 @@ import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { buyReward, hasWallet } from '../../wallet-functions';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
+import { addCloseListener, presentToast } from '../../app-functions';
 
 @IonicPage({
   name:'view_reward'
@@ -18,23 +19,13 @@ export class ViewReward{
   reward:any;
   constructor(public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
+    addCloseListener(this.viewCtrl, window);
     this.reward = navParams.get('reward');
   }
 
   public ionViewDidLoad()
   {
     this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
-  }
-
-  presentToast(message)
-  {
-    let toast = this.toastCtrl.create(
-    {
-      message: message,
-      duration: 1500,
-      position: 'bottom'
-    });
-    toast.present();
   }
 
   public closeModal()
@@ -59,7 +50,7 @@ export class ViewReward{
             (
               (data) =>
               {
-                this.presentToast("Purchase successful!");
+                presentToast(this.toastCtrl, "Purchase successful!");
                 this.closeModal();
               },
               (error) =>

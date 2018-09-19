@@ -5,6 +5,8 @@ import { ReceivePage } from '../receiveErp/receiveErp';
 import { SendErpPage} from '../sendErp/sendErp';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
+import { Storage } from '@ionic/storage';
+import { checkLoggedIn, openModal } from '../../app-functions';
 import web3 from 'web3';
 
 @IonicPage({
@@ -17,7 +19,8 @@ import web3 from 'web3';
 export class DashboardPage {
   user:any;
   address:any ;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
+  constructor(public storage:Storage, public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.user = {};
     this.http.get("/user/info").subscribe
     (
@@ -30,20 +33,16 @@ export class DashboardPage {
       },
       (error) =>
       {
-        alert(error);
+        console.log(error);
       }
     );
     console.log(web3);
-    //this.getBalance();
   }
 
   ionViewDidLoad(){
     this.events.subscribe("Reload Balance", () =>
     {
       this.getBalance();
-      //this.navCtrl.pop({animate:false});
-      //this.navCtrl.push(AccountPage);
-      //this.navCtrl.push(AccountPage,{},{animate:false});
     });
 
     this.events.subscribe("UpdatedDetails", () =>
@@ -59,12 +58,9 @@ export class DashboardPage {
         },
         (error) =>
         {
-          alert(error);
+          console.log(error);
         }
       );
-      //this.navCtrl.pop({animate:false});
-      //this.navCtrl.push(AccountPage);
-      //this.navCtrl.push(AccountPage,{},{animate:false});
     });
   }
 
@@ -79,51 +75,22 @@ export class DashboardPage {
       },
       (error) =>
       {
-        alert(error);
+        console.log(error);
       }
     );
   }
 
-  /*public presentToast()
-  {
-    let toast = this.toastCtrl.create(
-    {
-      message: 'Logged Out',
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
-  }*/
-
   sendErp()
   {
     var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' });
-    modalPage.present();
-    this.navCtrl.push('send_erp');
+    openModal(modalPage, window);
   }
 
   receiveErp()
   {
     var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' });
-    modalPage.present();
+    openModal(modalPage, window);
   }
-
-  /*public logout()
-  {
-    //this.navCtrl.push(AccountPage);
-    this.http.get("/user/logout").subscribe
-    (
-      (data) => //Success
-      {
-        this.presentToast();
-        this.navCtrl.setRoot(LogPage);
-      },
-      (error) =>//Failure
-      {
-        alert("Error: " +error);
-      }
-    );
-  }*/
 
   public rewardsPage()
   {

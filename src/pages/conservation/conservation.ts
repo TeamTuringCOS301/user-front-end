@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Events } from 'ionic-angular';
+import { ToastController, IonicPage, NavController, Events } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
+import { checkLoggedIn } from '../../app-functions';
 
 @IonicPage({
   name:'conservation'
@@ -19,7 +20,8 @@ export class ConservationPage {
   areas:any;
   allAreas:any;
   url:any;
-  constructor(public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
+  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.areas = [];
     this.area = {};
     this.allAreas = [];
@@ -34,8 +36,7 @@ export class ConservationPage {
 }
   picked(area)
   {
-    CONFIG.area = area;
-    this.navCtrl.push('map');
+    this.navCtrl.push('map', {area: area});
   }
 
   onSearchInput(data)

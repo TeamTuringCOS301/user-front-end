@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { AccountPage } from '../account/account';
 import { DashboardPage } from '../dashboard/dashboard';
+import { checkLoggedIn, presentToast } from '../../app-functions';
 
 @IonicPage({
   name:'register'
@@ -19,30 +20,30 @@ export class RegPage {
   regUser: any;
   url: any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
+    storage.get('loggedIn').then
+    (
+       (val) =>
+       {
+         if(val == true)
+         {
+           this.navCtrl.push('account');
+         }
+       }
+   );
+    //this.storage.set('loggedIn', false);
     this.regUser = new FormGroup({username: new FormControl("", Validators.required), email:new FormControl("", Validators.required), fName: new FormControl("", Validators.required), sName: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
   }
 
-  public presentToast(message)
-  {
-    let toast = this.toastCtrl.create(
-      {
-        message: message,
-        duration: 1500,
-        position: 'bottom',
-        dismissOnPageChange: false
-      });
-      toast.present();
-    }
 
 
     registerUser(value: any) {
       var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if(!regexEmail.test(value.email)) {
-        this.presentToast("Please enter a valid email address");
+        presentToast(this.toastCtrl, "Please enter a valid email address");
       }
       else if(value.password != value.confirmPassword)
       {
-        this.presentToast("Please ensure that your passwords match");
+        presentToast(this.toastCtrl, "Please ensure that your passwords match");
       }
       else
       {
@@ -57,7 +58,8 @@ export class RegPage {
           (response) => //Success
           {
           console.log(response);
-          this.presentToast("Registration successful! Please log in");
+          presentToast(this.toastCtrl, "Registration successful! Please log in");
+          this.storage.set('loggedIn', true);
           this.navCtrl.setRoot('account');
         },
         (error) => //Failure

@@ -2,6 +2,7 @@ import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
+import { addCloseListener } from '../../app-functions';
 
 @IonicPage({
   name:'view_alert'
@@ -16,6 +17,7 @@ export class ViewAlert{
   alert:any;
   constructor(public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
+    addCloseListener(this.viewCtrl, window);
     this.alert = navParams.get('alert');
   }
 

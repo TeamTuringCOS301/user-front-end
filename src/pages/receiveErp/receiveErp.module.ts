@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ReceivePage } from './receiveErp';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ReceivePage } from './receiveErp';
   ],
   imports: [
     IonicPageModule.forChild(ReceivePage),
+    QRCodeModule
   ],
   entryComponents: [
     ReceivePage

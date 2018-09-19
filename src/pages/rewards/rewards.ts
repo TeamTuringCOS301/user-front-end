@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
+import { IonicPage, ToastController, NavController, ModalController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
 import { ViewReward } from '../viewReward/viewReward';
 import { DashboardPage } from '../dashboard/dashboard';
+import { checkLoggedIn, openModal } from '../../app-functions';
 
 @IonicPage({
   name: 'rewards',
@@ -16,7 +18,9 @@ import { DashboardPage } from '../dashboard/dashboard';
 export class RewardsPage {
   rewards: any;
 
-  constructor(public navCtrl: NavController, public http: Http, public modalCtrl: ModalController) {
+  constructor(public toastCtrl: ToastController, public storage: Storage, public navCtrl: NavController, public http: Http, public modalCtrl: ModalController)
+  {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.http.get("/reward/list").subscribe
     (
       (data) => //Success
@@ -39,7 +43,8 @@ export class RewardsPage {
     {
       if(reward.id == id)
       {
-        var modalPage = this.modalCtrl.create('view_reward', {reward:reward}); modalPage.present();
+        var modalPage = this.modalCtrl.create('view_reward', {reward:reward});
+        openModal(modalPage, window);
       }
     });
   }

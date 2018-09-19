@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { NavParams, IonicPage, NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -7,6 +7,7 @@ import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { Events } from 'ionic-angular';
 import { ViewAlert } from '../viewAlert/viewAlert';
+import { checkLoggedIn, presentToast, openModal } from '../../app-functions';
 
 declare var google;
 
@@ -33,28 +34,23 @@ export class MapPage {
   marker: any;
   url: any;
   naviID: any;
-  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  trackingInterval: any;
+  constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.area;
     this.alertsArr = [];
     this.naviID;
     this.pointsArr = [];
     this.isTracking = false;
     this.patrol = {};
-  }
-
-  public presentToast(message)
-  {
-    let toast = this.toastCtrl.create(
+    window.addEventListener('popstate', () =>
     {
-      message: message,
-      duration: 1500,
-      position: 'bottom'
+      clearInterval(this.trackingInterval);
     });
-    toast.present();
   }
 
   ionViewDidEnter(){
-      this.area = CONFIG.area;
+      this.area = this.navParams.get('area');
       this.patrol = {};
       this.patrol.coins = 0;
       this.LoadMap(this.area);
@@ -100,12 +96,12 @@ export class MapPage {
 
   public trackMe() {
     console.log("Entered trackMe()");
-    if (navigator.geolocation) {
+    if (navigator.geolocation)
+    {
       this.isTracking = true;
       navigator.geolocation.getCurrentPosition((position) => {
         console.log("Got current position");
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
         this.map.panTo(this.currentLocation);
         this.map.setZoom(46);//16
@@ -114,14 +110,18 @@ export class MapPage {
       (error) =>{
         console.log(error.message);
       }, {timeout:10000});
-      CONFIG.tracking = setInterval(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        CONFIG.currentLocation = this.currentLocation;
-        this.showPosition(position);
-      });
-    }, CONFIG.interval);
-    } else {
+      this.trackingInterval = setInterval(() =>
+      {
+        navigator.geolocation.getCurrentPosition(
+        (position) =>
+        {
+          this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          this.showPosition(position);
+        });
+      }, CONFIG.interval);
+    }
+    else
+    {
       alert("Geolocation is not supported by this browser.");
     }
   }
@@ -154,7 +154,7 @@ export class MapPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.coin)
         {
-          this.presentToast("Yay, you got a coin!");
+          presentToast(this.toastCtrl, "Yay, you got a coin!");
           this.patrol.coins ++;
         }
         else
@@ -165,7 +165,7 @@ export class MapPage {
       (error) => {
         if(error.status == 418)
         {
-          this.presentToast("You are not inside the specified conservation area");
+          presentToast(this.toastCtrl, "You are not inside the specified conservation area");
         }
       }
       );
@@ -213,7 +213,8 @@ export class MapPage {
           alert.severity = CONFIG.severity[alert.severity];
 
           marker.addListener('click', () => {
-            var modalPage = this.modalCtrl.create(ViewAlert, {alert: alert}); modalPage.present();
+            var modalPage = this.modalCtrl.create('view_alert', {alert: alert, area: this.area});
+            openModal(modalPage, window);
           });
           this.alertsArr.push(marker);
         });
@@ -241,7 +242,6 @@ LoadMap(areaName) {
       center: jsonResp.middle,
       mapTypeId: 'terrain'
     });
-    // Construct the polygon.
     var mapObj = new google.maps.Polygon
     ({
       paths: jsonResp.border,
@@ -263,18 +263,19 @@ LoadMap(areaName) {
 
 public navPop()
 {
-  clearInterval(CONFIG.tracking);
+  clearInterval(this.trackingInterval);
   this.navCtrl.pop();
 }
 
 ionViewDidLeave()
 {
-  clearInterval(CONFIG.tracking);
+  clearInterval(this.trackingInterval);
 }
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation}); modalPage.present();
+  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  openModal(modalPage, window);
 }
 
 }

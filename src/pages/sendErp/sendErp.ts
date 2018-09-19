@@ -4,9 +4,9 @@ import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
 import { hasWallet, sendCoin } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
-import * as $ from 'jquery';
 import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
+import { addCloseListener } from '../../app-functions';
 
 @IonicPage({
   name:'send_erp'
@@ -29,6 +29,7 @@ export class SendErpPage
   scanning: any = false;
   constructor(public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
   {
+    addCloseListener(this.viewCtrl, window);
     this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl(), message: new FormControl()});
   }
 
@@ -36,7 +37,6 @@ export class SendErpPage
   {
     console.log(val);
     this.scanner.resetScan();
-    //this.scanner.scannerEnabled = false;
     this.scanning = false;
     this.otherKey = val;
     console.log("Other key is: " +this.otherKey);
@@ -115,7 +115,6 @@ export class SendErpPage
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
-    //console.log(this.navParams.get('message'));
 }
 
 }

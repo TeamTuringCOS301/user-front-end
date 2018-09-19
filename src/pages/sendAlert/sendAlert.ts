@@ -8,6 +8,7 @@ import { NavController, LoadingController, ToastController } from 'ionic-angular
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Ng2ImgToolsService } from 'ng2-img-tools';
+import { addCloseListener, presentToast } from '../../app-functions';
 
 @IonicPage({
   name:'send_alert'
@@ -33,6 +34,7 @@ export class SendAlert
   severities: any = [];
   constructor(private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
+    addCloseListener(this.viewCtrl, window);
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
     this.form = formBuilder.group({
@@ -45,17 +47,6 @@ export class SendAlert
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
     });
-  }
-
-  presentToast(message)
-  {
-    let toast = this.toastCtrl.create(
-    {
-      message: message,
-      duration: 1500,
-      position: 'bottom'
-    });
-    toast.present();
   }
 
   processWebImage(event) {
@@ -107,11 +98,11 @@ export class SendAlert
       jsonArr.image = this.imageBlob;
       jsonArr.severity = parseInt(value.severity);
       jsonArr.location = this.currentLocation;
-      this.http.post("/alert/add/"+CONFIG.area, jsonArr).subscribe
+      this.http.post("/alert/add/"+this.navParams.get('area'), jsonArr).subscribe
       (
         (response)=> //Success
         {
-          this.presentToast("Alert sent");
+          presentToast(this.toastCtrl, "Alert sent");
         },
         (error)=> //Failure
         {

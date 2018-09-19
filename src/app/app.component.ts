@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ViewController, ModalController, ToastController, App } from 'ionic-angular';
+import { Nav, Platform, ModalController, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Splash } from '../pages/splash/splash';
@@ -23,25 +23,21 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public app: App, public viewCtrl: ViewController, public appCtrl: App, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Account', component: 'account'},
-      { title: 'Conservation Areas', component: ConservationPage},
-      { title: 'Rewards', component: RewardsPage},
-      { title: 'Edit Profile', component: EditPage},
-      { title: 'Change Password', component: UpdatePasswordPage},
-      { title: 'Link Wallet', component: LinkWalletPage}
+      { title: 'Conservation Areas', component: 'conservation'},
+      { title: 'Rewards', component: 'rewards'},
+      { title: 'Edit Profile', component: 'edit_profile'},
+      { title: 'Change Password', component: 'update_password'},
+      { title: 'Link Wallet', component: 'link_wallet'}
     ];
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      window.addEventListener('popstate', () =>
-      {
-        this.viewCtrl.dismiss();
-      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -78,7 +74,7 @@ export class MyApp {
       (data) => //Success
       {
         this.presentToast();
-        this.nav.setRoot(LogPage);
+        this.nav.setRoot('login');
       },
       (error) =>//Failure
       {

@@ -3,6 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Http } from '../../http-api';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
 import { LogPage } from '../login/login';
+import { DashboardPage } from '../dashboard/dashboard';
+import { addCloseListener } from '../../app-functions';
 
 @IonicPage({
   name:'receive_erp'
@@ -15,13 +17,11 @@ import { LogPage } from '../login/login';
 
 export class ReceivePage
 {
-  //@ViewChild(Nav) nav: Nav;
-  //rootPage: any;
-
   public myAngularxQrCode: string = null;
   message: any;
   constructor(public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
   {
+    addCloseListener(this.viewCtrl, window);
     this.http.get("/user/info").subscribe
     (
       (data) =>
@@ -38,13 +38,12 @@ export class ReceivePage
         {
           this.viewCtrl.dismiss();
           this.app.getRootNav().push('link_wallet');
-          //this.nav.push(LinkWalletPage);
           alert("Please link a wallet before trying to receive ERP-Coins.");
         }
       },
       (error) =>
       {
-        alert(error);
+        console.log(error);
       }
     );
   }

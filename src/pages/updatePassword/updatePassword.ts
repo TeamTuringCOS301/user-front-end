@@ -4,6 +4,7 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
+import { checkLoggedIn, presentToast } from '../../app-functions';
 
 @IonicPage({
   name:'update_password'
@@ -15,27 +16,18 @@ import { ToastController } from 'ionic-angular';
 })
 export class UpdatePasswordPage {
   updatePassword: any;
-  constructor(public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
+  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController)
+  {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.updatePassword = new FormGroup({oldPassword: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
   }
 
-  public presentToast(message)
-  {
-    let toast = this.toastCtrl.create(
-      {
-        message: message,
-        duration: 1500,
-        position: 'bottom',
-        dismissOnPageChange: false
-      });
-      toast.present();
-    }
 
   updatePass(value)
   {
     if(value.password != value.confirmPassword)
     {
-      this.presentToast("Please ensure that your passwords match");
+      presentToast(this.toastCtrl, "Please ensure that your passwords match");
     }
     else
     {
