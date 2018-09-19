@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -9,6 +9,10 @@ import { Events } from 'ionic-angular';
 import { ViewAlert } from '../viewAlert/viewAlert';
 
 declare var google;
+
+@IonicPage({
+  name:'map'
+})
 
 @Component({
   selector: 'page-map',
@@ -270,7 +274,7 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create(SendAlert, {location: this.currentLocation}); modalPage.present();
+  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation}); modalPage.present();
 }
 
 }

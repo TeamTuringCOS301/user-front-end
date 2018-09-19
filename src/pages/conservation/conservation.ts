@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, Events } from 'ionic-angular';
+import { IonicPage, NavController, Events } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
+
+@IonicPage({
+  name:'conservation'
+})
 
 @Component({
   selector: 'page-conservation',
@@ -31,7 +35,7 @@ export class ConservationPage {
   picked(area)
   {
     CONFIG.area = area;
-    this.navCtrl.push(MapPage);
+    this.navCtrl.push('map');
   }
 
   onSearchInput(data)

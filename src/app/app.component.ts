@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController, ToastController, App } from 'ionic-angular';
+import { Nav, Platform, ViewController, ModalController, ToastController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Splash } from '../pages/splash/splash';
@@ -18,16 +18,16 @@ import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = LogPage;
+  //viewCtrl: ViewController;
+  rootPage: any = 'login';
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public appCtrl: App, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
+  constructor(public app: App, public viewCtrl: ViewController, public appCtrl: App, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Account', component: DashboardPage},
+      { title: 'Account', component: 'account'},
       { title: 'Conservation Areas', component: ConservationPage},
       { title: 'Rewards', component: RewardsPage},
       { title: 'Edit Profile', component: EditPage},
@@ -38,15 +38,10 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      window.addEventListener('popstate', () => {
-            if (this.nav.canGoBack()) { //Can we go back?
-              //if(this.nav.length()>2){history.pushState(null, null, document.URL);}
-              this.nav.pop();
-            }
+      window.addEventListener('popstate', () =>
+      {
+        this.viewCtrl.dismiss();
       });
-      window.onpopstate = (evt) => {
-        this.nav.pop();
-      };
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

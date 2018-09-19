@@ -1,7 +1,12 @@
-import { ViewController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
+
+@IonicPage({
+  name:'view_alert'
+})
+
 @Component({
   selector: 'page-viewAlert',
   templateUrl: 'viewAlert.html'

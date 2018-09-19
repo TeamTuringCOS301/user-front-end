@@ -1,9 +1,13 @@
-import { ViewController, NavParams, App, ToastController } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, App, ToastController } from 'ionic-angular';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { buyReward, hasWallet } from '../../wallet-functions';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
+
+@IonicPage({
+  name:'view_reward'
+})
 
 @Component({
   selector: 'page-viewReward',
@@ -51,8 +55,7 @@ export class ViewReward{
         {
           if(walletAddress == null)
           {
-            var jsonArrTwo: any = {};
-            this.http.post('/reward/buy/'+this.reward.id, jsonArrTwo).subscribe
+            this.http.get('/reward/buy/'+this.reward.id).subscribe
             (
               (data) =>
               {

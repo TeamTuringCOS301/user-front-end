@@ -1,8 +1,12 @@
-import { App, ViewController, NavController, Nav } from 'ionic-angular';
+import { IonicPage, App, ViewController, NavController, Nav } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '../../http-api';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
 import { LogPage } from '../login/login';
+
+@IonicPage({
+  name:'receive_erp'
+})
 
 @Component({
   selector: 'page-receiveErp',
@@ -33,7 +37,7 @@ export class ReceivePage
         else
         {
           this.viewCtrl.dismiss();
-          this.app.getRootNav().push(LinkWalletPage);
+          this.app.getRootNav().push('link_wallet');
           //this.nav.push(LinkWalletPage);
           alert("Please link a wallet before trying to receive ERP-Coins.");
         }

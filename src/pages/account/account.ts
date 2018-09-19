@@ -3,7 +3,7 @@ import { RewardsPage } from '../rewards/rewards';
 import { ModalController, Events } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { SendPage } from '../sendErp/sendErp';
+import { SendErpPage } from '../sendErp/sendErp';
 import { ReceivePage } from '../receiveErp/receiveErp';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -76,12 +76,12 @@ export class AccountPage {
 
   public sendErp()
   {
-    var modalPage = this.modalCtrl.create(SendPage, {cssClass: 'send-modal' }); modalPage.present();
+    var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' }); modalPage.present();
   }
 
   public receiveErp()
   {
-    var modalPage = this.modalCtrl.create(ReceivePage, {cssClass: 'send-modal' }); modalPage.present();
+    var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' }); modalPage.present();
   }
 
   public logout()
@@ -92,7 +92,7 @@ export class AccountPage {
       (data) => //Success
       {
         this.presentToast();
-        this.navCtrl.push(LogPage);
+        this.navCtrl.push('login');
       },
       (error) =>//Failure
       {
@@ -104,12 +104,12 @@ export class AccountPage {
 
   public rewardsPage()
   {
-    this.navCtrl.push(RewardsPage);
+    this.navCtrl.push('rewards');
   }
 
   public conservationAreas()
   {
-    this.navCtrl.push(ConservationPage);
+    this.navCtrl.push('conservation');
   }
 
 }

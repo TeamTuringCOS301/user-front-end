@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { hasWallet, getAddress } from '../../wallet-functions';
 import { Http } from '../../http-api';
+
+@IonicPage({
+  name:'link_wallet'
+})
 
 @Component({
   selector: 'page-linkWallet',

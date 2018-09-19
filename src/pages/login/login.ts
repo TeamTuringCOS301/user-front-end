@@ -7,9 +7,9 @@ import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { DashboardPage } from '../dashboard/dashboard';
 
-/*@IonicPage({
+@IonicPage({
   name: 'login'
-})*/
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -53,8 +53,8 @@ export class LogPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.success)
         {
-          this.navCtrl.setRoot(DashboardPage);
-          //window.location.href = '/#/account';
+          //this.navCtrl.push('account');
+          this.navCtrl.setRoot('account');
         }
         else
         {
@@ -75,7 +75,7 @@ export class LogPage {
 
   registerPage()
   {
-    this.navCtrl.push(RegPage);
+    this.navCtrl.push('register');
   }
 
 }

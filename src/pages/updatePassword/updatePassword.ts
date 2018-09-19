@@ -5,6 +5,10 @@ import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
 
+@IonicPage({
+  name:'update_password'
+})
+
 @Component({
   selector: 'page-updatePassword',
   templateUrl: 'updatePassword.html'

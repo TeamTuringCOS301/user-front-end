@@ -73,3 +73,18 @@ export function buyReward(reward: any, http: Http) {
     console.error(error);
   });
 }
+
+export function sendCoin(sendTransaction: any, http: Http) {
+  init();
+  http.get('/contract').subscribe((data) => {
+    const {abi, address} = data.json();
+    web3.eth.contract(abi).at(address)
+      .transfer(sendTransaction.address, sendTransaction.amount, {from: web3.eth.accounts[0]}, (error, result) => {
+        if(error) {
+          console.error(error);
+        }
+      });
+  }, (error) => {
+    console.error(error);
+  });
+}

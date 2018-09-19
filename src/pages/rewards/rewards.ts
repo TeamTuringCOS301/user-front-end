@@ -5,10 +5,10 @@ import { CONFIG } from '../../app-config';
 import { ViewReward } from '../viewReward/viewReward';
 import { DashboardPage } from '../dashboard/dashboard';
 
-/*@IonicPage({
+@IonicPage({
   name: 'rewards',
   defaultHistory: ['dashboard']
-})*/
+})
 @Component({
   selector: 'page-rewards',
   templateUrl: 'rewards.html'
@@ -39,7 +39,7 @@ export class RewardsPage {
     {
       if(reward.id == id)
       {
-        var modalPage = this.modalCtrl.create(ViewReward, {reward:reward}); modalPage.present();
+        var modalPage = this.modalCtrl.create('view_reward', {reward:reward}); modalPage.present();
       }
     });
   }

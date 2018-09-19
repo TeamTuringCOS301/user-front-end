@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, Events, ModalController } from 'ionic-angular';
 import { Http } from '../../http-api';
 import { ReceivePage } from '../receiveErp/receiveErp';
-import { SendPage} from '../sendErp/sendErp';
+import { SendErpPage} from '../sendErp/sendErp';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
 import web3 from 'web3';
 
-/*@IonicPage({
+@IonicPage({
   name:'account'
-})*/
+})
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'
@@ -97,13 +97,14 @@ export class DashboardPage {
 
   sendErp()
   {
-    var modalPage = this.modalCtrl.create(SendPage, {cssClass: 'send-modal' });
+    var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' });
     modalPage.present();
+    this.navCtrl.push('send_erp');
   }
 
   receiveErp()
   {
-    var modalPage = this.modalCtrl.create(ReceivePage, {cssClass: 'send-modal' });
+    var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' });
     modalPage.present();
   }
 
@@ -126,12 +127,12 @@ export class DashboardPage {
 
   public rewardsPage()
   {
-    this.navCtrl.push(RewardsPage);
+    this.navCtrl.push('rewards');
   }
 
   public conservationAreas()
   {
-    this.navCtrl.push(ConservationPage, {});
+    this.navCtrl.push('conservation', {});
   }
 
 }

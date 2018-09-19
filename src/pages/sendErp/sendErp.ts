@@ -1,19 +1,23 @@
-import { ViewController, Platform, App } from 'ionic-angular';
+import { IonicPage, ViewController, Platform, App } from 'ionic-angular';
 import { Component } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
-import { hasWallet } from '../../wallet-functions';
+import { hasWallet, sendCoin } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
+
+@IonicPage({
+  name:'send_erp'
+})
 
 @Component({
   selector: 'page-sendErp',
   templateUrl: 'sendErp.html'
 })
 
-export class SendPage
+export class SendErpPage
 {
   @ViewChild('scanner')
   scanner: ZXingScannerComponent;
@@ -73,34 +77,38 @@ export class SendPage
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
         walletAddress = jsonArr.walletAddress;
-        if(hasWallet() == true && walletAddress != null)
+        console.log(jsonArr.coinBalance);
+        console.log(value.amount);
+        if(jsonArr.coinBalance >= value.amount && value.amount > 0 && Math.floor(value.amount) == value.amount)
         {
-          var jsonArr: any = {};
-          jsonArr.address = value.address;
-          jsonArr.amount = value.amount;
-          jsonArr.message = value.message;
-          this.http.post("", jsonArr).subscribe
-          (
-            (response) => //Success
-            {
-              //Handle successful register
-            },
-            (error) =>//Failure
-            {
-              //Handle error
-            },
-            () =>
-            {
-              //Completion code
-            }
-          );
+          if(hasWallet() == true && walletAddress != null)
+          {
+            var jsonArrSend: any = {};
+            jsonArrSend.address = value.address;
+            jsonArrSend.amount = value.amount;
+            sendCoin(jsonArrSend, this.http);
+          }
+          else
+          {
+            this.viewCtrl.dismiss();
+            this.app.getRootNav().push('link_wallet');
+            alert("Please ensure your wallet is running before trying to send ERP-Coins.");
+          }
         }
         else
         {
-          this.viewCtrl.dismiss();
-          this.app.getRootNav().push(LinkWalletPage);
-          //this.nav.push(LinkWalletPage);
-          alert("Please link a wallet before trying to send ERP-Coins.");
+          if(value.amount <= 0)
+          {
+            alert("You cannot send negative or 0 coins.");
+          }
+          else if(jsonArr.coinBalance >= value.amount)
+          {
+            alert("You are trying to send more coins than you have.");
+          }
+          else
+          {
+            alert("You can only send whole coins. No decimals!");
+          }
         }
       });
   }

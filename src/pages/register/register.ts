@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { AccountPage } from '../account/account';
 import { DashboardPage } from '../dashboard/dashboard';
+
+@IonicPage({
+  name:'register'
+})
 
 @Component({
   selector: 'page-register',
@@ -54,7 +58,7 @@ export class RegPage {
           {
           console.log(response);
           this.presentToast("Registration successful! Please log in");
-          this.navCtrl.setRoot(DashboardPage);
+          this.navCtrl.setRoot('account');
         },
         (error) => //Failure
         {

@@ -25,7 +25,7 @@
       <ion-grid>
         <ion-row>
           <ion-col col-10 offset-1>
-            <zxing-scanner #scanner [class.hide]="scanning == false" [autofocusEnabled]="true" (camerasFound)="cameras($event)" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+            <zxing-scanner #scanner [class.hide]="scanning == false" (camerasFound)="cameras($event)" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
           </ion-col>
         </ion-row>
         <ion-row>

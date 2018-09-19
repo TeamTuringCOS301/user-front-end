@@ -6,6 +6,10 @@ import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
+@IonicPage({
+  name:'edit_profile'
+})
+
 @Component({
   selector: 'page-edit',
   templateUrl: 'editProfile.html'
