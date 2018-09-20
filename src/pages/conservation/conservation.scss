@@ -1,60 +1,5 @@
 page-conservation{
 
-  /*ion-header{
-    position:fixed;
-    height:40px;
-  }
-
-  ion-title{
-    text-align: center;
-    width:100%;
-    position:fixed;
-    margin-top:10px;
-
-  }
-
-  #backIcon{
-    color: #AD2EFE;
-    margin:auto;
-    font-size: 3em;
-    padding-left:1%;
-    text-align:center;
-    width:100%;
-  }
-
-  @media(max-width: 900px) {
-    .divForm{
-      display:block;
-      width:80%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    #backButton{
-      background-color: white;
-      width:10%;
-  	  float:left;
-      margin-left:0%;
-  	  position:relative;
-  	  z-index:5;
-    }
-  }
-
-  @media(min-width: 900px) {
-    ion-content{
-      width:40%;
-    }
-    #backButton{
-      background-color: white;
-      width:5%;
-  	  float:left;
-      margin-left:0%;
-  	  position:relative;
-  	   z-index:5;
-    }
-  }*/
-
-  //Tristan CSS
   .card-ios p{
     color: color($colors, white);
 }
@@ -65,13 +10,9 @@ page-conservation{
 
 .area-card .card-ios {
     background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
-    //border: 4px solid color($colors, tertiary);
-    //box-shadow:none;
 }
 
 .area-card .card-md {
     background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, secondary) 50%, color($colors, tertiary) 100%);
-    //border: 4px solid color($colors, tertiary);
-    //box-shadow:none;
 }
 }

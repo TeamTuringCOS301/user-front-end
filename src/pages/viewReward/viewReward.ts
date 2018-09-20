@@ -1,10 +1,11 @@
-import { IonicPage, ViewController, NavParams, App, ToastController } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, App, ToastController, NavController, Events } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { buyReward, hasWallet } from '../../wallet-functions';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
-import { addCloseListener, presentToast } from '../../app-functions';
+import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
 
 @IonicPage({
   name:'view_reward'
@@ -17,63 +18,69 @@ import { addCloseListener, presentToast } from '../../app-functions';
 
 export class ViewReward{
   reward:any;
-  constructor(public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
+  coinBalance: any;
+  walletAddress: any = null;
+  status: any = "";
+  constructor(public events: Events, public storage: Storage, public navCtrl: NavController, public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
-    addCloseListener(this.viewCtrl, window);
+    addCloseListener(this.viewCtrl, window, this.events);
     this.reward = navParams.get('reward');
-  }
-
-  public ionViewDidLoad()
-  {
-    this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
-  }
-
-  public closeModal()
-  {
-    this.viewCtrl.dismiss();
-  }
-
-  public purchaseReward()
-  {
-    var walletAddress = null;
+    //this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
     this.http.get("/user/info").subscribe(
       (data) =>
       {
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
-        walletAddress = jsonArr.walletAddress;
-        if(jsonArr.coinBalance >= this.reward.coinValue)
+        this.walletAddress = jsonArr.walletAddress;
+        this.coinBalance = jsonArr.coinBalance;
+        this.checkBalance();
+      },
+      (error) =>
+      {
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
+      }
+    );
+  }
+
+  public closeModal()
+  {
+    closeModal(this.viewCtrl, this.events);
+  }
+
+  public checkBalance()
+  {
+    if(this.reward.coinValue > this.coinBalance)
+    {
+      this.status = "Insufficient balance";
+    }
+  }
+
+  public purchaseReward()
+  {
+    if(this.walletAddress == null)
+    {
+      this.http.get('/reward/buy/'+this.reward.id).subscribe
+      (
+        (data) =>
         {
-          if(walletAddress == null)
-          {
-            this.http.get('/reward/buy/'+this.reward.id).subscribe
-            (
-              (data) =>
-              {
-                presentToast(this.toastCtrl, "Purchase successful!");
-                this.closeModal();
-              },
-              (error) =>
-              {
-                console.log(error);
-              }
-            );
-          }
-          else if(hasWallet() == false)
-          {
-            alert("Could not connect to wallet plugin. Please check that it is installed and working.");
-          }
-          else
-          {
-            console.log(this.reward);
-            console.log(this.http);
-            buyReward(this.reward, this.http);
-          }
-        }
-        else
+          presentToast(this.toastCtrl, "Purchase successful!");
+          this.closeModal();
+        },
+        (error) =>
         {
-          alert("You don't have enough balance to buy this reward");
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         }
-      });
+      );
+    }
+    else if(hasWallet() == false)
+    {
+      alert("Could not connect to wallet plugin. Please check that it is installed and working.");
+    }
+    else
+    {
+      console.log(this.reward);
+      console.log(this.http);
+      buyReward(this.reward, this.http);
+    }
   }
 }

@@ -6,7 +6,7 @@ import { SendErpPage} from '../sendErp/sendErp';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
 import { Storage } from '@ionic/storage';
-import { checkLoggedIn, openModal } from '../../app-functions';
+import { checkLoggedIn, openModal, handleError } from '../../app-functions';
 import web3 from 'web3';
 
 @IonicPage({
@@ -17,10 +17,11 @@ import web3 from 'web3';
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  user:any;
+  user:any = {};
   address:any ;
   constructor(public storage:Storage, public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    this.user.balance = 0;
     this.user = {};
     this.http.get("/user/info").subscribe
     (
@@ -33,7 +34,7 @@ export class DashboardPage {
       },
       (error) =>
       {
-        console.log(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
     console.log(web3);
@@ -44,6 +45,7 @@ export class DashboardPage {
     {
       this.getBalance();
     });
+    this.events.publish("Reload Balance");
 
     this.events.subscribe("UpdatedDetails", () =>
     {
@@ -58,7 +60,7 @@ export class DashboardPage {
         },
         (error) =>
         {
-          console.log(error);
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         }
       );
     });
@@ -75,7 +77,7 @@ export class DashboardPage {
       },
       (error) =>
       {
-        console.log(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }

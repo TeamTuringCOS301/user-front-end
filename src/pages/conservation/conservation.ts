@@ -4,10 +4,11 @@ import { MapPage } from '../map/map';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
-import { checkLoggedIn } from '../../app-functions';
+import { checkLoggedIn, handleError } from '../../app-functions';
 
 @IonicPage({
-  name:'conservation'
+  name:'conservation',
+  defaultHistory: ['account']
 })
 
 @Component({
@@ -20,6 +21,7 @@ export class ConservationPage {
   areas:any;
   allAreas:any;
   url:any;
+  status: any;
   constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.areas = [];
@@ -32,7 +34,12 @@ export class ConservationPage {
         var jsonResp = JSON.parse(data.text());
         this.areas = jsonResp.areas;
         this.allAreas = jsonResp.areas;
-      });
+      },
+      (error) =>
+      {
+        handleError(this.storage, this.navCtrl, error, toastCtrl);
+      }
+    );
 }
   picked(area)
   {

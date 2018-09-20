@@ -1,10 +1,11 @@
-import { IonicPage, App, ViewController, NavController, Nav } from 'ionic-angular';
+import { Events, IonicPage, App, ViewController, NavController, ToastController, Nav } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 import { Http } from '../../http-api';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
 import { LogPage } from '../login/login';
 import { DashboardPage } from '../dashboard/dashboard';
-import { addCloseListener } from '../../app-functions';
+import { addCloseListener, handleError, presentLongToast, closeModal } from '../../app-functions';
+import { Storage } from '@ionic/storage';
 
 @IonicPage({
   name:'receive_erp'
@@ -19,9 +20,9 @@ export class ReceivePage
 {
   public myAngularxQrCode: string = null;
   message: any;
-  constructor(public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
+  constructor(public events: Events, public storage: Storage, public toastCtrl: ToastController, public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
   {
-    addCloseListener(this.viewCtrl, window);
+    addCloseListener(this.viewCtrl, window, this.events);
     this.http.get("/user/info").subscribe
     (
       (data) =>
@@ -38,19 +39,24 @@ export class ReceivePage
         {
           this.viewCtrl.dismiss();
           this.app.getRootNav().push('link_wallet');
-          alert("Please link a wallet before trying to receive ERP-Coins.");
+          presentLongToast(this.toastCtrl, "Please link a wallet before trying to receive ERP-Coins.");
         }
       },
       (error) =>
       {
-        console.log(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
 
+  ionViewDidLeave()
+  {
+    this.events.publish("Reload Balance");
+  }
+
   public closeModal()
   {
-    this.viewCtrl.dismiss();
+    closeModal(this.viewCtrl, this.events);
   }
 
 }

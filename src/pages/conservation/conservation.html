@@ -12,17 +12,19 @@
   </ion-searchbar>
   <ion-grid>
     <ion-row>
-      <ion-col class="area-card" col-lg-4 col-md-6 col-sm-12 col-12>
-        <ion-card *ngFor="let area of areas" (click)="picked(area.id)">
-          <ion-card-header>
-            <b>{{area.name}}</b>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Province: {{area.province}}</p>
-            <p> City: {{area.city}}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+      <ion-col class="area-card" *ngFor="let area of areas" col-12 col-sm-9 col-md-6 col-lg-4>
+          <ion-card (click) = "picked(area.id)">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{area.name}},{{area.province}}&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyBi2S3VHfaSr9tBIYt3g0BKz46518DIRLQ" alt="err">
+            <!--<img src="https://maps.googleapis.com/maps/api/staticmap?center={{area.name}}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284">-->
+            <ion-card-header color="white">
+              {{area.name}}
+            </ion-card-header>
+            <ion-card-content>
+              <p>Province: {{area.province}}</p>
+              <p>City: {{area.city}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

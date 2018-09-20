@@ -1,12 +1,13 @@
-import { IonicPage, ViewController, Platform, App } from 'ionic-angular';
+import { Events, IonicPage, ViewController, Platform, App, ToastController, NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
 import { hasWallet, sendCoin } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
 import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { LinkWalletPage } from '../linkWallet/linkWallet';
-import { addCloseListener } from '../../app-functions';
+import { addCloseListener, handleError, presentLongToast, presentToast, closeModal } from '../../app-functions';
 
 @IonicPage({
   name:'send_erp'
@@ -27,10 +28,11 @@ export class SendErpPage
   sendDetails: any;
   scannedCode = null;
   scanning: any = false;
-  constructor(public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
+  constructor(public events: Events, public navCtrl: NavController, public storage: Storage, public toastCtrl: ToastController, public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
   {
-    addCloseListener(this.viewCtrl, window);
-    this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl(), message: new FormControl()});
+    addCloseListener(this.viewCtrl, window, this.events);
+
+    this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl()});
   }
 
   scanSuccess(val)
@@ -45,7 +47,12 @@ export class SendErpPage
   cameras(val)
   {
     console.log(val);
-    this.selCamera = val[0];
+    var cam = 1;
+    if(val[cam] == null)
+    {
+      cam = 0;
+    }
+    this.selCamera = val[cam];
   }
 
   scan()
@@ -65,7 +72,12 @@ export class SendErpPage
 
   public closeModal()
   {
-    this.viewCtrl.dismiss();
+    closeModal(this.viewCtrl, this.events);
+  }
+
+  ionViewDidLeave()
+  {
+    this.events.publish("Reload Balance");
   }
 
   public sendFunc(value: any)
@@ -77,8 +89,6 @@ export class SendErpPage
         var jsonResp = data.text();
         var jsonArr = JSON.parse(jsonResp);
         walletAddress = jsonArr.walletAddress;
-        console.log(jsonArr.coinBalance);
-        console.log(value.amount);
         if(jsonArr.coinBalance >= value.amount && value.amount > 0 && Math.floor(value.amount) == value.amount)
         {
           if(hasWallet() == true && walletAddress != null)
@@ -87,34 +97,40 @@ export class SendErpPage
             jsonArrSend.address = value.address;
             jsonArrSend.amount = value.amount;
             sendCoin(jsonArrSend, this.http);
+            this.sendDetails.reset();
+          }
+          else if(walletAddress != null)
+          {
+            this.closeModal();
+            this.app.getRootNav().push('link_wallet');
+            presentLongToast(this.toastCtrl, "Please ensure your wallet plugin is running before trying to send ERP-Coins.");
           }
           else
           {
-            this.viewCtrl.dismiss();
+            this.closeModal();
             this.app.getRootNav().push('link_wallet');
-            alert("Please ensure your wallet is running before trying to send ERP-Coins.");
+            presentLongToast(this.toastCtrl, "You need to link your account to an external wallet to send coins.");
           }
         }
         else
         {
           if(value.amount <= 0)
           {
-            alert("You cannot send negative or 0 coins.");
+            presentToast(this.toastCtrl, "You cannot send negative or 0 coins.");
           }
-          else if(jsonArr.coinBalance >= value.amount)
+          else if(jsonArr.coinBalance <= value.amount)
           {
-            alert("You are trying to send more coins than you have.");
+            presentToast(this.toastCtrl, "You are trying to send more coins than you have.");
           }
           else
           {
-            alert("You can only send whole coins. No decimals!");
+            presentToast(this.toastCtrl, "You can only send whole coins. No decimals!");
           }
         }
+      },
+      (error) =>
+      {
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       });
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalPage');
-}
-
 }

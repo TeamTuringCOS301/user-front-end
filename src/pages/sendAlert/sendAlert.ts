@@ -1,14 +1,14 @@
-import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, NavController, Events } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Ng2ImgToolsService } from 'ng2-img-tools';
-import { addCloseListener, presentToast } from '../../app-functions';
+import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
 
 @IonicPage({
   name:'send_alert'
@@ -32,9 +32,9 @@ export class SendAlert
   address:any;
   currentLocation: any;
   severities: any = [];
-  constructor(private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
+  constructor(public events: Events, public navCtrl: NavController, private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
-    addCloseListener(this.viewCtrl, window);
+    addCloseListener(this.viewCtrl, window, this.events);
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
     this.form = formBuilder.group({
@@ -87,7 +87,7 @@ export class SendAlert
 
   public closeModal()
   {
-    this.viewCtrl.dismiss();
+    closeModal(this.viewCtrl, this.events);
   }
 
   public sendFunc(value: any)
@@ -106,14 +106,9 @@ export class SendAlert
         },
         (error)=> //Failure
         {
-          alert(error);//Handle error
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         }
       );
-      this.viewCtrl.dismiss();
-  }
-
-  ionViewDidLoad()
-  {
-    console.log('ionViewDidLoad ModalPage');
+      this.closeModal();
   }
 }

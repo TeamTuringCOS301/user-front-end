@@ -3,27 +3,6 @@ page-map{
   ion-toolbar, .toolbar{
     background: white;
   }
-  /*ion-header{
-    position:fixed;
-    height:40px;
-  }
-
-  ion-title{
-    text-align: center;
-    width:100%;
-    position:fixed;
-    margin-top:10px;
-
-  }
-
-  #backIcon{
-    color: #AD2EFE;
-    margin:auto;
-    font-size: 3em;
-    padding-left:1%;
-    text-align:center;
-    width:100%;
-  }*/
 
   #map {
     width: 100%;
@@ -36,79 +15,35 @@ page-map{
     z-index: 1000;
   }
 
-
-  /*@media(max-width: 900px) {
-
-    #backButton{
-      background-color: white;
-      width:10%;
-      position:relative;
-  	  float:left;
-      margin-left:0%;
-  	  z-index:5;
-    }
-
-    .divForm{
-      display:block;
-      width:80%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    #alertBtn{
-      width:100%;
-      background-color:white;
-      border:solid 1px #AD2EFE;
-      color: #AD2EFE;
-      border-radius: 4px;
-      height:40px;
-      display:block;
-      margin:auto;
-    }
+  #coinGif{
+    width: 20%;
+    margin-left: 40%;
+    position:fixed;
   }
 
-  @media(min-width: 900px) {
+ .coinFlip{
+    -webkit-animation-name: coinFlip;
+    -webkit-animation-duration: 4s;
+    animation-name: coinFlip;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+ }
 
-    #backButton{
-      background-color: white;
-      width:5%;
-      position:relative;
-  	  float:left;
-      margin-left:0%;
-  	  z-index:5;
-    }
+ .hide{
+   display: none;
+ }
 
-    #map {
-      margin-left:5%;
-      height: 80%;
-      width:60%;
-      margin-top:3%;
-      position:relative;
-      float:left;
-    }
+ @keyframes coinFlip{
+   0%   {bottom: 0px; opacity: 1;}
+   50%  {bottom: 200px; opacity: 1;}
+   100% {bottom: 200px; opacity: 0;}
+ }
 
-   #alertBtn{
-      width:40%;
-      background-color:white;
-      border:solid 1px #AD2EFE;
-      color: #AD2EFE;
-      border-radius: 4px;
-      height:40px;
-      display:block;
-    }
-
-    #details{
-      float:right;
-      position:relative;
-      width: 30%;
-      height:80%;
-      margin-right:4%;
-      margin-top:2%;
-    }
-  }
-      .scroll {
-        height: 100%
-      }
-*/
+ @-webkit-keyframes coinFlip{
+   0%   {bottom: 0px; opacity: 1;}
+   50%  {bottom: 200px; opacity: 1}
+   100% {bottom: 200px; opacity: 0;}
+ }
 
 }

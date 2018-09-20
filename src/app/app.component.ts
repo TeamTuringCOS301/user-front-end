@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController, ToastController} from 'ionic-angular';
+import { Nav, Platform, ModalController, ToastController, Events} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Storage } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Splash } from '../pages/splash/splash';
 import { LogPage } from '../pages/login/login';
@@ -23,7 +24,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
+  constructor(public events: Events, public storage: Storage, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl:ModalController, public toastCtrl: ToastController, public http: Http) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -38,20 +39,16 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      window.addEventListener('popstate', () =>
+      {
+        this.events.publish("Reload Balance");
+      });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    /*if(CONFIG.tracking != -1)
-    {
-      alert("Tracking is: "+CONFIG.tracking);
-      clearInteval(CONFIG.tracking);
-      CONFIG.tracking = -1;
-    }*/
     this.nav.push(page.component);
   }
 
@@ -75,6 +72,7 @@ export class MyApp {
       {
         this.presentToast();
         this.nav.setRoot('login');
+        this.storage.set('loggedIn', false);
       },
       (error) =>//Failure
       {

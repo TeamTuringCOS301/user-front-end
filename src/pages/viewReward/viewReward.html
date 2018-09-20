@@ -1,7 +1,7 @@
 <ion-header>
 
 <ion-navbar>
-    <ion-title>{{reward.name}}</ion-title>
+    <ion-title>Reward</ion-title>
     <ion-buttons end>
     <button ion-button (click)="closeModal()">Close</button>
     </ion-buttons>
@@ -18,7 +18,8 @@
           <ion-row>
             <ion-col col-1></ion-col>
             <ion-col col-10>
-              <div text-center><!--Severity-->
+              <div text-center>
+                <h3>{{reward.name}}</h3>
                 <h4>{{reward.areaName}}</h4>
                 <p>{{reward.description}}</p>
               </div>
@@ -30,9 +31,11 @@
                 <img src={{reward.image}}>
             </ion-col>
           </ion-row>
-          <ion-row>
-            <ion-col col-4 offset-4><button ion-button color="tertiary" round outline (click)="purchaseReward()">Buy</button></ion-col>
+          <ion-row text-center>
+            <ion-col col-5 ><p>{{reward.coinValue}} ERP-Coin</p></ion-col>
+            <ion-col col-5 offset-1><button [disabled]='status!= ""' ion-button color="tertiary" id="buyBtn" round outline (click)="purchaseReward()">Buy</button></ion-col>
           </ion-row>
+          <p text-center id="statusText">{{status}}</p>
         </ion-grid>
       </ion-list>
     </form>

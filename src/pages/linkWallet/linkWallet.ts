@@ -8,7 +8,8 @@ import { Storage } from '@ionic/storage';
 import { checkLoggedIn } from '../../app-functions';
 
 @IonicPage({
-  name:'link_wallet'
+  name:'link_wallet',
+  defaultHistory: ['account']
 })
 
 @Component({

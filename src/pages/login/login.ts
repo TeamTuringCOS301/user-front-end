@@ -25,7 +25,7 @@ export class LogPage {
       {
         if(val == true)
         {
-          this.navCtrl.push('account');
+          this.navCtrl.setRoot('account');
         }
       }
   );

@@ -17,7 +17,7 @@
 <ion-content>
   <ion-row>
     <ion-col col-12 text-center>
-      <ion-icon name="paper-plane" style="font-size:150px"></ion-icon>
+      <ion-icon name="paper-plane" [class.hide]="scanning == true" style="font-size:150px"></ion-icon>
     </ion-col>
   </ion-row>
   <form [formGroup]="sendDetails" (submit)="sendFunc(sendDetails.value)">
@@ -41,14 +41,6 @@
             <ion-item>
               <ion-label></ion-label>
               <ion-input formControlName="amount" type="number" placeholder="Amount"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-10 offset-1>
-            <ion-item>
-              <ion-label></ion-label>
-              <ion-input formControlName="message" type="text" placeholder="Message"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>

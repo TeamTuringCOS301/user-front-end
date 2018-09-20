@@ -7,12 +7,14 @@ import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { Events } from 'ionic-angular';
 import { ViewAlert } from '../viewAlert/viewAlert';
-import { checkLoggedIn, presentToast, openModal } from '../../app-functions';
+import { checkLoggedIn, presentToast, openModal, handleError } from '../../app-functions';
+import * as $ from 'jquery';
 
 declare var google;
 
 @IonicPage({
-  name:'map'
+  name:'map',
+  defaultHistory: ['conservation']
 })
 
 @Component({
@@ -22,6 +24,8 @@ declare var google;
 
 
 export class MapPage {
+  //@ViewChild('coinGif') coinToFlip;
+
   map: any;
   patrol: any;
   isTracking: any;
@@ -35,8 +39,14 @@ export class MapPage {
   url: any;
   naviID: any;
   trackingInterval: any;
+  animating: any = false; //CHANGE TO FALSE
   constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    //var coinToFlip = document.getElementById("coinGif");
+    //console.log(this.coinToFlip);
+    //this.coinToFlip.addEventListener("animationend", () =>{this.animating=false; console.log("here");});
+    //this.coinToFlip.className = "slidein";
+    //s$("#coinGif").bind("animationend", () => {this.animating = false; console.log("HERE");});
     this.area;
     this.alertsArr = [];
     this.naviID;
@@ -47,6 +57,11 @@ export class MapPage {
     {
       clearInterval(this.trackingInterval);
     });
+  }
+
+  listener()
+  {
+    this.animating = false;
   }
 
   ionViewDidEnter(){
@@ -72,7 +87,8 @@ export class MapPage {
           });
         this.pointsArr = [];
         points.forEach(
-          (point) => {
+          (point) =>
+          {
             var pointLocation = new google.maps.LatLng(point.lat, point.lng);
             var marker = new google.maps.Marker({
               position: pointLocation,
@@ -88,8 +104,9 @@ export class MapPage {
           }
         );
       },
-      (error) => {
-        console.log(error);
+      (error) =>
+      {
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
@@ -122,7 +139,7 @@ export class MapPage {
     }
     else
     {
-      alert("Geolocation is not supported by this browser.");
+      presentToast(this.toastCtrl, "Geolocation is not supported by this browser.");
     }
   }
 
@@ -154,6 +171,7 @@ export class MapPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.coin)
         {
+          this.animating = true;
           presentToast(this.toastCtrl, "Yay, you got a coin!");
           this.patrol.coins ++;
         }
@@ -162,10 +180,15 @@ export class MapPage {
 
         }
       },
-      (error) => {
+      (error) =>
+      {
         if(error.status == 418)
         {
-          presentToast(this.toastCtrl, "You are not inside the specified conservation area");
+          presentToast(this.toastCtrl, "You are outside your chosen conservation area");
+        }
+        else
+        {
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         }
       }
       );
@@ -222,7 +245,7 @@ export class MapPage {
     },
     (error) =>//Failure
     {
-      console.log("Error"+error);
+      handleError(this.storage, this.navCtrl, error, this.toastCtrl);
     }
 );
 }
@@ -257,7 +280,7 @@ LoadMap(areaName) {
   },
   (error) =>//Failure
   {
-    console.log("Error: " +error);
+    handleError(this.storage, this.navCtrl, error, this.toastCtrl);
   });
 }
 
@@ -274,8 +297,9 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
-  openModal(modalPage, window);
+  this.animating = true;
+  //var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  //openModal(modalPage, window);
 }
 
 }

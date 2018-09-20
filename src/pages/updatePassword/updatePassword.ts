@@ -4,10 +4,11 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
-import { checkLoggedIn, presentToast } from '../../app-functions';
+import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
 
 @IonicPage({
-  name:'update_password'
+  name:'update_password',
+  defaultHistory: ['account']
 })
 
 @Component({
@@ -38,8 +39,9 @@ export class UpdatePasswordPage {
         (data) => {
           this.navCtrl.pop();
         },
-        (error) => {
-          alert("Error: "+error);
+        (error) =>
+        {
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         });
     }
   }
