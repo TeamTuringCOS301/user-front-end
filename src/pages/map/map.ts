@@ -1,4 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { NavParams, IonicPage, NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController } from 'ionic-angular';
@@ -24,7 +25,7 @@ declare var google;
 
 
 export class MapPage {
-  //@ViewChild('coinGif') coinToFlip;
+  //@ViewChild('coinGif') coinToFlip:ElementRef;
 
   map: any;
   patrol: any;
@@ -39,12 +40,12 @@ export class MapPage {
   url: any;
   naviID: any;
   trackingInterval: any;
-  animating: any = false; //CHANGE TO FALSE
-  constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  source: any = "assets/imgs/coin.gif";
+  permSource: any = "assets/imgs/coin.gif";
+  animating: any = false;
+  coinToFlip: any;
+  constructor(@Inject(DOCUMENT) document, public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
-    //var coinToFlip = document.getElementById("coinGif");
-    //console.log(this.coinToFlip);
-    //this.coinToFlip.addEventListener("animationend", () =>{this.animating=false; console.log("here");});
     //this.coinToFlip.className = "slidein";
     //s$("#coinGif").bind("animationend", () => {this.animating = false; console.log("HERE");});
     this.area;
@@ -62,6 +63,17 @@ export class MapPage {
   listener()
   {
     this.animating = false;
+  }
+  ionViewDidLoad()
+  {
+    this.coinToFlip = document.getElementById('coinGif');
+    this.coinToFlip.addEventListener("animationend", () =>
+    {
+      this.animating=false;
+      console.log("here");
+      this.source = "";
+      //coinToFlip.setAttribute("src", source);
+    });
   }
 
   ionViewDidEnter(){
@@ -172,6 +184,7 @@ export class MapPage {
         if(jsonResp.coin)
         {
           this.animating = true;
+          this.source = this.permSource;
           presentToast(this.toastCtrl, "Yay, you got a coin!");
           this.patrol.coins ++;
         }
@@ -297,9 +310,10 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  this.animating = true;
-  //var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
-  //openModal(modalPage, window);
+  //this.animating = true;
+  //this.source = this.permSource;
+  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  openModal(modalPage, window);
 }
 
 }
