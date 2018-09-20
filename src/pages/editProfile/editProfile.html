@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form (submit)="upUser(updateUser.value)" [formGroup]="updateUser">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <ion-item>
+              <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+              <ion-input formControlName="email" type="email" value="{{currentDetails.email}}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <ion-item>
+              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>
+              <ion-input formControlName="fName" type="text" value="{{currentDetails.name}}"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <ion-item>
+              <ion-label><ion-icon name="information-circle"></ion-icon></ion-label>
+              <ion-input formControlName="sName" type="text" value="{{currentDetails.surname}}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-8 offset-2>
+          <button ion-button outline round type="submit" block>Update</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

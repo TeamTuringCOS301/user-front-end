@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavParams, IonicPage, NavController, ToastController } from 'ionic-angular';
 import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -7,8 +7,15 @@ import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { Events } from 'ionic-angular';
 import { ViewAlert } from '../viewAlert/viewAlert';
+import { checkLoggedIn, presentToast, openModal, handleError } from '../../app-functions';
+import * as $ from 'jquery';
 
 declare var google;
+
+@IonicPage({
+  name:'map',
+  defaultHistory: ['conservation']
+})
 
 @Component({
   selector: 'page-map',
@@ -17,6 +24,8 @@ declare var google;
 
 
 export class MapPage {
+  //@ViewChild('coinGif') coinToFlip;
+
   map: any;
   patrol: any;
   isTracking: any;
@@ -29,28 +38,34 @@ export class MapPage {
   marker: any;
   url: any;
   naviID: any;
-  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  trackingInterval: any;
+  animating: any = false; //CHANGE TO FALSE
+  constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    //var coinToFlip = document.getElementById("coinGif");
+    //console.log(this.coinToFlip);
+    //this.coinToFlip.addEventListener("animationend", () =>{this.animating=false; console.log("here");});
+    //this.coinToFlip.className = "slidein";
+    //s$("#coinGif").bind("animationend", () => {this.animating = false; console.log("HERE");});
     this.area;
     this.alertsArr = [];
     this.naviID;
     this.pointsArr = [];
     this.isTracking = false;
     this.patrol = {};
+    window.addEventListener('popstate', () =>
+    {
+      clearInterval(this.trackingInterval);
+    });
   }
 
-  public presentToast(message)
+  listener()
   {
-    let toast = this.toastCtrl.create(
-    {
-      message: message,
-      duration: 1500,
-      position: 'bottom'
-    });
-    toast.present();
+    this.animating = false;
   }
 
   ionViewDidEnter(){
-      this.area = CONFIG.area;
+      this.area = this.navParams.get('area');
       this.patrol = {};
       this.patrol.coins = 0;
       this.LoadMap(this.area);
@@ -72,7 +87,8 @@ export class MapPage {
           });
         this.pointsArr = [];
         points.forEach(
-          (point) => {
+          (point) =>
+          {
             var pointLocation = new google.maps.LatLng(point.lat, point.lng);
             var marker = new google.maps.Marker({
               position: pointLocation,
@@ -88,37 +104,42 @@ export class MapPage {
           }
         );
       },
-      (error) => {
-        alert(error);
+      (error) =>
+      {
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
 
   public trackMe() {
     console.log("Entered trackMe()");
-    if (navigator.geolocation) {
+    if (navigator.geolocation)
+    {
       this.isTracking = true;
       navigator.geolocation.getCurrentPosition((position) => {
         console.log("Got current position");
         this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        CONFIG.currentLocation = this.currentLocation;
         this.showPosition(position);
         this.map.panTo(this.currentLocation);
         this.map.setZoom(46);//16
         //this.alerts();
       },
       (error) =>{
-        alert(error.message);
+        console.log(error.message);
       }, {timeout:10000});
-      CONFIG.tracking = setInterval(() => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        CONFIG.currentLocation = this.currentLocation;
-        this.showPosition(position);
-      });
-    }, CONFIG.interval);
-    } else {
-      alert("Geolocation is not supported by this browser.");
+      this.trackingInterval = setInterval(() =>
+      {
+        navigator.geolocation.getCurrentPosition(
+        (position) =>
+        {
+          this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          this.showPosition(position);
+        });
+      }, CONFIG.interval);
+    }
+    else
+    {
+      presentToast(this.toastCtrl, "Geolocation is not supported by this browser.");
     }
   }
 
@@ -150,7 +171,8 @@ export class MapPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.coin)
         {
-          this.presentToast("Yay, you got a coin!");
+          this.animating = true;
+          presentToast(this.toastCtrl, "Yay, you got a coin!");
           this.patrol.coins ++;
         }
         else
@@ -158,10 +180,15 @@ export class MapPage {
 
         }
       },
-      (error) => {
+      (error) =>
+      {
         if(error.status == 418)
         {
-          this.presentToast("You are not inside the specified conservation area");
+          presentToast(this.toastCtrl, "You are outside your chosen conservation area");
+        }
+        else
+        {
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
         }
       }
       );
@@ -209,7 +236,8 @@ export class MapPage {
           alert.severity = CONFIG.severity[alert.severity];
 
           marker.addListener('click', () => {
-            var modalPage = this.modalCtrl.create(ViewAlert, {alert: alert}); modalPage.present();
+            var modalPage = this.modalCtrl.create('view_alert', {alert: alert, area: this.area});
+            openModal(modalPage, window);
           });
           this.alertsArr.push(marker);
         });
@@ -217,7 +245,7 @@ export class MapPage {
     },
     (error) =>//Failure
     {
-    alert("Error"+error);
+      handleError(this.storage, this.navCtrl, error, this.toastCtrl);
     }
 );
 }
@@ -237,7 +265,6 @@ LoadMap(areaName) {
       center: jsonResp.middle,
       mapTypeId: 'terrain'
     });
-    // Construct the polygon.
     var mapObj = new google.maps.Polygon
     ({
       paths: jsonResp.border,
@@ -253,24 +280,26 @@ LoadMap(areaName) {
   },
   (error) =>//Failure
   {
-    alert("Error: " +error);
+    handleError(this.storage, this.navCtrl, error, this.toastCtrl);
   });
 }
 
 public navPop()
 {
-  clearInterval(CONFIG.tracking);
+  clearInterval(this.trackingInterval);
   this.navCtrl.pop();
 }
 
 ionViewDidLeave()
 {
-  clearInterval(CONFIG.tracking);
+  clearInterval(this.trackingInterval);
 }
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create(SendAlert, {location: this.currentLocation}); modalPage.present();
+  this.animating = true;
+  //var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  //openModal(modalPage, window);
 }
 
 }

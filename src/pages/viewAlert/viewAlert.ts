@@ -1,7 +1,13 @@
-import { ViewController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams, Events } from 'ionic-angular';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
+import { addCloseListener, closeModal } from '../../app-functions';
+
+@IonicPage({
+  name:'view_alert'
+})
+
 @Component({
   selector: 'page-viewAlert',
   templateUrl: 'viewAlert.html'
@@ -9,8 +15,9 @@ import { Http } from '../../http-api';
 
 export class ViewAlert{
   alert:any;
-  constructor(public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
+  constructor(public events: Events, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
+    addCloseListener(this.viewCtrl, window, this.events);
     this.alert = navParams.get('alert');
   }
 
@@ -24,6 +31,6 @@ export class ViewAlert{
 
   public closeModal()
   {
-    this.viewCtrl.dismiss();
+    closeModal(this.viewCtrl, this.events);
   }
 }

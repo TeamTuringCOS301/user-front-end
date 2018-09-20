@@ -6,7 +6,11 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { DashboardPage } from '../dashboard/dashboard';
+import { checkLoggedIn, presentToast } from '../../app-functions';
 
+@IonicPage({
+  name: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -15,34 +19,30 @@ export class LogPage {
   logUser: any;
   url:any;
   constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
+   storage.get('loggedIn').then
+   (
+      (val) =>
+      {
+        if(val == true)
+        {
+          this.navCtrl.setRoot('account');
+        }
+      }
+  );
+  //this.storage.set('loggedIn', false);
   this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
 }
 
-  public presentToast(text)
-  {
-    let toast = this.toastCtrl.create(
-    {
-      message: text,
-      duration: 1500,
-      position: 'bottom',
-      dismissOnPageChange: false
-    });
-    toast.present();
-  }
 
   loginUser(value: any) {
     if(!this.logUser.valid)
     {
-      this.presentToast("Please fill out all of the fields");
+      presentToast(this.toastCtrl, "Please fill out all of the fields");
       return;
     }
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-    //var param = JSON.stringify(jsonArr);
-
-    /*this.presentToast("Welcome!");
-    this.navCtrl.setRoot(DashboardPage);*/
     this.http.post("/user/login", jsonArr).subscribe
     (
       (data) => //Success
@@ -50,7 +50,8 @@ export class LogPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.success)
         {
-          this.navCtrl.setRoot(DashboardPage);
+          this.storage.set('loggedIn', true);
+          this.navCtrl.setRoot('account');
         }
         else
         {
@@ -59,7 +60,7 @@ export class LogPage {
       },
       (error) =>//Failure
       {
-        alert("Error: "+error);
+        console.log("Error: "+error);
       }
     );
   }
@@ -71,7 +72,7 @@ export class LogPage {
 
   registerPage()
   {
-    this.navCtrl.push(RegPage);
+    this.navCtrl.push('register');
   }
 
 }

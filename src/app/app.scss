@@ -15,7 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-/*ion-backdrop{
+ion-backdrop{
   visibility:visible !important;
   z-index:auto;
 }
@@ -23,14 +23,24 @@
 @media(max-width: 900px) {
   .modal-wrapper{
       width: 70%;
-      height: 65%;
+      object-fit:contain;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      max-height: 68%;
       margin-top: 20%;
       margin-left: 15%;
 
   }
 }
 
-@media(min-width: 900px) {
+.toolbar-background-ios, .toolbar-background-md{
+  background: linear-gradient(45deg, color($colors, primary) 0%, color($colors, tertiary) 100%);
+}
+
+ion-title{
+  color:white !important;
+}
+/*@media(min-width: 900px) {
   .modal-wrapper{
       width: 40%;
       height: 70%;
@@ -39,9 +49,9 @@
       background-color: black;
       opacity:0.5;
   }
-}
+}*/
 
 
 .scroll-content{
     overflow-y: auto !important;
-}*/
+}

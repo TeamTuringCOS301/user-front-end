@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Link Wallet</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form (submit)="wallet(linkWallet.value)" [formGroup]="linkWallet">
+    <ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <ion-item>
+              <ion-label><ion-icon name="person"></ion-icon></ion-label>
+              <ion-input formControlName="walletAddress" type="text" placeholder="Wallet Address" value="{{walletAddress}}"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 offset-3>
+          <button ion-button outline round type="submit" block>Link</button>
+        </ion-col>
+      </ion-row>
+      <h4 style="color: red;">{{message}}{{noMessage}}</h4>
+      <a style="font-size:1.1em;" *ngIf='noMessage != ""' href="https://metamask.io/">MetaMask</a>
+      <ion-row *ngIf='message != ""'>
+        <ion-col col-6 offset-3>
+          <button ion-button outline round (click)="loadAddr()" block>Load from wallet</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

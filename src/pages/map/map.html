@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Map</ion-title>
   </ion-navbar>
-  <ion-toolbar color="secondary" text-center>
+  <ion-toolbar color="white" text-center>
       You have found <b> {{patrol.coins}} </b> ERP Coins this patrol.
   </ion-toolbar>
 </ion-header>
@@ -15,4 +15,5 @@
       <ion-icon name="alert"></ion-icon>
     </button>
   </ion-fab>
+  <img #coinGif [class.coinFlip]="animating == true" [class.hide]="animating==false" src="assets/imgs/coin.gif" alt="">
 </ion-content>

@@ -3,12 +3,13 @@ import { RewardsPage } from '../rewards/rewards';
 import { ModalController, Events } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { SendPage } from '../sendErp/sendErp';
+import { SendErpPage } from '../sendErp/sendErp';
 import { ReceivePage } from '../receiveErp/receiveErp';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { LogPage } from '../login/login';
+import web3 from 'web3';
 
 @Component({
   selector: 'page-account',
@@ -26,14 +27,14 @@ export class AccountPage {
       {
         var jsonResp = JSON.parse(data.text());
         this.user.name = jsonResp.name;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
         alert(error);
       }
     );
-    this.getBalance();
-    //setInterval(this.getBalance(), 300);
+    console.log(web3);
   }
 
   ionViewDidLoad(){
@@ -48,12 +49,12 @@ export class AccountPage {
 
   public getBalance()
   {
-    this.http.get("/user/coins").subscribe
+    this.http.get("/user/info").subscribe
     (
       (data) =>
       {
         var jsonResp = JSON.parse(data.text());
-        this.user.balance = jsonResp.balance;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
@@ -75,12 +76,12 @@ export class AccountPage {
 
   public sendErp()
   {
-    var modalPage = this.modalCtrl.create(SendPage, {cssClass: 'send-modal' }); modalPage.present();
+    var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' }); modalPage.present();
   }
 
   public receiveErp()
   {
-    var modalPage = this.modalCtrl.create(ReceivePage, {cssClass: 'send-modal' }); modalPage.present();
+    var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' }); modalPage.present();
   }
 
   public logout()
@@ -91,7 +92,7 @@ export class AccountPage {
       (data) => //Success
       {
         this.presentToast();
-        this.navCtrl.push(LogPage);
+        this.navCtrl.push('login');
       },
       (error) =>//Failure
       {
@@ -103,12 +104,12 @@ export class AccountPage {
 
   public rewardsPage()
   {
-    this.navCtrl.push(RewardsPage);
+    this.navCtrl.push('rewards');
   }
 
   public conservationAreas()
   {
-    this.navCtrl.push(ConservationPage);
+    this.navCtrl.push('conservation');
   }
 
 }

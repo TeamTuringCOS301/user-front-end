@@ -2,18 +2,26 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, Events, ModalController } from 'ionic-angular';
 import { Http } from '../../http-api';
 import { ReceivePage } from '../receiveErp/receiveErp';
-import { SendPage} from '../sendErp/sendErp';
+import { SendErpPage} from '../sendErp/sendErp';
 import { ConservationPage } from '../conservation/conservation';
 import { RewardsPage} from '../rewards/rewards';
+import { Storage } from '@ionic/storage';
+import { checkLoggedIn, openModal, handleError } from '../../app-functions';
+import web3 from 'web3';
 
+@IonicPage({
+  name:'account'
+})
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
-  user:any;
+  user:any = {};
   address:any ;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
+  constructor(public storage:Storage, public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    this.user.balance = 0;
     this.user = {};
     this.http.get("/user/info").subscribe
     (
@@ -22,89 +30,78 @@ export class DashboardPage {
         var jsonResp = JSON.parse(data.text());
         console.log(jsonResp);
         this.user.name = jsonResp.name;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
-        alert(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
-    this.getBalance();
+    console.log(web3);
   }
 
   ionViewDidLoad(){
     this.events.subscribe("Reload Balance", () =>
     {
       this.getBalance();
-      //this.navCtrl.pop({animate:false});
-      //this.navCtrl.push(AccountPage);
-      //this.navCtrl.push(AccountPage,{},{animate:false});
+    });
+    this.events.publish("Reload Balance");
+
+    this.events.subscribe("UpdatedDetails", () =>
+    {
+      this.http.get("/user/info").subscribe
+      (
+        (data) =>
+        {
+          var jsonResp = JSON.parse(data.text());
+          console.log(jsonResp);
+          this.user.name = jsonResp.name;
+          this.user.balance = jsonResp.coinBalance;
+        },
+        (error) =>
+        {
+          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
+        }
+      );
     });
   }
 
-  getBalance()
+  public getBalance()
   {
-    this.http.get("/user/coins").subscribe
+    this.http.get("/user/info").subscribe
     (
       (data) =>
       {
         var jsonResp = JSON.parse(data.text());
-        this.user.balance = jsonResp.balance;
+        this.user.balance = jsonResp.coinBalance;
       },
       (error) =>
       {
-        alert(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
 
-  /*public presentToast()
-  {
-    let toast = this.toastCtrl.create(
-    {
-      message: 'Logged Out',
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
-  }*/
-
   sendErp()
   {
-    var modalPage = this.modalCtrl.create(SendPage, {cssClass: 'send-modal' });
-    modalPage.present();
+    var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' });
+    openModal(modalPage, window);
   }
 
   receiveErp()
   {
-    var modalPage = this.modalCtrl.create(ReceivePage, {cssClass: 'send-modal' });
-    modalPage.present();
+    var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' });
+    openModal(modalPage, window);
   }
-
-  /*public logout()
-  {
-    //this.navCtrl.push(AccountPage);
-    this.http.get("/user/logout").subscribe
-    (
-      (data) => //Success
-      {
-        this.presentToast();
-        this.navCtrl.setRoot(LogPage);
-      },
-      (error) =>//Failure
-      {
-        alert("Error: " +error);
-      }
-    );
-  }*/
 
   public rewardsPage()
   {
-    this.navCtrl.push(RewardsPage);
+    this.navCtrl.push('rewards');
   }
 
   public conservationAreas()
   {
-    this.navCtrl.push(ConservationPage, {});
+    this.navCtrl.push('conservation', {});
   }
 
 }
