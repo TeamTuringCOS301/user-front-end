@@ -63,7 +63,6 @@ export class MapPage {
     this.coinToFlip.addEventListener("animationend", () =>
     {
       this.animating=false;
-      console.log("here");
       this.source = "#";
     });
   }
@@ -301,10 +300,8 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  this.animating = true;
-  this.source = this.permSource;
-  //var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
-  //openModal(modalPage, window);
+  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  openModal(modalPage, window);
 }
 
 }
