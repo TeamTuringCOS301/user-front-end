@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Http } from '../http-api';
+import { handleError } from '../app-functions';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -67,7 +69,7 @@ export class MyApp {
       },
       (error) =>//Failure
       {
-        alert("Error: " +error);
+        handleError(this.storage, this.nav, error, this.toastCtrl);
       }
     );
   }
