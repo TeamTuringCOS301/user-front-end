@@ -3,16 +3,7 @@ import { Nav, Platform, ModalController, ToastController, Events} from 'ionic-an
 import { StatusBar } from '@ionic-native/status-bar';
 import { Storage } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Splash } from '../pages/splash/splash';
-import { LogPage } from '../pages/login/login';
-import { DashboardPage } from '../pages/dashboard/dashboard';
-import { ConservationPage } from '../pages/conservation/conservation';
-import { RewardsPage } from '../pages/rewards/rewards';
-import { EditPage } from '../pages/editProfile/editProfile';
 import { Http } from '../http-api';
-import { CONFIG } from '../app-config';
-import { UpdatePasswordPage } from '../pages/updatePassword/updatePassword';
-import { LinkWalletPage } from '../pages/linkWallet/linkWallet';
 
 @Component({
   templateUrl: 'app.html'

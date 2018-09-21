@@ -1,9 +1,6 @@
-import { Events, IonicPage, App, ViewController, NavController, ToastController, Nav } from 'ionic-angular';
-import { Component, ViewChild } from '@angular/core';
+import { Events, IonicPage, App, ViewController, NavController, ToastController} from 'ionic-angular';
+import { Component} from '@angular/core';
 import { Http } from '../../http-api';
-import { LinkWalletPage } from '../linkWallet/linkWallet';
-import { LogPage } from '../login/login';
-import { DashboardPage } from '../dashboard/dashboard';
 import { addCloseListener, handleError, presentLongToast, closeModal } from '../../app-functions';
 import { Storage } from '@ionic/storage';
 

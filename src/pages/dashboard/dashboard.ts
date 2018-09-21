@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, Events, ModalController } from 'ionic-angular';
 import { Http } from '../../http-api';
-import { ReceivePage } from '../receiveErp/receiveErp';
-import { SendErpPage} from '../sendErp/sendErp';
-import { ConservationPage } from '../conservation/conservation';
-import { RewardsPage} from '../rewards/rewards';
 import { Storage } from '@ionic/storage';
 import { checkLoggedIn, openModal, handleError } from '../../app-functions';
 import web3 from 'web3';

@@ -1,12 +1,12 @@
 import { IonicPage, ViewController, NavParams, NavController, Events } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
-import { LoadingController, ToastController } from 'ionic-angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ToastController } from 'ionic-angular';
+//import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { Camera } from '@ionic-native/camera';
 import { Ng2ImgToolsService } from 'ng2-img-tools';
 import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
 
@@ -38,10 +38,10 @@ export class SendAlert
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
     this.form = formBuilder.group({
-      title: [''],
+      title: ['', Validators.required],
       profilePic: ['', Validators.required],
-      description: [''],
-      severity: ['']
+      description: ['', Validators.required],
+      severity: ['', Validators.required]
     });
 
     this.form.valueChanges.subscribe((v) => {

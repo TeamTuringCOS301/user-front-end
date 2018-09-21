@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { RegPage } from '../register/register';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
-import { DashboardPage } from '../dashboard/dashboard';
-import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
+import { presentToast, handleError } from '../../app-functions';
 
 @IonicPage({
   name: 'login'

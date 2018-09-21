@@ -58,7 +58,6 @@ export class EditPage {
       this.http.post("/user/update", jsonArr).subscribe(
         (data) =>
         {
-          var jsonResp = JSON.parse(data.text());
           this.events.publish("UpdatedDetails");
           this.navCtrl.pop();
         },

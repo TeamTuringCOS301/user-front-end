@@ -4,9 +4,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
-import { AccountPage } from '../account/account';
-import { DashboardPage } from '../dashboard/dashboard';
-import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
+import { presentToast, handleError } from '../../app-functions';
 
 @IonicPage({
   name:'register',

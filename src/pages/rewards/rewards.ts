@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, ToastController, NavController, ModalController, NavParams } from 'ionic-angular';
+import { IonicPage, ToastController, NavController, ModalController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
-import { ViewReward } from '../viewReward/viewReward';
 import { checkLoggedIn, openModal, handleError } from '../../app-functions';
 
 @IonicPage({
@@ -66,7 +65,6 @@ export class RewardsPage {
 
   picked(id)
   {
-    var reward = {};
     this.rewards.forEach((reward) =>
     {
       if(reward.id == id)

@@ -5,8 +5,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import { Http } from '../../http-api';
 import { hasWallet, sendCoin } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
-import { ZXingScannerModule, ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { LinkWalletPage } from '../linkWallet/linkWallet';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { addCloseListener, handleError, presentLongToast, presentToast, closeModal } from '../../app-functions';
 
 @IonicPage({
