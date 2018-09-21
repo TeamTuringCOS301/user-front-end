@@ -41,7 +41,7 @@ export class DashboardPage {
     {
       this.getBalance();
     });
-    this.events.publish("Reload Balance");
+    //this.events.publish("Reload Balance");
 
     this.events.subscribe("UpdatedDetails", () =>
     {

@@ -38,10 +38,10 @@ export class SendAlert
     this.severities = CONFIG.severity;
     this.currentLocation = navParams.get('location');
     this.form = formBuilder.group({
-      title: ['', Validators.required],
-      profilePic: ['', Validators.required],
-      description: [''],
-      severity: ['', Validators.required]
+      title: [''],
+      profilePic: [''],
+      description: ['', Validators.required],
+      severity: ['']
     });
 
     this.form.valueChanges.subscribe((v) => {

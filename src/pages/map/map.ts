@@ -300,7 +300,7 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation, area: this.area});
   openModal(modalPage, window);
 }
 

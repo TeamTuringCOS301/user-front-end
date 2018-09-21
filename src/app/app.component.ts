@@ -63,7 +63,7 @@ export class MyApp {
     (
       (data) => //Success
       {
-        this.presentToast();        
+        this.presentToast();
         this.storage.set('loggedIn', false).then(() => {this.nav.setRoot('login');});
       },
       (error) =>//Failure
