@@ -1,93 +1,12 @@
 page-register{
- /*ion-title{
-    text-align: center;
-    float:right;
-    width:100%;
-    position:fixed;
-    margin-top:10px;
+
+  #userNameP{
+    color: red;
+    font-size: 12px;
+    padding: 0;
+    margin:0;
+    margin-top:5px;
   }
-
-
-  @media(max-width: 900px) {
-    .divForm{
-      display:block;
-      width:80%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .submitBtn{
-      width:100%;
-      background-color:white;
-      border:solid 1px #AD2EFE;
-      color: #AD2EFE;
-      border-radius: 4px;
-      height:40px;
-      display:block;
-      margin:auto;
-    }
-
-  }
-
-  @media(min-width: 900px) {
-    .divForm{
-      display:block;
-      width:40%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .submitBtn{
-      width:40%;
-      background-color:white;
-      border:solid 1px #AD2EFE;
-      color: #AD2EFE;
-      border-radius: 4px;
-      height:40px;
-      display:block;
-    }
-
-  }
-
-  ion-header{
-    position:fixed;
-    height:40px;
-  }
-
-  ion-input{
-    width:100%;
-    padding:4px;
-  }
-
-  ion-label{
-    width:100%;
-    padding:4px;
-    text-align:left;
-  }
-
-  .submitBtn{
-    width:100%;
-  }
-
-
-  #backIcon{
-    color: #AD2EFE;
-    margin:auto;
-    font-size: 3em;
-    padding-left:1%;
-    text-align:center;
-  }
-
-  #backButton{
-    background-color: white;
-    width:5%;
-    margin-left:0%;
-	float:left;
-	position:relative;
-	z-index:5;
-  }*/
-
-  //Tristan CSS
   .list-ios .item-input:last-child {
     border-bottom: 1px solid #dedede;
   }

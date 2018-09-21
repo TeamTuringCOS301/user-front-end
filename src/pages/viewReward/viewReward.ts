@@ -1,10 +1,8 @@
 import { IonicPage, ViewController, NavParams, App, ToastController, NavController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { CONFIG } from '../../app-config';
+import { Component } from '@angular/core';
 import { Http } from '../../http-api';
 import { buyReward, hasWallet } from '../../wallet-functions';
-import { LinkWalletPage } from '../linkWallet/linkWallet';
 import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
 
 @IonicPage({

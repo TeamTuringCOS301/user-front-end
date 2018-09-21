@@ -1,15 +1,12 @@
-import { Component, ViewChild, ElementRef, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
 import { NavParams, IonicPage, NavController, ToastController } from 'ionic-angular';
-import { SendAlert } from '../sendAlert/sendAlert';
 import { ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { Events } from 'ionic-angular';
-import { ViewAlert } from '../viewAlert/viewAlert';
 import { checkLoggedIn, presentToast, openModal, handleError } from '../../app-functions';
-import * as $ from 'jquery';
+
 
 declare var google;
 
@@ -25,8 +22,6 @@ declare var google;
 
 
 export class MapPage {
-  //@ViewChild('coinGif') coinToFlip:ElementRef;
-
   map: any;
   patrol: any;
   isTracking: any;
@@ -44,10 +39,8 @@ export class MapPage {
   permSource: any = "assets/imgs/coin.gif";
   animating: any = false;
   coinToFlip: any;
-  constructor(@Inject(DOCUMENT) document, public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
-    //this.coinToFlip.className = "slidein";
-    //s$("#coinGif").bind("animationend", () => {this.animating = false; console.log("HERE");});
     this.area;
     this.alertsArr = [];
     this.naviID;
@@ -71,8 +64,7 @@ export class MapPage {
     {
       this.animating=false;
       console.log("here");
-      this.source = "";
-      //coinToFlip.setAttribute("src", source);
+      this.source = "#";
     });
   }
 
@@ -233,7 +225,7 @@ export class MapPage {
           '</div>'+
           '</div>';
           this.alertsArr = [];
-          var infowindow = new google.maps.InfoWindow({
+          new google.maps.InfoWindow({
             content: contentString
           });
           var marker = new google.maps.Marker({
@@ -272,7 +264,6 @@ LoadMap(areaName) {
     var jsonResp = JSON.parse(data.text());
     if(jsonResp)
     {
-      var mapDetails:any;
       this.map = new google.maps.Map(document.getElementById('map'), {
       zoom: 5,
       center: jsonResp.middle,
@@ -310,10 +301,10 @@ ionViewDidLeave()
 
 public sendAlert()
 {
-  //this.animating = true;
-  //this.source = this.permSource;
-  var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
-  openModal(modalPage, window);
+  this.animating = true;
+  this.source = this.permSource;
+  //var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation});
+  //openModal(modalPage, window);
 }
 
 }

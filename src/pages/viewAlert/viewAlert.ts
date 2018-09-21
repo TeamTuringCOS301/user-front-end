@@ -1,5 +1,5 @@
 import { IonicPage, ViewController, NavParams, Events } from 'ionic-angular';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { addCloseListener, closeModal } from '../../app-functions';
