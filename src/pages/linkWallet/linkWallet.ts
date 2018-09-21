@@ -5,7 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { hasWallet, getAddress } from '../../wallet-functions';
 import { Http } from '../../http-api';
 import { Storage } from '@ionic/storage';
-import { checkLoggedIn } from '../../app-functions';
+import { checkLoggedIn, handleError, presentToast } from '../../app-functions';
 
 @IonicPage({
   name:'link_wallet',
@@ -66,11 +66,12 @@ export class LinkWalletPage {
     this.http.post("/user/address", jsonArr).subscribe(
       (data) =>
       {
-        console.log(data.text());
+        this.navCtrl.push('account');
+        presentToast(this.toastCtrl, "Successfully linked");
       },
       (error) =>
       {
-        console.log(error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
