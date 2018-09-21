@@ -50,8 +50,8 @@ export class LogPage {
         var jsonResp = JSON.parse(data.text());
         if(jsonResp.success)
         {
-          this.storage.set('loggedIn', true);
-          this.navCtrl.setRoot('account');
+          this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
+
         }
         else
         {

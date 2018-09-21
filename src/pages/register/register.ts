@@ -64,8 +64,8 @@ registerUser(value: any)
         if(jsonResp.success)
         {
           presentToast(this.toastCtrl, "Registration successful!");
-          this.storage.set('loggedIn', true);
-          this.navCtrl.setRoot('account');
+          this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
+
         }
         else
         {

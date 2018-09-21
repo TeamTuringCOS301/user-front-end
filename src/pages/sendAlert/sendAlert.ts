@@ -40,7 +40,7 @@ export class SendAlert
     this.form = formBuilder.group({
       title: ['', Validators.required],
       profilePic: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       severity: ['', Validators.required]
     });
 
