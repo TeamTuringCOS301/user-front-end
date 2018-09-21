@@ -9,16 +9,19 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
 
 @IonicPage({
-  name:'register'
+  name:'register',
+  defaultHistory: ['login']
 })
 
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
 })
+
 export class RegPage {
   regUser: any;
   url: any;
+  usernameTaken: any = "";
   constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
     storage.get('loggedIn').then
     (
@@ -37,6 +40,7 @@ export class RegPage {
 
 registerUser(value: any)
 {
+  this.usernameTaken = "";
   var regexEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if(!regexEmail.test(value.email))
   {
@@ -56,17 +60,27 @@ registerUser(value: any)
     jsonArr.surname = value.sName;
     this.http.post("/user/add", jsonArr).subscribe
     (
-      (response) => //Success
+      (data) => //Success
       {
-      console.log(response);
-      presentToast(this.toastCtrl, "Registration successful!");
-      this.storage.set('loggedIn', true);
-      this.navCtrl.setRoot('account');
-    },
-    (error) => //Failure
-    {
-      handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-    });
+        var jsonResp = JSON.parse(data.text());
+        if(jsonResp.success)
+        {
+          presentToast(this.toastCtrl, "Registration successful!");
+          this.storage.set('loggedIn', true);
+          this.navCtrl.setRoot('account');
+        }
+        else
+        {
+          this.usernameTaken = "Username already in use";
+          console.log("username taken");
+        }
+
+      },
+      (error) => //Failure
+      {
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
+      }
+    );
   }
 }
 

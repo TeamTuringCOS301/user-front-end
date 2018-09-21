@@ -14,6 +14,9 @@
               <ion-input formControlName="username" type="text" placeholder="Username"></ion-input>
             </ion-item>
           </ion-col>
+          <ion-col id="usernameP" *ngIf='usernameTaken!=""'col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
+            <p id="userNameP">{{usernameTaken}}</p>
+          </ion-col>
           <ion-col col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6>
             <ion-item>
               <ion-label><ion-icon name="mail"></ion-icon></ion-label>

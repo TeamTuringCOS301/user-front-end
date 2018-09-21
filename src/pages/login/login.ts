@@ -6,7 +6,7 @@ import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { DashboardPage } from '../dashboard/dashboard';
-import { checkLoggedIn, presentToast } from '../../app-functions';
+import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
 
 @IonicPage({
   name: 'login'
@@ -18,6 +18,7 @@ import { checkLoggedIn, presentToast } from '../../app-functions';
 export class LogPage {
   logUser: any;
   url:any;
+  invalidMsg: any = "";
   constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
    storage.get('loggedIn').then
    (
@@ -35,6 +36,7 @@ export class LogPage {
 
 
   loginUser(value: any) {
+    this.invalidMsg = "";
     if(!this.logUser.valid)
     {
       presentToast(this.toastCtrl, "Please fill out all of the fields");
@@ -55,12 +57,13 @@ export class LogPage {
         }
         else
         {
-          alert("Invalid username/password combination");
+          this.invalidMsg = "Invalid username/password combination";
+          presentToast(this.toastCtrl, "Invalid username/password combination");
         }
       },
       (error) =>//Failure
       {
-        console.log("Error: "+error);
+        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
   }
