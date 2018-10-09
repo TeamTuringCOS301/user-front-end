@@ -24,20 +24,29 @@ export class ViewReward{
     addCloseListener(this.viewCtrl, window, this.events);
     this.reward = navParams.get('reward');
     //this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
-    this.http.get("/user/info").subscribe(
-      (data) =>
-      {
-        var jsonResp = data.text();
-        var jsonArr = JSON.parse(jsonResp);
-        this.walletAddress = jsonArr.walletAddress;
-        this.coinBalance = jsonArr.coinBalance;
-        this.checkBalance();
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.get("/user/info").subscribe(
+        (data) =>
+        {
+          var jsonResp = data.text();
+          var jsonArr = JSON.parse(jsonResp);
+          this.walletAddress = jsonArr.walletAddress;
+          this.coinBalance = jsonArr.coinBalance;
+          this.checkBalance();
+          refresh = false;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
+
   }
 
   public closeModal()
@@ -57,18 +66,22 @@ export class ViewReward{
   {
     if(this.walletAddress == null)
     {
-      this.http.get('/reward/buy/'+this.reward.id).subscribe
-      (
-        (data) =>
-        {
-          presentToast(this.toastCtrl, "Purchase successful!");
-          this.closeModal();
-        },
-        (error) =>
-        {
-          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-        }
-      );
+      var refresh = false;
+      do
+      {
+        this.http.get('/reward/buy/'+this.reward.id).subscribe
+        (
+          (data) =>
+          {
+            presentToast(this.toastCtrl, "Purchase successful!");
+            this.closeModal();
+          },
+          (error) =>
+          {
+            handleError(this.storage, this.navCtrl, error, this.toastCtrl);
+          }
+        );
+      }while(refresh);      
     }
     else if(hasWallet() == false)
     {

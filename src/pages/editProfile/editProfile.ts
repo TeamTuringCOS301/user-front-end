@@ -24,17 +24,26 @@ export class EditPage {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.updateUser = new FormGroup({email:new FormControl("", Validators.required), fName: new FormControl("", Validators.required), sName: new FormControl("", Validators.required)});
     this.currentDetails = {};
-    this.http.get("/user/info").subscribe(
-      (data) => {
-        var jsonResp = JSON.parse(data.text());
-        this.currentDetails.email = jsonResp.email;
-        this.currentDetails.name = jsonResp.name;
-        this.currentDetails.surname = jsonResp.surname;
-        this.currentDetails.walletAddress = jsonResp.walletAddress;
-      },
-      (error) => {
-        console.log(error);
-      });
+    var refresh = false;
+    do
+    {
+      this.http.get("/user/info").subscribe(
+        (data) => {
+          refresh = false;
+          var jsonResp = JSON.parse(data.text());
+          this.currentDetails.email = jsonResp.email;
+          this.currentDetails.name = jsonResp.name;
+          this.currentDetails.surname = jsonResp.surname;
+          this.currentDetails.walletAddress = jsonResp.walletAddress;
+        },
+        (error) => {
+          console.log(error);
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl)=="")
+          {
+            refresh = true;
+          }
+        });
+    }while(refresh);
   }
 
 
@@ -55,16 +64,24 @@ export class EditPage {
       jsonArr.email = value.email;
       jsonArr.name = value.fName;
       jsonArr.surname = value.sName;
-      this.http.post("/user/update", jsonArr).subscribe(
-        (data) =>
-        {
-          this.events.publish("UpdatedDetails");
-          this.navCtrl.pop();
-        },
-        (error) =>
-        {
-          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-        });
+      var refresh = false;
+      do
+      {
+        this.http.post("/user/update", jsonArr).subscribe(
+          (data) =>
+          {
+            refresh = false;
+            this.events.publish("UpdatedDetails");
+            this.navCtrl.pop();
+          },
+          (error) =>
+          {
+            if(handleError(this.storage, this.navCtrl, error, this.toastCtrl)=="")
+            {
+              refresh = true;
+            }
+          });
+      }while(refresh);
     }
   }
 

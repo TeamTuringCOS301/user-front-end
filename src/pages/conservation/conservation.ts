@@ -25,19 +25,27 @@ export class ConservationPage {
     this.areas = [];
     this.area = {};
     this.allAreas = [];
-    this.http.get("/area/list").subscribe
-    (
-      (data) => //Success
-      {
-        var jsonResp = JSON.parse(data.text());
-        this.areas = jsonResp.areas;
-        this.allAreas = jsonResp.areas;
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.get("/area/list").subscribe
+      (
+        (data) => //Success
+        {
+          refresh = false;
+          var jsonResp = JSON.parse(data.text());
+          this.areas = jsonResp.areas;
+          this.allAreas = jsonResp.areas;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, toastCtrl)=="")
+          {
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
 }
   picked(area)
   {

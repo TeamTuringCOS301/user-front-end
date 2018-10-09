@@ -30,25 +30,37 @@ export class LinkWalletPage {
   }
 
   ionViewDidLoad(){
-    this.http.get("/user/info").subscribe(
-    (data) =>
+    var refresh = false;
+    do
     {
-      var jsonResp = data.text();
-      var jsonArr = JSON.parse(jsonResp);
-      this.walletAddress = jsonArr.walletAddress;
-      if(hasWallet())
+      this.http.get("/user/info").subscribe(
+      (data) =>
       {
-        this.extWallet = getAddress();
-        if(this.extWallet != this.walletAddress)
+        refresh = false;
+        var jsonResp = data.text();
+        var jsonArr = JSON.parse(jsonResp);
+        this.walletAddress = jsonArr.walletAddress;
+        if(hasWallet())
         {
-          this.message = "Your stored address is different from the one reported by your wallet. Click to load address from wallet.";
+          this.extWallet = getAddress();
+          if(this.extWallet != this.walletAddress)
+          {
+            this.message = "Your stored address is different from the one reported by your wallet. Click to load address from wallet.";
+          }
         }
-      }
-      else
+        else
+        {
+          this.noMessage = "No external wallet found, please install one.";
+        }
+      },
+      (err) =>
       {
-        this.noMessage = "No external wallet found, please install one.";
-      }
-    });
+        if(handleError(this.storage, this.navCtrl, err, this.toastCtrl) == "")
+        {
+          refresh = true;
+        }
+      });
+    }while(refresh);
   }
 
   loadAddr()
@@ -63,17 +75,25 @@ export class LinkWalletPage {
   wallet(val){
     var jsonArr: any = {};
     jsonArr.walletAddress = val.walletAddress;
-    this.http.post("/user/address", jsonArr).subscribe(
-      (data) =>
-      {
-        this.navCtrl.push('account');
-        presentToast(this.toastCtrl, "Successfully linked");
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.post("/user/address", jsonArr).subscribe(
+        (data) =>
+        {
+          refresh = true;
+          this.navCtrl.push('account');
+          presentToast(this.toastCtrl, "Successfully linked");
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            refresh = false;
+          }
+        }
+      );
+    }while(refresh);
   }
 
 }

@@ -56,29 +56,38 @@ registerUser(value: any)
     jsonArr.email = value.email;
     jsonArr.name = value.fName;
     jsonArr.surname = value.sName;
-    this.http.post("/user/add", jsonArr).subscribe
-    (
-      (data) => //Success
-      {
-        var jsonResp = JSON.parse(data.text());
-        if(jsonResp.success)
+    var refresh = false;
+    do
+    {
+      this.http.post("/user/add", jsonArr).subscribe
+      (
+        (data) => //Success
         {
-          presentToast(this.toastCtrl, "Registration successful!");
-          this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
+          var jsonResp = JSON.parse(data.text());
+          refresh = false;
+          if(jsonResp.success)
+          {
+            presentToast(this.toastCtrl, "Registration successful!");
+            this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
 
-        }
-        else
+          }
+          else
+          {
+            this.usernameTaken = "Username already in use";
+            console.log("username taken");
+          }
+
+        },
+        (error) => //Failure
         {
-          this.usernameTaken = "Username already in use";
-          console.log("username taken");
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            refresh = true;
+          }
         }
+      );
+    }while(refresh);
 
-      },
-      (error) => //Failure
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
   }
 }
 

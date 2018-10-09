@@ -20,21 +20,29 @@ export class RewardsPage {
   constructor(public toastCtrl: ToastController, public storage: Storage, public navCtrl: NavController, public http: Http, public modalCtrl: ModalController)
   {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
-    this.http.get("/reward/list").subscribe
-    (
-      (data) => //Success
-      {
-        var jsonResp = JSON.parse(data.text());
-        this.allRewards = jsonResp.rewards;
-        this.rewards = this.allRewards;
-        this.allRewards.forEach((reward) => {reward.image = CONFIG.url +"/reward/image/"+reward.id;});
-        console.log(this.allRewards);
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.get("/reward/list").subscribe
+      (
+        (data) => //Success
+        {
+          var jsonResp = JSON.parse(data.text());
+          this.allRewards = jsonResp.rewards;
+          this.rewards = this.allRewards;
+          this.allRewards.forEach((reward) => {reward.image = CONFIG.url +"/reward/image/"+reward.id;});
+          console.log(this.allRewards);
+          refresh = false;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
   }
 
   onSearchInput(data)

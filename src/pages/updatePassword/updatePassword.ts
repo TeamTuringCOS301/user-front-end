@@ -35,14 +35,18 @@ export class UpdatePasswordPage {
       var jsonArr: any = {};
       jsonArr.old = value.oldPassword;
       jsonArr.new = value.password;
-      this.http.post("/user/password", jsonArr).subscribe(
-        (data) => {
-          this.navCtrl.pop();
-        },
-        (error) =>
-        {
-          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-        });
+      var refresh = false;
+      do
+      {
+        this.http.post("/user/password", jsonArr).subscribe(
+          (data) => {
+            this.navCtrl.pop();
+          },
+          (error) =>
+          {
+            handleError(this.storage, this.navCtrl, error, this.toastCtrl);
+          });
+      }while(refresh);
     }
   }
 

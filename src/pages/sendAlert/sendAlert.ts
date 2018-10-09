@@ -32,6 +32,7 @@ export class SendAlert
   address:any;
   currentLocation: any;
   severities: any = [];
+  imageData: any;
   constructor(public events: Events, public navCtrl: NavController, private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
     addCloseListener(this.viewCtrl, window, this.events);
@@ -52,10 +53,10 @@ export class SendAlert
   processWebImage(event) {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
-      let imageData = (readerEvent.target as any).result;
-      var position = imageData.indexOf(",");
-      this.imageBlob = imageData.slice(position+1);
-      this.form.patchValue({ 'profilePic': imageData });
+      this.imageData = (readerEvent.target as any).result;
+      var position = this.imageData.indexOf(",");
+      this.imageBlob = this.imageData.slice(position+1);
+      this.form.patchValue({ 'profilePic': this.imageData });
     };
     this.ng2ImgToolsService.resize([event.target.files[0]], CONFIG.alertSideLengthPx, CONFIG.alertSideLengthPx).subscribe((res) => {
           reader.readAsDataURL(res);
@@ -98,17 +99,26 @@ export class SendAlert
       jsonArr.image = this.imageBlob;
       jsonArr.severity = parseInt(value.severity);
       jsonArr.location = this.currentLocation;
-      this.http.post("/alert/add/"+this.navParams.get('area'), jsonArr).subscribe
-      (
-        (response)=> //Success
-        {
-          presentToast(this.toastCtrl, "Alert sent");
-        },
-        (error)=> //Failure
-        {
-          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-        }
-      );
+      var refresh = false;
+      do
+      {
+        this.http.post("/alert/add/"+this.navParams.get('area'), jsonArr).subscribe
+        (
+          (response)=> //Success
+          {
+            refresh = false;
+            presentToast(this.toastCtrl, "Alert sent");
+
+          },
+          (error)=> //Failure
+          {
+            if(handleError(this.storage, this.navCtrl, error, this.toastCtrl)=="")
+            {
+              refresh = true;
+            }
+          }
+        );
+      }while(refresh);
       this.closeModal();
   }
 }

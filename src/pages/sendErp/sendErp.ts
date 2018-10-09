@@ -82,54 +82,62 @@ export class SendErpPage
   public sendFunc(value: any)
   {
     var walletAddress = null;
-    this.http.get("/user/info").subscribe(
-      (data) =>
-      {
-        var jsonResp = data.text();
-        var jsonArr = JSON.parse(jsonResp);
-        walletAddress = jsonArr.walletAddress;
-        if(jsonArr.coinBalance >= value.amount && value.amount > 0 && Math.floor(value.amount) == value.amount)
+    var refresh = false;
+    do
+    {
+      this.http.get("/user/info").subscribe(
+        (data) =>
         {
-          if(hasWallet() == true && walletAddress != null)
+          refresh = false;
+          var jsonResp = data.text();
+          var jsonArr = JSON.parse(jsonResp);
+          walletAddress = jsonArr.walletAddress;
+          if(jsonArr.coinBalance >= value.amount && value.amount > 0 && Math.floor(value.amount) == value.amount)
           {
-            var jsonArrSend: any = {};
-            jsonArrSend.address = value.address;
-            jsonArrSend.amount = value.amount;
-            sendCoin(jsonArrSend, this.http);
-            this.sendDetails.reset();
-          }
-          else if(walletAddress != null)
-          {
-            this.closeModal();
-            this.app.getRootNav().push('link_wallet');
-            presentLongToast(this.toastCtrl, "Please ensure your wallet plugin is running before trying to send ERP-Coins.");
+            if(hasWallet() == true && walletAddress != null)
+            {
+              var jsonArrSend: any = {};
+              jsonArrSend.address = value.address;
+              jsonArrSend.amount = value.amount;
+              sendCoin(jsonArrSend, this.http);
+              this.sendDetails.reset();
+            }
+            else if(walletAddress != null)
+            {
+              this.closeModal();
+              this.app.getRootNav().push('link_wallet');
+              presentLongToast(this.toastCtrl, "Please ensure your wallet plugin is running before trying to send ERP-Coins.");
+            }
+            else
+            {
+              this.closeModal();
+              this.app.getRootNav().push('link_wallet');
+              presentLongToast(this.toastCtrl, "You need to link your account to an external wallet to send coins.");
+            }
           }
           else
           {
-            this.closeModal();
-            this.app.getRootNav().push('link_wallet');
-            presentLongToast(this.toastCtrl, "You need to link your account to an external wallet to send coins.");
+            if(value.amount <= 0)
+            {
+              presentToast(this.toastCtrl, "You cannot send negative or 0 coins.");
+            }
+            else if(jsonArr.coinBalance <= value.amount)
+            {
+              presentToast(this.toastCtrl, "You are trying to send more coins than you have.");
+            }
+            else
+            {
+              presentToast(this.toastCtrl, "You can only send whole coins. No decimals!");
+            }
           }
-        }
-        else
+        },
+        (error) =>
         {
-          if(value.amount <= 0)
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) =="")
           {
-            presentToast(this.toastCtrl, "You cannot send negative or 0 coins.");
+            refresh = true;
           }
-          else if(jsonArr.coinBalance <= value.amount)
-          {
-            presentToast(this.toastCtrl, "You are trying to send more coins than you have.");
-          }
-          else
-          {
-            presentToast(this.toastCtrl, "You can only send whole coins. No decimals!");
-          }
-        }
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      });
+        });
+    }while(refresh);
   }
 }

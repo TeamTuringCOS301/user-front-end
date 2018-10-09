@@ -19,20 +19,30 @@ export class DashboardPage {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.user.balance = 0;
     this.user = {};
-    this.http.get("/user/info").subscribe
-    (
-      (data) =>
-      {
-        var jsonResp = JSON.parse(data.text());
-        console.log(jsonResp);
-        this.user.name = jsonResp.name;
-        this.user.balance = jsonResp.coinBalance;
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.get("/user/info").subscribe
+      (
+        (data) =>
+        {
+          var jsonResp = JSON.parse(data.text());
+          console.log(jsonResp);
+          this.user.name = jsonResp.name;
+          this.user.balance = jsonResp.coinBalance;
+          refresh = false;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            console.log("No internet connection, retrying...");
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
+
     console.log(web3);
   }
 
@@ -45,37 +55,54 @@ export class DashboardPage {
 
     this.events.subscribe("UpdatedDetails", () =>
     {
-      this.http.get("/user/info").subscribe
-      (
-        (data) =>
-        {
-          var jsonResp = JSON.parse(data.text());
-          console.log(jsonResp);
-          this.user.name = jsonResp.name;
-          this.user.balance = jsonResp.coinBalance;
-        },
-        (error) =>
-        {
-          handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-        }
-      );
+      var refresh = false;
+      do
+      {
+        this.http.get("/user/info").subscribe
+        (
+          (data) =>
+          {
+            var jsonResp = JSON.parse(data.text());
+            this.user.name = jsonResp.name;
+            this.user.balance = jsonResp.coinBalance;
+            refresh = false;
+          },
+          (error) =>
+          {
+            if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+            {
+              console.log("No internet connection, retrying...");
+              refresh = true;
+            }
+          }
+        );
+      }while(refresh);
     });
   }
 
   public getBalance()
   {
-    this.http.get("/user/info").subscribe
-    (
-      (data) =>
-      {
-        var jsonResp = JSON.parse(data.text());
-        this.user.balance = jsonResp.coinBalance;
-      },
-      (error) =>
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+    var refresh = false;
+    do
+    {
+      this.http.get("/user/info").subscribe
+      (
+        (data) =>
+        {
+          var jsonResp = JSON.parse(data.text());
+          this.user.balance = jsonResp.coinBalance;
+          refresh = false;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            console.log("No internet connection, retrying...");
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
   }
 
   sendErp()

@@ -43,27 +43,35 @@ export class LogPage {
     var jsonArr: any = {};
     jsonArr.username = value.username;
     jsonArr.password = value.password;
-    this.http.post("/user/login", jsonArr).subscribe
-    (
-      (data) => //Success
-      {
-        var jsonResp = JSON.parse(data.text());
-        if(jsonResp.success)
+    var refresh = false;
+    do
+    {
+      this.http.post("/user/login", jsonArr).subscribe
+      (
+        (data) => //Success
         {
-          this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
+          var jsonResp = JSON.parse(data.text());
+          refresh = false;
+          if(jsonResp.success)
+          {
+            this.storage.set('loggedIn', true).then(() => {this.navCtrl.setRoot('account');});
 
-        }
-        else
+          }
+          else
+          {
+            this.invalidMsg = "Invalid username/password combination";
+            //presentToast(this.toastCtrl, "Invalid username/password combination");
+          }
+        },
+        (error) =>//Failure
         {
-          this.invalidMsg = "Invalid username/password combination";
-          presentToast(this.toastCtrl, "Invalid username/password combination");
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl) == "")
+          {
+            refresh = true;
+          }
         }
-      },
-      (error) =>//Failure
-      {
-        handleError(this.storage, this.navCtrl, error, this.toastCtrl);
-      }
-    );
+      );
+    }while(refresh);
   }
 
   navPop()

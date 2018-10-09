@@ -42,14 +42,17 @@
               <!--<ion-item no-lines>-->
               <ion-label id="photoLabel">Image</ion-label>
               <div id="photoDiv">
-                <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px;" (change)="processWebImage($event)" />
+                <img class="profile-image" src="{{imageData}}" *ngIf="this.form.controls.profilePic.value">
+                <div *ngIf="!this.form.controls.profilePic.value">
+                <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px; width: 0px;" (change)="processWebImage($event)" />
                   <div class="profile-image-wrapper" (click)="getPicture()">
                     <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-                      <ion-icon name="add"></ion-icon>
+                      <ion-icon id="add" name="add"></ion-icon>
                     </div>
-                    <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
+                    <!--<div class="profile-image" [style.backgroundImage]="getProfileImageStyle()"></div>-->
                   </div>
                 </div>
+              </div>
               <!--</ion-item>-->
             </ion-col>
           </ion-row>

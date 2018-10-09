@@ -76,16 +76,17 @@ export function handleError(storage, navCtrl, error, toastCtrl)
   {
     msg = "Internal Server Error. Please try again later.";
   }
-  else if(error.status == 400)
+  /*else if(error.status == 400)
   {
     msg = "Something went wrong. Please try again.";
-  }
+  }*/
   else
   {
-    msg = "No Internet Connection.";
+    //msg = "No Internet Connection.";
   }
   if(msg != "")
   {
     presentLongToast(toastCtrl, msg);
   }
+  return msg;
 }
