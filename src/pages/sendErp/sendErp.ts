@@ -27,6 +27,8 @@ export class SendErpPage
   sendDetails: any;
   scannedCode = null;
   scanning: any = false;
+  currCam: any = 1;
+  camArr: any = [];
   constructor(public events: Events, public navCtrl: NavController, public storage: Storage, public toastCtrl: ToastController, public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
   {
     addCloseListener(this.viewCtrl, window, this.events);
@@ -46,12 +48,31 @@ export class SendErpPage
   cameras(val)
   {
     console.log(val);
+    this.camArr = val;
     var cam = 1;
     if(val[cam] == null)
     {
       cam = 0;
     }
     this.selCamera = val[cam];
+  }
+
+  swapCam()
+  {
+    console.log("Swp");
+    var newCam = (this.currCam +1) % 2;
+    this.currCam = newCam;
+    if(this.camArr[newCam] == null)
+    {
+
+    }
+    else
+    {
+      this.selCamera = this.camArr[newCam];
+      this.platform.ready().then(()=>{this.scanner.startScan(this.selCamera)});
+      this.scanning = true;
+    }
+
   }
 
   scan()

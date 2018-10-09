@@ -24,8 +24,9 @@
     <ion-list>
       <ion-grid>
         <ion-row>
-          <ion-col col-10 offset-1>
+          <ion-col col-10 offset-1 text-center>
             <zxing-scanner #scanner [class.hide]="scanning == false" (camerasFound)="cameras($event)" (scanSuccess)="scanSuccess($event)"></zxing-scanner>
+            <ion-icon (click)="swapCam()" name="swap" *ngIf="scanning != false" style="font-size: 30px; color: grey;"></ion-icon>
           </ion-col>
         </ion-row>
         <ion-row>
