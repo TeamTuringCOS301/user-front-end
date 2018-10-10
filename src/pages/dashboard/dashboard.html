@@ -9,14 +9,14 @@
 
 <ion-content>
   <ion-content class="card-background-page">
-    <ion-row>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 align-self-center padding>
+    <ion-row col-10 offset-1>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 align-self-center padding>
         <img src="assets/imgs/Artboard 1-1.png" />
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 padding>
         <h1 ion-text text-center>Welcome {{user.name}}</h1>
         <button col-12 ion-button round outline color="tertiary" (click)="conservationAreas()">Start Patrol</button>
         <button col-12 ion-button round outline color="tertiary" (click)="rewardsPage()">View Available Rewards</button>
-      </ion-col>
-      <ion-col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4>
         <ion-card class="balance">
           <h1><b>{{user.balance}}</b> ERP</h1>
           <ion-row>

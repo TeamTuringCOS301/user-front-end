@@ -12,7 +12,7 @@ declare var google;
 
 @IonicPage({
   name:'map',
-  defaultHistory: ['conservation']
+  defaultHistory: ['account', 'conservation']
 })
 
 @Component({

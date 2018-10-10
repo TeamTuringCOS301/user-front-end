@@ -5,7 +5,7 @@ page-dashboard {
             position: relative;
             text-align: center;
         }
-      
+
         .card-title {
           position: absolute;
           bottom: 15%;
@@ -14,7 +14,7 @@ page-dashboard {
           font-weight: bold;
           color: black;
         }
-      
+
         .card-subtitle {
           font-size: 1.0em;
           position: absolute;
@@ -22,12 +22,13 @@ page-dashboard {
           width: 100%;
           color: black;
         }
-      
+
     }
 
     .balance {
         border-color: color($colors, tertiary);
         border-right-width: 3px;
+        margin-top: 5%;
     }
 
     .item-md, .item-ios, .grad {
