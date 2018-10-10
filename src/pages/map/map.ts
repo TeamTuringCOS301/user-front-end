@@ -162,7 +162,6 @@ export class MapPage {
       }
     });
     this.sendLocation(location);
-    this.alerts();
   }
 
   public sendLocation(location) {
@@ -179,10 +178,6 @@ export class MapPage {
           presentToast(this.toastCtrl, "Yay, you got a coin!");
           this.patrol.coins ++;
         }
-        else
-        {
-
-        }
       },
       (error) =>
       {
@@ -196,6 +191,7 @@ export class MapPage {
         }
       }
       );
+      this.alerts();
   }
 
   public alerts() {
