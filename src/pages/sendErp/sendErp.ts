@@ -122,6 +122,8 @@ export class SendErpPage
               jsonArrSend.amount = value.amount;
               sendCoin(jsonArrSend, this.http);
               this.sendDetails.reset();
+              presentToast(this.toastCtrl, "Coins sent");
+              this.closeModal();
             }
             else if(walletAddress != null)
             {
