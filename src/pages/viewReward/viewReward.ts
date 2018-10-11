@@ -81,16 +81,14 @@ export class ViewReward{
             handleError(this.storage, this.navCtrl, error, this.toastCtrl);
           }
         );
-      }while(refresh);      
+      }while(refresh);
     }
     else if(hasWallet() == false)
     {
-      alert("Could not connect to wallet plugin. Please check that it is installed and working.");
+      presentToast(this.toastCtrl, "Could not connect to wallet plugin. Please check that it is installed and working.");
     }
     else
     {
-      console.log(this.reward);
-      console.log(this.http);
       buyReward(this.reward, this.http);
     }
   }

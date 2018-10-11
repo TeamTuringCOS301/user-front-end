@@ -59,6 +59,7 @@ export class MapPage {
   }
   ionViewDidLoad()
   {
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     this.coinToFlip = document.getElementById('coinGif');
     this.coinToFlip.addEventListener("animationend", () =>
     {
@@ -69,6 +70,11 @@ export class MapPage {
 
   ionViewDidEnter(){
       this.area = this.navParams.get('area');
+      if(this.area == undefined)
+      {
+        this.navCtrl.setRoot('account');
+        presentToast(this.toastCtrl, "Please select an area");
+      }
       this.patrol = {};
       this.patrol.coins = 0;
       this.LoadMap(this.area);
@@ -136,9 +142,11 @@ export class MapPage {
         (position) =>
         {
           this.currentLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          console.log("Getting location...");
           this.showPosition(position);
         });
       }, CONFIG.interval);
+      this.storage.set('trackingInterval', this.trackingInterval);
     }
     else
     {

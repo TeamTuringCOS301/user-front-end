@@ -88,4 +88,9 @@ export class RewardsPage {
     this.navCtrl.pop();
   }
 
+  ionViewDidLoad()
+  {
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
+  }
+
 }

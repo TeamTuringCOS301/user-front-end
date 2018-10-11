@@ -53,8 +53,17 @@ export function addCloseListener(viewCtrl, curWin, events)
 
 export function openModal(modalPage, curWin)
 {
-  modalPage.present();
-  curWin.location.href = curWin.location.href +"/#";
+  var lastTwo = "";
+  var addr = curWin.location.href
+  lastTwo += addr.charAt(addr.length-2)
+  lastTwo += addr.charAt(addr.length-1)
+  if(lastTwo != "/#")
+  {
+    modalPage.present();
+    curWin.location.href = curWin.location.href +"/#";
+
+  }
+
 }
 
 export function closeModal(viewCtrl, events)

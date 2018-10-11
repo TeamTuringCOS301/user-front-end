@@ -81,7 +81,7 @@ export class ConservationPage {
 
   ionViewDidLoad()
   {
-
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
   }
 
   navPop()

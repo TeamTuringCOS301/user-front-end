@@ -47,6 +47,7 @@ export class DashboardPage {
   }
 
   ionViewDidLoad(){
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     this.events.subscribe("Reload Balance", () =>
     {
       this.getBalance();
