@@ -26,7 +26,7 @@ export class RegPage {
 
 ionViewDidLoad()
 {
-  storage.get('loggedIn').then
+  this.storage.get('loggedIn').then
   (
      (val) =>
      {

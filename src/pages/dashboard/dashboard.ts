@@ -3,7 +3,6 @@ import { IonicPage, NavController, ToastController, Events, ModalController } fr
 import { Http } from '../../http-api';
 import { Storage } from '@ionic/storage';
 import { checkLoggedIn, openModal, handleError, Loading } from '../../app-functions';
-import web3 from 'web3';
 
 @IonicPage({
   name:'account'

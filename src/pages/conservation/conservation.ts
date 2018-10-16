@@ -77,7 +77,7 @@ export class ConservationPage {
         },
         (error) =>
         {
-          if(handleError(this.storage, this.navCtrl, error, toastCtrl)=="")
+          if(handleError(this.storage, this.navCtrl, error, this.toastCtrl)=="")
           {
             refresh = true;
           }
