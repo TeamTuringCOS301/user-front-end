@@ -24,6 +24,7 @@ export class SendAlert
 
   @ViewChild('fileInput') fileInput;
   isReadyToSave: boolean;
+  loading: any = false;
   item: any;
   imageBlob: any;
   form: FormGroup;
@@ -51,11 +52,13 @@ export class SendAlert
   }
 
   processWebImage(event) {
+    this.loading = true;
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       this.imageData = (readerEvent.target as any).result;
       var position = this.imageData.indexOf(",");
       this.imageBlob = this.imageData.slice(position+1);
+      this.loading = false;
       this.form.patchValue({ 'profilePic': this.imageData });
     };
     this.ng2ImgToolsService.resize([event.target.files[0]], CONFIG.alertSideLengthPx, CONFIG.alertSideLengthPx).subscribe((res) => {
