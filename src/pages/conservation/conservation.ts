@@ -28,6 +28,7 @@ export class ConservationPage {
   picked(area)
   {
     this.loading.showLoadingScreen();
+    //
     this.navCtrl.push('map', {area: area});
   }
 
