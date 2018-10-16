@@ -2,7 +2,7 @@ import { IonicPage, ViewController, NavParams, Events } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
-import { addCloseListener, closeModal } from '../../app-functions';
+import { addCloseListener, closeModal, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'view_alert'
@@ -15,7 +15,7 @@ import { addCloseListener, closeModal } from '../../app-functions';
 
 export class ViewAlert{
   alert:any;
-  constructor(public events: Events, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
+  constructor(public loading: Loading, public events: Events, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
     addCloseListener(this.viewCtrl, window, this.events);
     this.alert = navParams.get('alert');
@@ -23,6 +23,7 @@ export class ViewAlert{
 
   public ionViewDidLoad()
   {
+    this.loading.doneLoading();
     if(this.alert.hasImage)
     {
       this.alert.image = CONFIG.url +"/alert/image/"+this.alert.id;

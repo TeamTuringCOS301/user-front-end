@@ -6,7 +6,7 @@ import { Http } from '../../http-api';
 import { hasWallet, sendCoin } from '../../wallet-functions';
 import { ViewChild } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
-import { addCloseListener, handleError, presentLongToast, presentToast, closeModal } from '../../app-functions';
+import { addCloseListener, handleError, presentLongToast, presentToast, closeModal, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'send_erp'
@@ -29,11 +29,15 @@ export class SendErpPage
   scanning: any = false;
   currCam: any = 1;
   camArr: any = [];
-  constructor(public events: Events, public navCtrl: NavController, public storage: Storage, public toastCtrl: ToastController, public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
+  constructor(public loading: Loading, public events: Events, public navCtrl: NavController, public storage: Storage, public toastCtrl: ToastController, public app: App, public platform: Platform, public viewCtrl: ViewController, public http: Http)
   {
     addCloseListener(this.viewCtrl, window, this.events);
-
     this.sendDetails = new FormGroup({address: new FormControl(), amount: new FormControl()});
+  }
+
+  ionViewDidLoad()
+  {
+    this.loading.doneLoading();
   }
 
   scanSuccess(val)
@@ -95,15 +99,11 @@ export class SendErpPage
     closeModal(this.viewCtrl, this.events);
   }
 
-  ionViewDidLeave()
-  {
-    this.events.publish("Reload Balance");
-  }
-
   public sendFunc(value: any)
   {
     var walletAddress = null;
     var refresh = false;
+    this.loading.showLoadingScreen();
     do
     {
       this.http.get("/user/info").subscribe(
@@ -162,5 +162,6 @@ export class SendErpPage
           }
         });
     }while(refresh);
+    this.loading.doneLoading();
   }
 }

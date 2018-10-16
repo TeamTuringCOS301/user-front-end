@@ -10,6 +10,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Http } from '../http-api';
+import { Loading } from '../app-functions';
 import { LocationService } from '@ionic-native/google-maps';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera } from '@ionic-native/camera';
@@ -44,6 +45,7 @@ import { Ng2ImgToolsModule } from 'ng2-img-tools';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackgroundGeolocation,
     Http,
+    Loading,
     FileTransfer,
     FileTransferObject,
     Camera

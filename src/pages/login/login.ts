@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
-import { presentToast, handleError } from '../../app-functions';
+import { presentToast, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name: 'login'
@@ -17,19 +17,23 @@ export class LogPage {
   logUser: any;
   url:any;
   invalidMsg: any = "";
-  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
-   storage.get('loggedIn').then
-   (
-      (val) =>
-      {
-        if(val == true)
-        {
-          this.navCtrl.setRoot('account');
-        }
-      }
-  );
-  //this.storage.set('loggedIn', false);
+  constructor(public loading: Loading, public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController) {
   this.logUser = new FormGroup({username: new FormControl("", Validators.required), password: new FormControl("", Validators.required)});
+}
+
+ionViewWillLoad()
+{
+  this.storage.get('loggedIn').then
+  (
+     (val) =>
+     {
+       if(val == true)
+       {
+         this.navCtrl.setRoot('account');
+       }
+     }
+ );
+  this.loading.doneLoading();
 }
 
 
@@ -44,6 +48,7 @@ export class LogPage {
     jsonArr.username = value.username;
     jsonArr.password = value.password;
     var refresh = false;
+    this.loading.showLoadingScreen();
     do
     {
       this.http.post("/user/login", jsonArr).subscribe
@@ -72,6 +77,7 @@ export class LogPage {
         }
       );
     }while(refresh);
+    this.loading.doneLoading();
   }
 
   navPop()
@@ -81,6 +87,7 @@ export class LogPage {
 
   registerPage()
   {
+    this.loading.showLoadingScreen();
     this.navCtrl.push('register');
   }
 

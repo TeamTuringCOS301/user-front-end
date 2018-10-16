@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController, Events, ModalController } from 'ionic-angular';
 import { Http } from '../../http-api';
 import { Storage } from '@ionic/storage';
-import { checkLoggedIn, openModal, handleError } from '../../app-functions';
+import { checkLoggedIn, openModal, handleError, Loading } from '../../app-functions';
 import web3 from 'web3';
 
 @IonicPage({
@@ -15,13 +15,18 @@ import web3 from 'web3';
 export class DashboardPage {
   user:any = {};
   address:any ;
-  constructor(public storage:Storage, public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
-    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+  constructor(public loading: Loading, public storage:Storage, public navCtrl: NavController, public toastCtrl: ToastController, public http: Http, public events: Events, public modalCtrl: ModalController) {
     this.user.balance = 0;
     this.user = {};
+  }
+
+  ionViewDidLoad(){
+    this.loading.showLoadingScreen();
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     var refresh = false;
-    do
-    {
+    do    {
+
       this.http.get("/user/info").subscribe
       (
         (data) =>
@@ -42,18 +47,10 @@ export class DashboardPage {
         }
       );
     }while(refresh);
-
-    console.log(web3);
-  }
-
-  ionViewDidLoad(){
-    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     this.events.subscribe("Reload Balance", () =>
     {
       this.getBalance();
     });
-    //this.events.publish("Reload Balance");
-
     this.events.subscribe("UpdatedDetails", () =>
     {
       var refresh = false;
@@ -79,6 +76,7 @@ export class DashboardPage {
         );
       }while(refresh);
     });
+    this.loading.doneLoading();
   }
 
   public getBalance()
@@ -109,22 +107,26 @@ export class DashboardPage {
   sendErp()
   {
     var modalPage = this.modalCtrl.create('send_erp', {cssClass: 'send-modal' });
+    this.loading.showLoadingScreen();
     openModal(modalPage, window);
   }
 
   receiveErp()
   {
     var modalPage = this.modalCtrl.create('receive_erp', {cssClass: 'send-modal' });
+    this.loading.showLoadingScreen();
     openModal(modalPage, window);
   }
 
   public rewardsPage()
   {
+    this.loading.showLoadingScreen();
     this.navCtrl.push('rewards');
   }
 
   public conservationAreas()
   {
+    this.loading.showLoadingScreen();
     this.navCtrl.push('conservation', {});
   }
 

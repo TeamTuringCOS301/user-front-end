@@ -8,7 +8,7 @@ import { ToastController } from 'ionic-angular';
 //import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera } from '@ionic-native/camera';
 import { Ng2ImgToolsService } from 'ng2-img-tools';
-import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
+import { addCloseListener, presentToast, handleError, closeModal, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'send_alert'
@@ -24,7 +24,7 @@ export class SendAlert
 
   @ViewChild('fileInput') fileInput;
   isReadyToSave: boolean;
-  loading: any = false;
+  loadingImg: any = false;
   item: any;
   imageBlob: any;
   form: FormGroup;
@@ -34,7 +34,7 @@ export class SendAlert
   currentLocation: any;
   severities: any = [];
   imageData: any;
-  constructor(public events: Events, public navCtrl: NavController, private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
+  constructor(public loading: Loading, public events: Events, public navCtrl: NavController, private ng2ImgToolsService: Ng2ImgToolsService, public toastCtrl: ToastController,public formBuilder: FormBuilder, public storage: Storage, public viewCtrl: ViewController, public http: Http, public navParams: NavParams)
   {
     addCloseListener(this.viewCtrl, window, this.events);
     this.severities = CONFIG.severity;
@@ -51,14 +51,19 @@ export class SendAlert
     });
   }
 
+  ionViewDidLoad()
+  {
+    this.loading.doneLoading();
+  }
+
   processWebImage(event) {
-    this.loading = true;
+    this.loadingImg = true;
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
       this.imageData = (readerEvent.target as any).result;
       var position = this.imageData.indexOf(",");
       this.imageBlob = this.imageData.slice(position+1);
-      this.loading = false;
+      this.loadingImg = false;
       this.form.patchValue({ 'profilePic': this.imageData });
     };
     this.ng2ImgToolsService.resize([event.target.files[0]], CONFIG.alertSideLengthPx, CONFIG.alertSideLengthPx).subscribe((res) => {

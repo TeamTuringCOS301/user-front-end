@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
-import { presentToast, handleError } from '../../app-functions';
+import { presentToast, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'register',
@@ -20,21 +20,24 @@ export class RegPage {
   regUser: any;
   url: any;
   usernameTaken: any = "";
-  constructor(public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
-    storage.get('loggedIn').then
-    (
-       (val) =>
-       {
-         if(val == true)
-         {
-           this.navCtrl.setRoot('account');
-         }
-       }
-   );
+  constructor(public loading: Loading, public storage: Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
     this.regUser = new FormGroup({username: new FormControl("", Validators.required), email:new FormControl("", Validators.required), fName: new FormControl("", Validators.required), sName: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
   }
 
-
+ionViewDidLoad()
+{
+  storage.get('loggedIn').then
+  (
+     (val) =>
+     {
+       if(val == true)
+       {
+         this.navCtrl.setRoot('account');
+       }
+     }
+ );
+ this.loading.doneLoading();
+}
 
 registerUser(value: any)
 {
@@ -57,6 +60,7 @@ registerUser(value: any)
     jsonArr.name = value.fName;
     jsonArr.surname = value.sName;
     var refresh = false;
+    this.loading.showLoadingScreen();
     do
     {
       this.http.post("/user/add", jsonArr).subscribe
@@ -87,7 +91,7 @@ registerUser(value: any)
         }
       );
     }while(refresh);
-
+    this.loading.doneLoading();
   }
 }
 

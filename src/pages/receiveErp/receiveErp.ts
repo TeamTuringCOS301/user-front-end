@@ -1,7 +1,7 @@
 import { Events, IonicPage, App, ViewController, NavController, ToastController} from 'ionic-angular';
 import { Component} from '@angular/core';
 import { Http } from '../../http-api';
-import { addCloseListener, handleError, presentLongToast, closeModal } from '../../app-functions';
+import { addCloseListener, handleError, presentLongToast, closeModal, Loading } from '../../app-functions';
 import { Storage } from '@ionic/storage';
 
 @IonicPage({
@@ -17,9 +17,13 @@ export class ReceivePage
 {
   public myAngularxQrCode: string = null;
   message: any;
-  constructor(public events: Events, public storage: Storage, public toastCtrl: ToastController, public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
+  constructor(public loading: Loading, public events: Events, public storage: Storage, public toastCtrl: ToastController, public app: App, public navCtrl: NavController, public http: Http, public viewCtrl: ViewController)
   {
     addCloseListener(this.viewCtrl, window, this.events);
+  }
+
+  ionViewDidLoad()
+  {
     this.http.get("/user/info").subscribe
     (
       (data) =>
@@ -44,6 +48,7 @@ export class ReceivePage
         handleError(this.storage, this.navCtrl, error, this.toastCtrl);
       }
     );
+    this.loading.doneLoading();
   }
 
   ionViewDidLeave()

@@ -5,7 +5,7 @@ import { ToastController } from 'ionic-angular';
 import { hasWallet, getAddress } from '../../wallet-functions';
 import { Http } from '../../http-api';
 import { Storage } from '@ionic/storage';
-import { checkLoggedIn, handleError, presentToast } from '../../app-functions';
+import { checkLoggedIn, handleError, presentToast, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'link_wallet',
@@ -23,13 +23,13 @@ export class LinkWalletPage {
   extWallet: any;
   message = "";
   noMessage = "";
-  constructor(public storage:Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
-    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+  constructor(public loading: Loading, public storage:Storage, public toastCtrl: ToastController, public navCtrl: NavController, public http: Http) {
     this.linkWallet = new FormGroup({walletAddress: new FormControl("", Validators.required)});
     this.walletAddress = "";
   }
 
   ionViewDidLoad(){
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     var refresh = false;
     do
     {
@@ -61,6 +61,7 @@ export class LinkWalletPage {
         }
       });
     }while(refresh);
+    this.loading.doneLoading();
   }
 
   loadAddr()
@@ -76,6 +77,7 @@ export class LinkWalletPage {
     var jsonArr: any = {};
     jsonArr.walletAddress = val.walletAddress;
     var refresh = false;
+    this.loading.showLoadingScreen();
     do
     {
       this.http.post("/user/address", jsonArr).subscribe(
@@ -94,6 +96,7 @@ export class LinkWalletPage {
         }
       );
     }while(refresh);
+    this.loading.doneLoading();
   }
 
 }

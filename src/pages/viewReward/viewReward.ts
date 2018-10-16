@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { Http } from '../../http-api';
 import { buyReward, hasWallet } from '../../wallet-functions';
-import { addCloseListener, presentToast, handleError, closeModal } from '../../app-functions';
+import { addCloseListener, presentToast, handleError, closeModal, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'view_reward'
@@ -19,11 +19,15 @@ export class ViewReward{
   coinBalance: any;
   walletAddress: any = null;
   status: any = "";
-  constructor(public events: Events, public storage: Storage, public navCtrl: NavController, public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
+  constructor(public loading: Loading, public events: Events, public storage: Storage, public navCtrl: NavController, public toastCtrl: ToastController, public app: App, public viewCtrl: ViewController, public navParams: NavParams, public http: Http)
   {
     addCloseListener(this.viewCtrl, window, this.events);
     this.reward = navParams.get('reward');
-    //this.reward.image = CONFIG.url +"/reward/image/"+this.reward.id;
+  }
+
+  ionViewDidLoad()
+  {
+    this.loading.showLoadingScreen();
     var refresh = false;
     do
     {
@@ -46,7 +50,7 @@ export class ViewReward{
         }
       );
     }while(refresh);
-
+    this.loading.doneLoading();
   }
 
   public closeModal()
@@ -66,6 +70,7 @@ export class ViewReward{
   {
     if(this.walletAddress == null)
     {
+      this.loading.showLoadingScreen();
       var refresh = false;
       do
       {
@@ -82,6 +87,7 @@ export class ViewReward{
           }
         );
       }while(refresh);
+      this.loading.doneLoading();
     }
     else if(hasWallet() == false)
     {

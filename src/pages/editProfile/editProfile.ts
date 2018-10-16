@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
-import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
+import { checkLoggedIn, presentToast, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'edit_profile',
@@ -20,10 +20,14 @@ export class EditPage {
   updateUser: any;
   url:any;
   currentDetails: any;
-  constructor(public events: Events, public toastCtrl: ToastController, public storage: Storage, public http: Http, public navCtrl: NavController) {
-    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+  constructor(public loading: Loading, public events: Events, public toastCtrl: ToastController, public storage: Storage, public http: Http, public navCtrl: NavController) {
     this.updateUser = new FormGroup({email:new FormControl("", Validators.required), fName: new FormControl("", Validators.required), sName: new FormControl("", Validators.required)});
     this.currentDetails = {};
+  }
+
+  ionViewDidLoad()
+  {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     var refresh = false;
     do
     {
@@ -44,6 +48,7 @@ export class EditPage {
           }
         });
     }while(refresh);
+    this.loading.doneLoading();
   }
 
 
@@ -65,6 +70,7 @@ export class EditPage {
       jsonArr.name = value.fName;
       jsonArr.surname = value.sName;
       var refresh = false;
+      this.loading.showLoadingScreen();
       do
       {
         this.http.post("/user/update", jsonArr).subscribe(
@@ -82,6 +88,7 @@ export class EditPage {
             }
           });
       }while(refresh);
+      this.loading.doneLoading();
     }
   }
 

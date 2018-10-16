@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToastController, IonicPage, NavController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
-import { checkLoggedIn, handleError } from '../../app-functions';
+import { checkLoggedIn, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'conservation',
@@ -20,35 +20,14 @@ export class ConservationPage {
   allAreas:any;
   url:any;
   status: any;
-  constructor(public toastCtrl: ToastController, public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
-    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+  constructor(public loading: Loading, public toastCtrl: ToastController, public events: Events, public http: Http, public navCtrl: NavController, public storage: Storage) {
     this.areas = [];
     this.area = {};
     this.allAreas = [];
-    var refresh = false;
-    do
-    {
-      this.http.get("/area/list").subscribe
-      (
-        (data) => //Success
-        {
-          refresh = false;
-          var jsonResp = JSON.parse(data.text());
-          this.areas = jsonResp.areas;
-          this.allAreas = jsonResp.areas;
-        },
-        (error) =>
-        {
-          if(handleError(this.storage, this.navCtrl, error, toastCtrl)=="")
-          {
-            refresh = true;
-          }
-        }
-      );
-    }while(refresh);
 }
   picked(area)
   {
+    this.loading.showLoadingScreen();
     this.navCtrl.push('map', {area: area});
   }
 
@@ -81,7 +60,30 @@ export class ConservationPage {
 
   ionViewDidLoad()
   {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
     this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
+    var refresh = false;
+    do
+    {
+      this.http.get("/area/list").subscribe
+      (
+        (data) => //Success
+        {
+          refresh = false;
+          var jsonResp = JSON.parse(data.text());
+          this.areas = jsonResp.areas;
+          this.allAreas = jsonResp.areas;
+        },
+        (error) =>
+        {
+          if(handleError(this.storage, this.navCtrl, error, toastCtrl)=="")
+          {
+            refresh = true;
+          }
+        }
+      );
+    }while(refresh);
+    this.loading.doneLoading();
   }
 
   navPop()

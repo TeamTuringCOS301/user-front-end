@@ -3,7 +3,7 @@ import { IonicPage, ToastController, NavController, ModalController} from 'ionic
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { CONFIG } from '../../app-config';
-import { checkLoggedIn, openModal, handleError } from '../../app-functions';
+import { checkLoggedIn, openModal, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name: 'rewards',
@@ -17,9 +17,15 @@ export class RewardsPage {
   rewards: any;
   allRewards: any;
 
-  constructor(public toastCtrl: ToastController, public storage: Storage, public navCtrl: NavController, public http: Http, public modalCtrl: ModalController)
+  constructor(public loading: Loading, public toastCtrl: ToastController, public storage: Storage, public navCtrl: NavController, public http: Http, public modalCtrl: ModalController)
+  {
+
+  }
+
+  ionViewDidLoad()
   {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     var refresh = false;
     do
     {
@@ -43,6 +49,7 @@ export class RewardsPage {
         }
       );
     }while(refresh);
+    this.loading.doneLoading();
   }
 
   onSearchInput(data)
@@ -78,6 +85,7 @@ export class RewardsPage {
       if(reward.id == id)
       {
         var modalPage = this.modalCtrl.create('view_reward', {reward:reward});
+        this.loading.showLoadingScreen();
         openModal(modalPage, window);
       }
     });
@@ -86,11 +94,6 @@ export class RewardsPage {
   navPop()
   {
     this.navCtrl.pop();
-  }
-
-  ionViewDidLoad()
-  {
-    this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
   }
 
 }

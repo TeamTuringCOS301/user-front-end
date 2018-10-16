@@ -47,8 +47,8 @@
                 <input type="file" accept="image/*" #fileInput name="files[]" style="visibility: hidden; height: 0px; width: 0px;" (change)="processWebImage($event)" />
                   <div class="profile-image-wrapper" (click)="getPicture()">
                     <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-                      <ion-icon id="add" name="add" *ngIf="loading==false"></ion-icon>
-                      <ion-spinner name="circles" *ngIf="loading==true"></ion-spinner>
+                      <ion-icon id="add" name="add" *ngIf="loadingImg==false"></ion-icon>
+                      <ion-spinner name="circles" *ngIf="loadingImg==true"></ion-spinner>
                     </div>
                     <!--<div class="profile-image" [style.backgroundImage]="getProfileImageStyle()"></div>-->
                   </div>

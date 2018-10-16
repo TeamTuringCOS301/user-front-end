@@ -1,3 +1,33 @@
+import { LoadingController } from 'ionic-angular';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class Loading {
+  loading:any = null;
+  constructor(private loadingCtrl: LoadingController){}
+
+  public showLoadingScreen()
+  {
+    if(this.loading == null)
+    {
+      this.loading = this.loadingCtrl.create({
+        content: 'Loading',
+        spinner: 'circles'
+      });
+      this.loading.present();
+    }
+  }
+
+  public doneLoading()
+  {
+    if(this.loading != null)
+    {
+      this.loading.dismiss();
+      this.loading = null;
+    }
+  }
+};
+
 export function checkLoggedIn(storage, toastCtrl, navCtrl)
 {
   storage.get('loggedIn').then(

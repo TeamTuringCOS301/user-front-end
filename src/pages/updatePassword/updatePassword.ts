@@ -4,7 +4,7 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { Http } from '../../http-api';
 import { ToastController } from 'ionic-angular';
-import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
+import { checkLoggedIn, presentToast, handleError, Loading } from '../../app-functions';
 
 @IonicPage({
   name:'update_password',
@@ -17,10 +17,15 @@ import { checkLoggedIn, presentToast, handleError } from '../../app-functions';
 })
 export class UpdatePasswordPage {
   updatePassword: any;
-  constructor(public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController)
+  constructor(public loading: Loading, public storage: Storage, public toastCtrl: ToastController, public http: Http, public navCtrl: NavController)
+  {
+    this.updatePassword = new FormGroup({oldPassword: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
+  }
+
+  ionViewDidLoad()
   {
     checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
-    this.updatePassword = new FormGroup({oldPassword: new FormControl("", Validators.required), password: new FormControl("", Validators.required), confirmPassword: new FormControl("", Validators.required)});
+    this.loading.doneLoading();
   }
 
 
@@ -35,6 +40,7 @@ export class UpdatePasswordPage {
       var jsonArr: any = {};
       jsonArr.old = value.oldPassword;
       jsonArr.new = value.password;
+      this.loading.showLoadingScreen();
       var refresh = false;
       do
       {
@@ -47,6 +53,7 @@ export class UpdatePasswordPage {
             handleError(this.storage, this.navCtrl, error, this.toastCtrl);
           });
       }while(refresh);
+      this.loading.doneLoading();
     }
   }
 

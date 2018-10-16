@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { CONFIG } from '../../app-config';
 import { Http } from '../../http-api';
 import { Events } from 'ionic-angular';
-import { checkLoggedIn, presentToast, openModal, handleError } from '../../app-functions';
+import { checkLoggedIn, presentToast, openModal, handleError, Loading } from '../../app-functions';
 
 
 declare var google;
@@ -39,8 +39,7 @@ export class MapPage {
   permSource: any = "assets/imgs/coin.gif";
   animating: any = false;
   coinToFlip: any;
-  constructor(public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
-    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+  constructor(public loading: Loading, public navParams: NavParams, public toastCtrl: ToastController, public events: Events, public http: Http, public storage: Storage, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.area;
     this.alertsArr = [];
     this.naviID;
@@ -59,6 +58,8 @@ export class MapPage {
   }
   ionViewDidLoad()
   {
+    checkLoggedIn(this.storage, this.toastCtrl, this.navCtrl);
+    this.loading.doneLoading();
     this.storage.get('trackingInterval').then((interval) => {clearInterval(interval);});
     this.coinToFlip = document.getElementById('coinGif');
     this.coinToFlip.addEventListener("animationend", () =>
@@ -72,9 +73,11 @@ export class MapPage {
       this.area = this.navParams.get('area');
       if(this.area == undefined)
       {
+        this.loading.showLoadingScreen();
         this.navCtrl.setRoot('account');
         presentToast(this.toastCtrl, "Please select an area");
       }
+
       this.patrol = {};
       this.patrol.coins = 0;
       this.LoadMap(this.area);
@@ -245,6 +248,7 @@ export class MapPage {
 
           marker.addListener('click', () => {
             var modalPage = this.modalCtrl.create('view_alert', {alert: alert, area: this.area});
+            this.loading.showLoadingScreen();
             openModal(modalPage, window);
           });
           this.alertsArr.push(marker);
@@ -305,6 +309,7 @@ ionViewDidLeave()
 public sendAlert()
 {
   var modalPage = this.modalCtrl.create('send_alert', {location: this.currentLocation, area: this.area});
+  this.loading.showLoadingScreen();
   openModal(modalPage, window);
 }
 
