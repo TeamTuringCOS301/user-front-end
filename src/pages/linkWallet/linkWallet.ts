@@ -50,7 +50,8 @@ export class LinkWalletPage {
         }
         else
         {
-          this.noMessage = "No external wallet found, please install one.";
+          //this.noMessage = "No external wallet found, please install one.";
+          this.noMessage = "Please come visit our stand for assistance.";
         }
       },
       (err) =>
