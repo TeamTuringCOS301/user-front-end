@@ -33,7 +33,7 @@
           </ion-row>
           <ion-row text-center>
             <ion-col col-5 ><p>{{reward.coinValue}} ERP-Coin</p></ion-col>
-            <ion-col col-5 offset-1><button [disabled]='status!= ""' ion-button color="tertiary" id="buyBtn" round outline (click)="purchaseReward()">Buy</button></ion-col>
+            <ion-col col-5 offset-1><button [disabled]='status!= ""' ion-button id="buyBtn" round outline (click)="purchaseReward()">Buy</button></ion-col>
           </ion-row>
           <p text-center id="statusText">{{status}}</p>
         </ion-grid>

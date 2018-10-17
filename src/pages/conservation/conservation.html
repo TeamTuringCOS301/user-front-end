@@ -16,10 +16,8 @@
           <ion-card (click) = "picked(area.id)">
             <img src="https://maps.googleapis.com/maps/api/staticmap?center={{area.name}},{{area.province}}&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyBi2S3VHfaSr9tBIYt3g0BKz46518DIRLQ" alt="err">
             <!--<img src="https://maps.googleapis.com/maps/api/staticmap?center={{area.name}}&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284">-->
-            <ion-card-header color="white">
-              {{area.name}}
-            </ion-card-header>
-            <ion-card-content>
+            <ion-card-content color="white">
+              <ion-card-title color="white"><b>{{area.name}}</b></ion-card-title>
               <p>Province: {{area.province}}</p>
               <p>City: {{area.city}}</p>
             </ion-card-content>

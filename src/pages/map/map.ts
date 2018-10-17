@@ -279,10 +279,10 @@ LoadMap(areaName) {
     var mapObj = new google.maps.Polygon
     ({
       paths: jsonResp.border,
-      strokeColor: '#0000FF',
+      strokeColor: '#6c7bfe',
       strokeOpacity: 0.8,
       strokeWeight: 2,
-      fillColor: '#0000ff',
+      fillColor: '#6c7bfe',
       fillOpacity: 0.2,
     });
     mapObj.setMap(this.map);
